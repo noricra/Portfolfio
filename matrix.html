@@ -13,6 +13,13 @@
             --matrix-glow: rgba(0, 255, 0, 0.3);
             --neo-red: #ff0040;
             --morpheus-blue: #0040ff;
+            /* Spacing scale */
+            --space-xxs: 0.25rem;
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 2rem;
+            --space-xl: 3rem;
         }
 
         * {
@@ -164,6 +171,10 @@
             gap: 2rem;
         }
 
+        nav a.active {
+            font-weight: 700;
+        }
+
         nav a {
             color: var(--matrix-green);
             text-decoration: none;
@@ -248,6 +259,10 @@
             padding: 120px 2rem 50px;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .stack > * + * {
+            margin-top: var(--space-md);
         }
 
         h1, h2 {
@@ -358,6 +373,7 @@
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+            align-items: stretch;
         }
 
         .project-card {
@@ -368,6 +384,9 @@
             position: relative;
             overflow: hidden;
             border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 260px;
         }
 
         body.reality-mode .project-card,
@@ -501,6 +520,23 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+        }
+
+        /* KPI Chips */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .chip {
+            border: 1px solid var(--matrix-green);
+            border-radius: 999px;
+            padding: 0.5rem 1rem;
+            text-align: center;
+            background: rgba(0, 255, 0, 0.05);
+            font-family: 'Orbitron', monospace;
         }
 
         .contact-node {
@@ -685,6 +721,16 @@
             font-weight: 700;
             text-shadow: 0 0 10px var(--matrix-glow);
         }
+
+        /* Focus mode reduces motion/noise */
+        body.focus-mode .matrix-bg { opacity: 0.03 !important; }
+        body.focus-mode .glitch:hover::before,
+        body.focus-mode .glitch:hover::after { display: none; }
+        body.focus-mode h1 { animation: none; text-shadow: none; }
+        body.focus-mode .project-card:hover { transform: none; box-shadow: none; }
+        body.focus-mode .project-card::before { display: none; }
+        body.focus-mode .terminal { backdrop-filter: none; }
+        body.focus-mode .quote-morpheus { background: rgba(0,0,0,0.04); }
     </style>
 </head>
 <body>
@@ -731,7 +777,14 @@
     <!-- Home Section -->
     <section id="home">
         <h1 class="glitch" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
-        
+
+        <div class="kpi-row">
+            <div class="chip">Education: CS (L3) + Math (L2)</div>
+            <div class="chip">10+ Countries • 4 Continents</div>
+            <div class="chip">Languages: FR/EN</div>
+            <div class="chip">Focus: Dev & Automation</div>
+        </div>
+
         <div class="terminal">
             <div class="terminal-header">
                 <div class="terminal-dot dot-red"></div>
@@ -997,7 +1050,7 @@
     </section>
 
     <footer style="text-align:center; padding:2rem 0; opacity:0.8;">
-        Press R for Matrix mode • Press B for Reality mode
+        Press R for Matrix mode • Press B for Reality mode • Press F for Focus
     </footer>
 
     <script>
@@ -1060,14 +1113,36 @@
             var bg = document.getElementById('matrixBg');
             if (bg) bg.style.opacity = '0.08';
         }
+        function toggleFocus(){
+            document.body.classList.toggle('focus-mode');
+        }
         window.showMatrix = showMatrix;
         window.hideMatrix = hideMatrix;
+        window.toggleFocus = toggleFocus;
 
         // Keyboard shortcuts
         document.addEventListener('keydown', function(e){
             if (e.key === 'r' || e.key === 'R') showMatrix();
             if (e.key === 'b' || e.key === 'B') hideMatrix();
+            if (e.key === 'f' || e.key === 'F') toggleFocus();
         });
+
+        // Scrollspy: highlight active nav link
+        var sections = Array.prototype.slice.call(document.querySelectorAll('section'));
+        var links = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+        function onScroll(){
+            var fromTop = window.scrollY + 130; // account for fixed nav
+            var current = sections.filter(function(sec){
+                return sec.offsetTop <= fromTop && (sec.offsetTop + sec.offsetHeight) > fromTop;
+            })[0];
+            links.forEach(function(link){ link.classList.remove('active'); });
+            if (current) {
+                var active = document.querySelector('nav a[href="#' + current.id + '"]');
+                if (active) active.classList.add('active');
+            }
+        }
+        document.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
     </script>
     </body>
     </html>
