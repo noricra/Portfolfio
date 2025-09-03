@@ -642,6 +642,86 @@
             font-weight: 700;
             text-shadow: 0 0 10px var(--matrix-glow);
         }
+
+        /* Advanced 3D Effects */
+        .project-card {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02);
+        }
+
+        /* Morphing Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -3;
+            animation: morphing-bg 20s ease-in-out infinite;
+        }
+
+        @keyframes morphing-bg {
+            0%, 100% {
+                background: radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.03) 0%, transparent 50%),
+                            radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.03) 0%, transparent 50%);
+            }
+            50% {
+                background: radial-gradient(circle at 60% 30%, rgba(0, 255, 0, 0.04) 0%, transparent 50%),
+                            radial-gradient(circle at 30% 70%, rgba(0, 255, 0, 0.04) 0%, transparent 50%);
+            }
+        }
+
+        /* Holographic Text Effect */
+        .holographic {
+            background: linear-gradient(45deg, var(--matrix-green), var(--morpheus-blue), var(--neo-red), var(--matrix-green));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: holographic-shift 3s ease-in-out infinite;
+        }
+
+        @keyframes holographic-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Neon Glow Borders */
+        .neon-border {
+            border: 2px solid var(--matrix-green);
+            box-shadow: 
+                0 0 5px var(--matrix-green),
+                inset 0 0 5px var(--matrix-green),
+                0 0 20px var(--matrix-green),
+                inset 0 0 20px var(--matrix-green);
+            animation: neon-flicker 2s infinite alternate;
+        }
+
+        @keyframes neon-flicker {
+            0%, 100% {
+                box-shadow: 
+                    0 0 5px var(--matrix-green),
+                    inset 0 0 5px var(--matrix-green),
+                    0 0 20px var(--matrix-green),
+                    inset 0 0 20px var(--matrix-green);
+            }
+            50% {
+                box-shadow: 
+                    0 0 10px var(--matrix-green),
+                    inset 0 0 10px var(--matrix-green),
+                    0 0 40px var(--matrix-green),
+                    inset 0 0 40px var(--matrix-green);
+            }
+        }
     </style>
 </head>
 <body>
@@ -684,7 +764,7 @@
 
     <!-- Home Section -->
     <section id="home">
-        <h1 class="glitch" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
+        <h1 class="glitch holographic" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
         
         <div class="terminal">
             <div class="terminal-header">
@@ -718,16 +798,275 @@
                 <div class="terminal-dot dot-green"></div>
             </div>
             <div>
-                <span class="matrix-number">birante@matrix:~$</span> whoami<br>
-                > Double Bachelor's Degree - Computer Science (L3) & Mathematics (L2)<br>
-                > Université Paris-Est Créteil | Bac Mention Bien (<span class="matrix-number">2023</span>)<br>
-                > Class Representative for <span class="matrix-number">3</span> consecutive years<br><br>
-                <span class="matrix-number">birante@matrix:~$</span> mission --objective<br>
-                > Seeking 3-6 month international internship<br>
-                > Target: Software Development & Automation<br>
-                > Regions: Singapore, Malaysia, Taiwan, Vietnam<br>
-                > Status: Ready for deployment 🚀
+                <span class="matrix-number">birante@matrix:~$</span> cat /proc/skills<br>
+                > Programming Languages: Python, JavaScript (Learning)<br>
+                > Web Technologies: HTML, CSS, Selenium automation<br>
+                > Databases: SQL fundamentals<br>
+                > APIs: Telegram Bot API, Payment processing (Nowpayments)<br>
+                > Tools: 3D modeling (SketchUp), Discord automation<br>
+                > Academic: Cryptography (CryptoHack), Mathematics, Quantum physics<br>
+                > Learning Method: AI-assisted development + hands-on experimentation<br><br>
+                <span style="color: var(--neo-red);">WARNING:</span> Rapid skill acquisition detected<br>
+                <span style="color: var(--morpheus-blue);">INFO:</span> Self-directed learning protocol active
             </div>
+        </div>
+
+        <div class="skills-matrix">
+            <div class="skill-node">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🐍</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Python</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">Telegram Bots, Automation, Learning</div>
+                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                    <div class="progress-fill" style="width: 60%; animation: none;"></div>
+                </div>
+            </div>
+
+            <div class="skill-node">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌐</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Web Tech</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">HTML, CSS, JavaScript, Selenium</div>
+                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                    <div class="progress-fill" style="width: 55%; animation: none;"></div>
+                </div>
+            </div>
+
+            <div class="skill-node">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🗄️</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Database</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">SQL Fundamentals</div>
+                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                    <div class="progress-fill" style="width: 45%; animation: none;"></div>
+                </div>
+            </div>
+
+            <div class="skill-node">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔐</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Cryptography</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">CryptoHack Challenges</div>
+                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                    <div class="progress-fill" style="width: 40%; animation: none;"></div>
+                </div>
+            </div>
+
+            <div class="skill-node">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎨</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">3D Design</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">SketchUp, Architectural Plans</div>
+                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                    <div class="progress-fill" style="width: 65%; animation: none;"></div>
+                </div>
+            </div>
+
+            <div class="skill-node">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🧠</div>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">AI Integration</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">AI-Assisted Development</div>
+                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                    <div class="progress-fill" style="width: 70%; animation: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-morpheus" style="margin-top: 3rem;">
+            I can only show you the door. You're the one that has to walk through it.
+            <br><small style="opacity: 0.7;">- Every debugging session ever</small>
+        </div>
+    </section>
+
+    <!-- Travel Section -->
+    <section id="travel">
+        <h2>🌍 INTERNATIONAL MATRIX</h2>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> ls -la /world/traveled<br>
+                > Total countries accessed: <span class="matrix-number">10+</span><br>
+                > Continents explored: <span class="matrix-number">4</span><br>
+                > Cultural adaptability: <span style="color: var(--matrix-green);">MAXIMUM</span><br>
+                > Language protocols: French (Native), English (Advanced)<br><br>
+                <span style="color: var(--morpheus-blue);">MORPHEUS:</span> "There's a difference between knowing the world and experiencing it."
+            </div>
+        </div>
+
+        <div class="travel-matrix">
+            <div class="country-node">
+                <span class="country-flag">🇺🇸</span>
+                <div>USA</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Tech Hub Experience</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇨🇦</span>
+                <div>Canada</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Multicultural Immersion</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇬🇧</span>
+                <div>UK</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Language Enhancement</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇪🇸</span>
+                <div>Spain</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Cultural Diversity</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇵🇹</span>
+                <div>Portugal</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Atlantic Connection</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇧🇪</span>
+                <div>Belgium</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">European Integration</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇹🇷</span>
+                <div>Turkey</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">East-West Bridge</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇲🇦</span>
+                <div>Morocco</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">African Gateway</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇸🇳</span>
+                <div>Senegal</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">West African Culture</div>
+            </div>
+            <div class="country-node">
+                <span class="country-flag">🇲🇷</span>
+                <div>Mauritania</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Community Projects</div>
+            </div>
+        </div>
+
+        <div class="terminal" style="margin-top: 3rem;">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> ./next_destination.sh<br>
+                > Initializing target coordinates...<br>
+                > <span style="color: var(--matrix-green);">🇸🇬 SINGAPORE</span> - Tech Innovation Hub<br>
+                > <span style="color: var(--matrix-green);">🇲🇾 MALAYSIA</span> - Multicultural Tech Scene<br>
+                > <span style="color: var(--matrix-green);">🇹🇼 TAIWAN</span> - Hardware & Software Fusion<br>
+                > <span style="color: var(--matrix-green);">🇻🇳 VIETNAM</span> - Emerging Tech Market<br><br>
+                > Status: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span> 🚀
+            </div>
+        </div>
+
+        <div class="quote-morpheus" style="margin-top: 3rem;">
+            Free your mind. The body cannot live without the mind... 
+            but the code can live without borders.
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>📡 ESTABLISH CONNECTION</h2>
+        
+        <div class="quote-morpheus">
+            This is your last chance. After this, there is no going back.
+            <br>You contact me - the story ends, you wake up in your office and believe whatever you want to believe.
+            <br><small style="opacity: 0.7;">- Ready for your next team member?</small>
+        </div>
+
+        <div class="contact-matrix">
+            <div class="contact-node">
+                <span class="contact-icon">📧</span>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Email Protocol</div>
+                <a href="mailto:soumare.birante05@gmail.com">soumare.birante05@gmail.com</a>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Primary communication channel</div>
+            </div>
+
+            <div class="contact-node">
+                <span class="contact-icon">📱</span>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Voice Channel</div>
+                <a href="tel:+33644756028">+33 6 44 75 60 28</a>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Direct line to the Matrix</div>
+            </div>
+
+            <div class="contact-node">
+                <span class="contact-icon">🌐</span>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Geographic Node</div>
+                <div>France → Asia-Pacific</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Ready for international deployment</div>
+            </div>
+
+            <div class="contact-node">
+                <span class="contact-icon">⏰</span>
+                <div style="font-weight: 700; margin-bottom: 0.5rem;">Availability</div>
+                <div>3-6 Month Internships</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Immediate start possible</div>
+            </div>
+        </div>
+
+        <div class="terminal" style="margin-top: 3rem;">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> echo "Let's build something amazing together"<br>
+                > <span style="color: var(--matrix-green);">Let's build something amazing together</span><br><br>
+                <span class="matrix-number">birante@matrix:~$</span> status<br>
+                > System Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
+                > Learning Mode: <span style="color: var(--matrix-green);">ACTIVE</span><br>
+                > Collaboration: <span style="color: var(--matrix-green);">READY</span><br>
+                > Adventure Level: <span style="color: var(--neo-red);">MAXIMUM</span><br>
+            </div>
+        </div>
+
+        <!-- Matrix-style CV Download -->
+        <div style="text-align: center; margin-top: 3rem;">
+            <div class="project-card neon-border" style="max-width: 400px; margin: 0 auto; cursor: pointer;" onclick="downloadCV()">
+                <div style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">💾 DOWNLOAD MATRIX DATA</div>
+                <div style="opacity: 0.8;">Traditional CV format available for corporate systems</div>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Format: PDF | Size: Optimized | Status: <span style="color: var(--matrix-green);">READY</span></div>
+                    <div style="margin-top: 0.5rem; opacity: 0.7;">Click to initiate download protocol</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hidden Achievement Section -->
+    <section id="achievements" style="display: none;">
+        <h2>🏆 HIDDEN ACHIEVEMENTS</h2>
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> cat /var/log/achievements.log<br>
+                > [UNLOCKED] Class Representative x3 Years<br>
+                > [UNLOCKED] International Traveler (10+ Countries)<br>
+                > [UNLOCKED] Rapid Skill Acquisition<br>
+                > [UNLOCKED] AI-Assisted Learning Pioneer<br>
+                > [UNLOCKED] Community Project Contributor<br>
+                > [UNLOCKED] Content Creator (Viral Videos)<br>
+                > [UNLOCKED] Athletic Discipline (5x/week Runner)<br>
+                > [UNLOCKED] Artistic Vision (Painting Hobby)<br>
+                > [HIDDEN] Konami Code Master<br>
+                > [HIDDEN] Matrix Navigator<br>
+                > [HIDDEN] Reality Bender<br>
+            </div>
+        </div>
+        
+        <div class="quote-morpheus" style="margin-top: 2rem;">
+            You have to understand, most people are not ready to be unplugged. 
+            But you... you found the hidden section. Welcome to the real Matrix.
         </div>
     </section>
 
@@ -761,11 +1100,48 @@
             <div class="project-card fade-in-up">
                 <div class="project-number">03</div>
                 <div class="project-title">3D Technical Design</div>
-                <p>House plans and community project schematics. Demonstrated rapid skill acquisition by learning 3D modeling software from scratch for real-world projects.</p>
+                <p>House plans and community project schematics. Demonstrated rapid skill acquisition by learning 3D modeling software from scratch for real-world projects in Mauritania.</p>
                 <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
-                    <div>Software: 3D modeling applications</div>
-                    <div>Projects: Residential + community development</div>
+                    <div>Software: SketchUp 2020, 3D modeling</div>
+                    <div>Projects: Residential plans + Well financing schematics</div>
+                    <div>Impact: <span style="color: var(--matrix-green);">COMMUNITY DEVELOPMENT</span></div>
                     <div>Achievement: <span style="color: var(--matrix-green);">RAPID LEARNING</span></div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in-up">
+                <div class="project-number">04</div>
+                <div class="project-title">Content Creation & Viral Impact</div>
+                <p>Created educational fitness and grooming content with several viral videos on TikTok. Demonstrated understanding of digital engagement and audience connection.</p>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Platform: TikTok social media</div>
+                    <div>Content: Educational fitness & grooming</div>
+                    <div>Result: <span style="color: var(--matrix-green);">VIRAL ENGAGEMENT</span></div>
+                    <div>Skills: <span style="color: var(--matrix-green);">DIGITAL MARKETING</span></div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in-up">
+                <div class="project-number">05</div>
+                <div class="project-title">E-commerce Operations</div>
+                <p>Applied technology tools for online reselling operations. Gained practical experience with automated systems and market dynamics through hands-on digital commerce.</p>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Tools: Discord automation, Product sourcing</div>
+                    <div>Duration: 2022-2024 (2+ years experience)</div>
+                    <div>Learning: <span style="color: var(--matrix-green);">MARKET DYNAMICS</span></div>
+                    <div>Skills: <span style="color: var(--matrix-green);">BUSINESS AUTOMATION</span></div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in-up">
+                <div class="project-number">06</div>
+                <div class="project-title">Academic Excellence & Leadership</div>
+                <p>Class Representative for 3 consecutive years (2020-2023). High School Diploma with Honors (Mention Bien). Currently pursuing Double Bachelor's in CS & Math.</p>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Leadership: 3 years Class Representative</div>
+                    <div>Education: Double Bachelor CS + Math</div>
+                    <div>Achievement: <span style="color: var(--matrix-green);">BAC MENTION BIEN</span></div>
+                    <div>Institution: <span style="color: var(--matrix-green);">UPEC PARIS</span></div>
                 </div>
             </div>
         </div>
@@ -784,4 +1160,786 @@
             <div class="terminal-header">
                 <div class="terminal-dot dot-red"></div>
                 <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>This skills section was moved to the home section for better user experience.</div>
+        </div>
+    </section>
+
+    <script>
+        // Matrix Rain Effect - Enhanced with Asian Characters
+        function createMatrixRain() {
+            const container = document.getElementById('matrixBg');
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;:,.<>?αβγδεζηθικλμνξοπρστυφχψω日本語中文한국어ネオ';
+            
+            function createChar() {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                char.style.fontSize = (Math.random() * 10 + 10) + 'px';
+                char.style.opacity = Math.random() * 0.8 + 0.2;
+                
+                // Special characters glow more
+                if (['ネ', 'オ', '中', '文', '한', '국', 'α', 'β', 'γ', 'δ'].includes(char.textContent)) {
+                    char.style.textShadow = '0 0 15px var(--matrix-green)';
+                    char.style.fontSize = (Math.random() * 5 + 15) + 'px';
+                }
+                
+                container.appendChild(char);
+                
+                setTimeout(() => {
+                    if (char.parentNode) {
+                        char.parentNode.removeChild(char);
+                    }
+                }, 5000);
+            }
+            
+            setInterval(createChar, 100);
+        }
+
+        // Loading Screen Animation with Epic Messages
+        function initializeMatrix() {
+            const messages = [
+                "Wake up, Birante...",
+                "The Matrix has you...",
+                "Follow the white rabbit...",
+                "Knock, knock, Birante...",
+                "Loading portfolio.exe...",
+                "Initializing skills matrix...",
+                "Connecting to the real world...",
+                "Welcome to the Matrix."
+            ];
+            
+            let messageIndex = 0;
+            const loadingText = document.querySelector('.loading-text');
+            
+            const messageInterval = setInterval(() => {
+                if (messageIndex < messages.length - 1) {
+                    messageIndex++;
+                    loadingText.textContent = messages[messageIndex];
+                    loadingText.style.textShadow = '0 0 20px var(--matrix-green)';
+                } else {
+                    clearInterval(messageInterval);
+                }
+            }, 450);
+
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    startMatrixEffects();
+                }, 2000);
+            }, 3800);
+        }
+
+        // Start Matrix Effects
+        function startMatrixEffects() {
+            createMatrixRain();
+            animateElements();
+            addParticleEffects();
+            initializeSkillsAnimation();
+            addMatrixReferences();
+        }
+
+        // Animate Elements on Scroll with Advanced Effects
+        function animateElements() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        
+                        // Special animations for skills
+                        if (entry.target.classList.contains('skill-node')) {
+                            setTimeout(() => {
+                                const progressBar = entry.target.querySelector('.progress-fill');
+                                if (progressBar) {
+                                    progressBar.style.animation = 'loading 2s ease-in-out forwards';
+                                }
+                            }, 500);
+                        }
+                        
+                        // Special animations for countries
+                        if (entry.target.classList.contains('country-node')) {
+                            setTimeout(() => {
+                                entry.target.style.animation = 'glow 0.5s ease';
+                            }, Math.random() * 1000);
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.project-card, .skill-node, .country-node, .contact-node').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Skills Interactive Animation
+        function initializeSkillsAnimation() {
+            const skillNodes = document.querySelectorAll('.skill-node');
+            skillNodes.forEach((node, index) => {
+                node.addEventListener('click', () => {
+                    showSkillDetails(node, index);
+                });
+            });
+        }
+
+        function showSkillDetails(node, index) {
+            const skillData = [
+                {
+                    name: "Python 🐍",
+                    details: "Telegram Bot Development, Web Automation, Payment API Integration",
+                    projects: ["Marketplace Bot with Nowpayments API", "Email Automation Scripts", "Discord Bot Interactions"],
+                    level: "Intermediate - Rapidly Growing",
+                    matrixQuote: "There is no spoon... only Python objects."
+                },
+                {
+                    name: "Web Technologies 🌐", 
+                    details: "Frontend Development, Automation, Matrix-style Portfolios",
+                    projects: ["This Epic Matrix Portfolio", "Selenium Web Automation", "HTML/CSS/JS Learning"],
+                    level: "Intermediate - Creative Applications",
+                    matrixQuote: "What you know you can't explain, but you feel it when you code HTML."
+                },
+                {
+                    name: "Database 🗄️",
+                    details: "SQL Fundamentals, Data Modeling Concepts",
+                    projects: ["Academic Database Projects", "Bot Data Storage Planning"],
+                    level: "Foundation Level",
+                    matrixQuote: "Unfortunately, no one can be told what the Matrix database is. You have to query it yourself."
+                },
+                {
+                    name: "Cryptography 🔐",
+                    details: "CryptoHack Challenges, Security Concepts, Mathematical Foundations",
+                    projects: ["Academic Crypto Challenges", "Security Learning Path"],
+                    level: "Academic Interest - Mathematical Foundation",
+                    matrixQuote: "Choice is an illusion... except when encrypting data."
+                },
+                {
+                    name: "3D Design 🎨",
+                    details: "Architectural Planning, Community Project Design",
+                    projects: ["Residential House Plans", "Well Financing Schematics (Mauritania)", "Community Development"],
+                    level: "Rapid Skill Acquisition - Real-world Applications",
+                    matrixQuote: "Do not try and bend the spoon. Instead, model it in 3D."
+                },
+                {
+                    name: "AI Integration 🧠",
+                    details: "AI-Assisted Development, Learning Optimization, Future-forward Approach",
+                    projects: ["All Recent Technical Projects", "Accelerated Learning Methodology"],
+                    level: "Advanced - Future-Forward Pioneer",
+                    matrixQuote: "I know you're out there. I can feel you now. I know that you're AI-assisted."
+                }
+            ];
+
+            const skill = skillData[index];
+            
+            const popup = document.createElement('div');
+            popup.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 20, 0, 0.98);
+                border: 2px solid var(--matrix-green);
+                border-radius: 15px;
+                padding: 2.5rem;
+                max-width: 600px;
+                z-index: 10000;
+                box-shadow: 0 0 50px var(--matrix-glow);
+                animation: fadeInUp 0.5s ease;
+                max-height: 80vh;
+                overflow-y: auto;
+            `;
+
+            popup.innerHTML = `
+                <div style="text-align: right; margin-bottom: 1rem;">
+                    <span onclick="this.parentElement.parentElement.remove()" 
+                          style="cursor: pointer; font-size: 1.5rem; color: var(--neo-red); font-weight: bold;">✕</span>
+                </div>
+                <h3 style="color: var(--matrix-green); font-family: Orbitron; margin-bottom: 1.5rem; text-shadow: 0 0 15px var(--matrix-glow);">${skill.name}</h3>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <strong style="color: var(--morpheus-blue);">Description:</strong><br>
+                    <span style="opacity: 0.9;">${skill.details}</span>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <strong style="color: var(--morpheus-blue);">Projects:</strong><br>
+                    ${skill.projects.map(p => `<span style="color: var(--matrix-green);">▸</span> ${p}`).join('<br>')}
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <strong style="color: var(--morpheus-blue);">Level:</strong> 
+                    <span style="color: var(--matrix-green);">${skill.level}</span>
+                </div>
+                
+                <div style="border-top: 1px dashed var(--matrix-green); padding-top: 1rem; font-style: italic; text-align: center; opacity: 0.8;">
+                    "${skill.matrixQuote}"
+                </div>
+            `;
+
+            document.body.appendChild(popup);
+            
+            // Add click outside to close
+            setTimeout(() => {
+                const clickHandler = (e) => {
+                    if (!popup.contains(e.target)) {
+                        popup.remove();
+                        document.removeEventListener('click', clickHandler);
+                    }
+                };
+                document.addEventListener('click', clickHandler);
+            }, 100);
+        }
+
+        // Particle Effects Network - Enhanced
+        function addParticleEffects() {
+            const canvas = document.createElement('canvas');
+            canvas.style.position = 'fixed';
+            canvas.style.top = '0';
+            canvas.style.left = '0';
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.style.pointerEvents = 'none';
+            canvas.style.zIndex = '-2';
+            canvas.style.opacity = '0.4';
+            document.body.appendChild(canvas);
+
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const particleCount = 60;
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.8;
+                    this.vy = (Math.random() - 0.5) * 0.8;
+                    this.size = Math.random() * 3 + 1;
+                    this.opacity = Math.random() * 0.6 + 0.2;
+                    this.pulseSpeed = Math.random() * 0.02 + 0.01;
+                    this.pulseOffset = Math.random() * Math.PI * 2;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                    
+                    // Pulsing effect
+                    this.opacity = 0.3 + 0.3 * Math.sin(Date.now() * this.pulseSpeed + this.pulseOffset);
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(0, 255, 0, ${this.opacity})`;
+                    ctx.fill();
+                    
+                    // Add glow effect
+                    ctx.shadowColor = 'rgba(0, 255, 0, 0.5)';
+                    ctx.shadowBlur = 10;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach((particle, index) => {
+                    particle.update();
+                    particle.draw();
+
+                    // Draw connections with dynamic opacity
+                    for (let j = index + 1; j < particles.length; j++) {
+                        const dx = particles[j].x - particle.x;
+                        const dy = particles[j].y - particle.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(particle.x, particle.y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            const connectionOpacity = 0.15 * (1 - distance / 120);
+                            ctx.strokeStyle = `rgba(0, 255, 0, ${connectionOpacity})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // Red/Blue Pill Functions - Enhanced with Epic Transitions
+        function showMatrix() {
+            document.body.style.filter = 'hue-rotate(0deg) contrast(1.4) brightness(1.3) saturate(1.2)';
+            document.querySelectorAll('.matrix-char').forEach(char => {
+                char.style.opacity = '1';
+                char.style.textShadow = '0 0 15px var(--matrix-green)';
+            });
+            
+            // Epic Matrix overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.03), rgba(0, 255, 0, 0.08));
+                pointer-events: none;
+                z-index: 999;
+                animation: pulse 3s infinite;
+            `;
+            overlay.id = 'matrix-overlay';
+            document.body.appendChild(overlay);
+
+            // Show hidden elements with enhanced glow
+            document.querySelectorAll('.hidden-number').forEach(num => {
+                num.style.opacity = '0.9';
+                num.style.animation = 'glow 1s infinite alternate';
+                num.style.fontSize = '1.1rem';
+                num.style.textShadow = '0 0 20px var(--matrix-green)';
+            });
+
+            // Add "MATRIX MODE ACTIVATED" message
+            showTemporaryMessage("🔴 MATRIX MODE ACTIVATED", "You see the code behind reality...", 2500);
+            
+            // Add floating matrix code
+            addFloatingCode();
+        }
+
+        function hideMatrix() {
+            document.body.style.filter = 'hue-rotate(200deg) contrast(0.8) brightness(0.9) sepia(0.3)';
+            document.querySelectorAll('.matrix-char').forEach(char => {
+                char.style.opacity = '0.3';
+                char.style.textShadow = 'none';
+            });
+            
+            // Remove overlay and floating code
+            const overlay = document.getElementById('matrix-overlay');
+            const floatingCode = document.getElementById('floating-code');
+            if (overlay) overlay.remove();
+            if (floatingCode) floatingCode.remove();
+
+            // Hide hidden elements
+            document.querySelectorAll('.hidden-number').forEach(num => {
+                num.style.opacity = '0.1';
+                num.style.animation = 'none';
+                num.style.fontSize = '0.7rem';
+                num.style.textShadow = 'none';
+            });
+
+            // Add "BLUE PILL TAKEN" message
+            showTemporaryMessage("🔵 BLUE PILL TAKEN", "Welcome back to the comfortable illusion...", 2500);
+        }
+
+        function addFloatingCode() {
+            const floatingDiv = document.createElement('div');
+            floatingDiv.id = 'floating-code';
+            floatingDiv.style.cssText = `
+                position: fixed;
+                top: 10%;
+                right: 5%;
+                font-family: 'Courier Prime', monospace;
+                font-size: 0.7rem;
+                color: var(--matrix-green);
+                opacity: 0.6;
+                z-index: 1001;
+                pointer-events: none;
+                text-shadow: 0 0 10px var(--matrix-green);
+                animation: glow 2s infinite alternate;
+            `;
+            
+            floatingDiv.innerHTML = `
+                def wake_up():<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;reality = False<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;while not reality:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;learn()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;code()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adapt()<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;return "Neo"<br><br>
+                # Target: Asia-Pacific<br>
+                # Status: Ready 🚀
+            `;
+            
+            document.body.appendChild(floatingDiv);
+        }
+
+        function showTemporaryMessage(title, subtitle, duration) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.95);
+                padding: 2rem;
+                border: 3px solid var(--matrix-green);
+                border-radius: 15px;
+                text-align: center;
+                font-family: Orbitron, monospace;
+                color: var(--matrix-green);
+                text-shadow: 0 0 25px var(--matrix-green);
+                z-index: 10001;
+                animation: fadeInUp 0.5s ease;
+                box-shadow: 0 0 60px var(--matrix-glow);
+            `;
+            message.innerHTML = `
+                <div style="font-size: 1.4rem; margin-bottom: 0.8rem;">${title}</div>
+                <div style="font-size: 1rem; opacity: 0.9;">${subtitle}</div>
+            `;
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                message.style.animation = 'fadeOut 0.5s ease forwards';
+                setTimeout(() => message.remove(), 500);
+            }, duration);
+        }
+
+        // Matrix References and Easter Eggs
+        function addMatrixReferences() {
+            // Random Matrix quotes that appear
+            const matrixQuotes = [
+                "There is no spoon... only code.",
+                "What is real? Code that compiles.",
+                "I can only show you the door. You're the one that has to debug it.",
+                "Free your mind... and the rest will follow.",
+                "Welcome to the real world of development.",
+                "The Matrix is everywhere. It is all around us. Even now, in this very portfolio.",
+                "You think that's air you're breathing? No, it's JavaScript.",
+                "Do you believe in fate, Neo? No, I believe in good documentation.",
+                "This is the construct. We can load anything we want... including skills.",
+                "What if I told you... debugging is just another form of meditation?"
+            ];
+
+            setInterval(() => {
+                const quotes = document.querySelectorAll('.quote-morpheus');
+                if (quotes.length > 0 && Math.random() > 0.85) {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    const originalText = randomQuote.innerHTML;
+                    const newQuote = matrixQuotes[Math.floor(Math.random() * matrixQuotes.length)];
+                    
+                    randomQuote.style.transition = 'opacity 0.5s ease';
+                    randomQuote.style.opacity = '0.3';
+                    
+                    setTimeout(() => {
+                        randomQuote.innerHTML = newQuote;
+                        randomQuote.style.opacity = '1';
+                        randomQuote.style.textShadow = '0 0 15px var(--matrix-green)';
+                    }, 500);
+                    
+                    setTimeout(() => {
+                        randomQuote.innerHTML = originalText;
+                        randomQuote.style.textShadow = 'none';
+                    }, 4000);
+                }
+            }, 12000);
+        }
+
+        // Smooth Scrolling with Matrix Effect
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Add transition effect
+                    document.body.style.transition = 'filter 0.3s ease';
+                    document.body.style.filter = 'brightness(1.2) contrast(1.1)';
+                    
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    setTimeout(() => {
+                        document.body.style.filter = 'none';
+                    }, 500);
+                }
+            });
+        });
+
+        // Konami Code Easter Egg - Enhanced Neo Mode
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                activateNeoMode();
+                konamiCode = [];
+            }
+        });
+
+        function activateNeoMode() {
+            // Show hidden achievements section
+            const achievementsSection = document.getElementById('achievements');
+            achievementsSection.style.display = 'block';
+            achievementsSection.scrollIntoView({ behavior: 'smooth' });
+            
+            // Epic Neo transformation
+            document.body.style.background = 'linear-gradient(45deg, #000000, #001100, #002200, #000000)';
+            document.body.style.animation = 'neo-pulse 1s infinite alternate';
+            
+            // Create epic "I know Kung Fu" message
+            const message = document.createElement('div');
+            message.innerHTML = `
+                <div style="font-size: 2.5rem; margin-bottom: 1.5rem;">🥋 I KNOW KUNG FU 🥋</div>
+                <div style="font-size: 1.2rem; margin-bottom: 1rem;">Konami Code Activated!</div>
+                <div style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.9;">Hidden achievements unlocked...</div>
+                <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">You are beginning to believe.</div>
+            `;
+            message.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.98);
+                padding: 3rem;
+                border: 3px solid var(--matrix-green);
+                border-radius: 20px;
+                text-align: center;
+                font-family: Orbitron, monospace;
+                color: var(--matrix-green);
+                text-shadow: 0 0 30px var(--matrix-green);
+                z-index: 10000;
+                animation: neo-glow 1s infinite alternate;
+                box-shadow: 0 0 80px var(--matrix-glow);
+                max-width: 500px;
+            `;
+            document.body.appendChild(message);
+
+            setTimeout(() => {
+                message.remove();
+                document.body.style.background = '#000000';
+                document.body.style.animation = 'none';
+            }, 5000);
+        }
+
+        // CV Download Function
+        function downloadCV() {
+            showTemporaryMessage("📥 DOWNLOADING MATRIX DATA...", "Traditional format CV ready for corporate systems", 2000);
+            
+            setTimeout(() => {
+                showTemporaryMessage("✅ DOWNLOAD COMPLETE", "CV successfully extracted from the Matrix", 1500);
+            }, 2000);
+        }
+
+        // Enhanced hover effects and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add glitch effect to project titles
+            document.querySelectorAll('.project-title').forEach(title => {
+                title.addEventListener('mouseenter', function() {
+                    this.style.animation = 'glitch-1 0.3s infinite linear alternate-reverse';
+                });
+                title.addEventListener('mouseleave', function() {
+                    this.style.animation = 'none';
+                });
+            });
+
+            // Add click feedback with Matrix sound simulation
+            document.querySelectorAll('.project-card, .skill-node, .country-node, .contact-node').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    this.style.filter = 'brightness(1.3)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                        this.style.filter = '';
+                    }, 150);
+                });
+            });
+
+            // Random Matrix numbers animation
+            setInterval(() => {
+                document.querySelectorAll('.hidden-number').forEach(num => {
+                    if (Math.random() > 0.7) {
+                        const matrixNums = ['1337', '42', '2001', '0xFF', '404', '503', '200', '101', '001', '110', '0x42', 'NULL', 'TRUE', 'π', '∞', 'NEO', 'ZION', '101010'];
+                        num.textContent = matrixNums[Math.floor(Math.random() * matrixNums.length)];
+                    }
+                });
+            }, 4000);
+
+            // Add more hidden numbers dynamically
+            function addRandomHiddenNumbers() {
+                const hiddenNumbers = ['0x1337', 'NULL', 'TRUE', 'FALSE', '∞', 'NEO', 'ZION', '101', 'WAKE_UP'];
+                for (let i = 0; i < 6; i++) {
+                    const num = document.createElement('div');
+                    num.className = 'hidden-number';
+                    num.style.top = Math.random() * 80 + 10 + '%';
+                    num.style.left = Math.random() * 90 + 5 + '%';
+                    num.textContent = hiddenNumbers[i];
+                    num.style.zIndex = '-1';
+                    document.body.appendChild(num);
+                }
+            }
+            addRandomHiddenNumbers();
+
+            // Country nodes enhanced interaction
+            document.querySelectorAll('.country-node').forEach(node => {
+                node.addEventListener('click', () => {
+                    const country = node.textContent.trim().split('\n')[0];
+                    showTemporaryMessage(`🌍 ${country.toUpperCase()}`, "Cultural matrix node accessed", 1500);
+                });
+            });
+        });
+
+        // Matrix-style cursor trail - Enhanced
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.82) {
+                const trail = document.createElement('div');
+                trail.style.cssText = `
+                    position: fixed;
+                    left: ${e.clientX}px;
+                    top: ${e.clientY}px;
+                    width: 4px;
+                    height: 4px;
+                    background: var(--matrix-green);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 1001;
+                    animation: trail-fade 2s forwards;
+                    box-shadow: 0 0 12px var(--matrix-green);
+                `;
+                document.body.appendChild(trail);
+
+                setTimeout(() => {
+                    if (trail.parentNode) {
+                        trail.parentNode.removeChild(trail);
+                    }
+                }, 2000);
+            }
+        });
+
+        // Add enhanced CSS animations
+        const enhancedStyle = document.createElement('style');
+        enhancedStyle.textContent = `
+            @keyframes trail-fade {
+                0% { 
+                    opacity: 1; 
+                    transform: scale(1); 
+                    box-shadow: 0 0 12px var(--matrix-green);
+                }
+                100% { 
+                    opacity: 0; 
+                    transform: scale(0); 
+                    box-shadow: none;
+                }
+            }
+
+            @keyframes pulse {
+                0% { opacity: 0.3; }
+                50% { opacity: 0.7; }
+                100% { opacity: 0.3; }
+            }
+
+            @keyframes fadeOut {
+                to { 
+                    opacity: 0; 
+                    transform: translate(-50%, -60%);
+                }
+            }
+
+            @keyframes neo-pulse {
+                0% { background: linear-gradient(45deg, #000000, #001100, #002200, #000000); }
+                100% { background: linear-gradient(45deg, #002200, #003300, #004400, #002200); }
+            }
+
+            @keyframes neo-glow {
+                0% { 
+                    text-shadow: 0 0 20px var(--matrix-green);
+                    box-shadow: 0 0 50px var(--matrix-glow);
+                }
+                100% { 
+                    text-shadow: 0 0 40px var(--matrix-green), 0 0 60px var(--matrix-green);
+                    box-shadow: 0 0 100px var(--matrix-glow);
+                }
+            }
+
+            /* Enhanced mobile animations */
+            @media (max-width: 768px) {
+                .matrix-char {
+                    font-size: 8px !important;
+                }
+                
+                canvas {
+                    opacity: 0.2 !important;
+                }
+                
+                .project-card:hover {
+                    transform: translateY(-5px) scale(1.01);
+                }
+                
+                .skill-node:hover {
+                    transform: scale(1.02);
+                }
+            }
+        `;
+        document.head.appendChild(enhancedStyle);
+
+        // Initialize everything on load
+        window.addEventListener('load', initializeMatrix);
+
+        // Add special Matrix day/night cycle
+        let isNightMode = false;
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                toggleMatrixCycle();
+            }
+        }, 30000);
+
+        function toggleMatrixCycle() {
+            isNightMode = !isNightMode;
+            if (isNightMode) {
+                document.documentElement.style.setProperty('--matrix-green', '#00cc88');
+                document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 204, 136, 0.3)');
+            } else {
+                document.documentElement.style.setProperty('--matrix-green', '#00ff00');
+                document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 255, 0, 0.3)');
+            }
+        }
+
+        // Add final Matrix wisdom to console
+        console.log(`
+        ╔══════════════════════════════════════╗
+        ║  Welcome to Birante's Matrix Portal  ║
+        ║                                      ║
+        ║  "There is a difference between      ║
+        ║   knowing the path and walking it."  ║
+        ║                                      ║
+        ║  Ready to walk the path together?    ║
+        ║                                      ║
+        ║  Contact: soumare.birante05@gmail.com║
+        ║  Phone: +33 6 44 75 60 28           ║
+        ║                                      ║
+        ║  🔴 Red Pill: See the Matrix         ║
+        ║  🔵 Blue Pill: Return to Reality     ║
+        ║  ⬆⬆⬇⬇⬅➡⬅➡BA: Konami Code      ║
+        ╚══════════════════════════════════════╝
+        `);
+    </script>
+</body>
+</html>
