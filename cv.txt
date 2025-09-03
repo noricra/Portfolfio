@@ -1,0 +1,87 @@
+# BIRANTE SOUMARE
+**Computer Science Student | Aspiring Developer | Adaptable Learner**  
+📧 soumare.birante05@gmail.com | 📱 +33 6 44 75 60 28  
+🌐 Based in France | Open to international opportunities
+
+---
+
+## 🎓 EDUCATION
+
+**Double Bachelor's Degree - Computer Science (L3) & Mathematics (L2)** | 2023-2025  
+Université Paris-Est Créteil, France  
+• **High School Diploma with Honors** (Mention Bien) | 2023
+• **Class Representative** for 3 consecutive years (2020-2023)
+
+---
+
+## 💻 TECHNICAL PROJECTS & LEARNING JOURNEY
+
+### **Projects Realized with AI Assistance**
+• **Telegram Bot with Payment Integration** - Implemented marketplace bot integrating Nowpayments API (AI-assisted development with hands-on learning)
+• **Web Automation Scripts** - Created basic Selenium and Python scripts for email automation and command execution
+• **E-commerce Tools Usage** - Utilized existing Discord bots for product sourcing operations
+
+### **Technical Foundation & Learning Approach**
+• **Programming Exposure**: Python basics, JavaScript fundamentals, Web Automation (Selenium) - *Learning in progress*
+• **Database**: Basic SQL knowledge
+• **Learning Method**: Self-directed learning combining AI assistance with practical experimentation
+• **Tools Used**: Telegram Bot API, Discord automation tools, 3D modeling software (SketchUp 2020)
+• **Academic Interests**: Cryptography challenges (CryptoHack), Mathematical problem solving, Quantum physics concepts, Blockchain technology
+
+---
+
+## 🚀 LEARNING EXPERIENCE
+
+**Digital Commerce Learning Experience** | 2022-2024  
+• Applied technology tools to facilitate online reselling operations
+• Gained practical experience with automated systems for product sourcing
+• Developed understanding of e-commerce workflows and market dynamics
+
+---
+
+## 🌍 INTERNATIONAL EXPERIENCE & LANGUAGES
+
+**Travel Experience** - 10+ countries across 4 continents  
+*USA, Canada, UK, Spain, Portugal, Belgium, Turkey, Morocco, Senegal, Mauritania*
+• **Cultural Adaptability**: Mix of family and independent travel experiences
+• **Languages**: French (Native), English (Strong reading/writing, developing oral skills)
+
+---
+
+## 💡 COMMUNITY INVOLVEMENT & PROJECTS
+
+**Technical Project Contributor**
+• **Community Development**: Created technical schematics for well financing projects in Mauritania (AI-assisted design)
+• **Architectural Learning**: Developed house plans using 3D modeling software, demonstrating rapid skill acquisition and adaptability
+• **Community Involvement**: Active member of local association and Mauritanian development projects
+
+**Content Creation Experience**
+• **Social Media**: Created educational content (fitness/grooming) with several viral videos reaching high engagement on TikTok
+• **Family Support**: Provided technical assistance and academic support to family members
+
+---
+
+## 🏃‍♂️ PERSONAL QUALITIES
+
+**Adaptable & Self-Directed Learner**
+• **Learning Agility**: Quick adaptation to new tools and technologies through self-directed exploration
+• **Problem-Solving Mindset**: Takes on technical challenges outside comfort zone with resourcefulness
+• **Discipline & Consistency**: Maintains rigorous personal training schedule (5x/week running)
+• **Creative Expression**: Painting hobby demonstrating artistic perspective and analytical thinking
+
+**Early Professional Experience**
+• **Hospital Internship** (2019-2020) - CH Manhès, Essonne: Patient assistance and facility maintenance
+
+---
+
+## 🎯 CAREER OBJECTIVES
+
+Seeking an **international internship in computer science** to apply and develop technical skills in a multicultural environment, with particular interest in:
+• Software Development & Automation
+• Learning Backend Systems & APIs
+• Cross-cultural project experience
+• **Target regions**: Asia-Pacific (Singapore, Malaysia, Taiwan, Vietnam)
+
+---
+
+*Available for 3-6 month internships | Excellent adaptability to international environments | Strong learning foundation with entrepreneurial mindset*
