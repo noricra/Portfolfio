@@ -29,6 +29,20 @@
             line-height: 1.6;
         }
 
+        /* Theme: Reality (light) */
+        body.reality-mode {
+            --matrix-green: #0b5fff;
+            --matrix-dark: #e9f1ff;
+            --matrix-glow: rgba(11, 95, 255, 0.25);
+            background: #f6f9fc;
+            color: #0a1a2a;
+        }
+
+        body.matrix-mode {
+            background: #000000;
+            color: var(--matrix-green);
+        }
+
         /* Matrix Rain Effect */
         .matrix-bg {
             position: fixed;
@@ -76,6 +90,11 @@
             transition: opacity 2s ease;
         }
 
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .loading-text {
             font-family: 'Orbitron', monospace;
             font-size: 1.5rem;
@@ -114,6 +133,11 @@
             border-bottom: 1px solid var(--matrix-green);
         }
 
+        body.reality-mode nav {
+            background: rgba(255, 255, 255, 0.92);
+            border-bottom-color: var(--matrix-green);
+        }
+
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -128,6 +152,10 @@
             font-size: 1.2rem;
             color: var(--matrix-green);
             text-shadow: 0 0 10px var(--matrix-glow);
+        }
+
+        body.reality-mode .logo {
+            text-shadow: none;
         }
 
         nav ul {
@@ -285,6 +313,10 @@
             font-family: 'Courier Prime', monospace;
         }
 
+        body.reality-mode .terminal {
+            background: rgba(10, 40, 80, 0.06);
+        }
+
         .terminal-header {
             display: flex;
             gap: 0.5rem;
@@ -336,6 +368,13 @@
             position: relative;
             overflow: hidden;
             border-radius: 10px;
+        }
+
+        body.reality-mode .project-card,
+        body.reality-mode .skill-node,
+        body.reality-mode .country-node,
+        body.reality-mode .contact-node {
+            background: linear-gradient(135deg, rgba(11, 95, 255, 0.06), rgba(11, 95, 255, 0.02));
         }
 
         .project-card::before {
@@ -512,6 +551,10 @@
             border-radius: 10px;
         }
 
+        body.reality-mode .quote-morpheus {
+            background: rgba(11, 95, 255, 0.05);
+        }
+
         .quote-morpheus::before {
             content: '"';
             font-size: 4rem;
@@ -662,9 +705,12 @@
             <div class="logo">BIRANTE.EXE</div>
             <ul>
                 <li><a href="#home">HOME</a></li>
+                <li><a href="#education">EDUCATION</a></li>
                 <li><a href="#projects">PROJECTS</a></li>
                 <li><a href="#skills">SKILLS</a></li>
+                <li><a href="#community">COMMUNITY</a></li>
                 <li><a href="#travel">TRAVEL</a></li>
+                <li><a href="#objectives">OBJECTIVES</a></li>
                 <li><a href="#contact">CONTACT</a></li>
             </ul>
         </div>
@@ -784,4 +830,244 @@
             <div class="terminal-header">
                 <div class="terminal-dot dot-red"></div>
                 <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> skills --list<br>
+                > Programming Exposure: Python, JavaScript basics, Selenium<br>
+                > Database: Basic SQL<br>
+                > Tools: Telegram Bot API, Discord automation, SketchUp 2020<br>
+                > Interests: Cryptography, Math problem solving, Quantum, Blockchain
+            </div>
+        </div>
+
+        <div class="skills-matrix">
+            <div class="skill-node">
+                <strong>Python</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">Automation, bots, scripting</div>
+            </div>
+            <div class="skill-node">
+                <strong>JavaScript</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">Fundamentals, DOM, web basics</div>
+            </div>
+            <div class="skill-node">
+                <strong>Selenium</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">Web automation and testing</div>
+            </div>
+            <div class="skill-node">
+                <strong>SQL</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">Queries, CRUD concepts</div>
+            </div>
+            <div class="skill-node">
+                <strong>APIs</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">Telegram Bot, payment APIs</div>
+            </div>
+            <div class="skill-node">
+                <strong>3D Modeling</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">SketchUp 2020, rapid learning</div>
+            </div>
+            <div class="skill-node">
+                <strong>Crypto & Math</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">CryptoHack, problem solving</div>
+            </div>
+            <div class="skill-node">
+                <strong>Languages</strong>
+                <div style="opacity:0.8; margin-top:0.5rem; font-size:0.95rem;">French (native), English (strong)</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <h2>🎓 EDUCATION</h2>
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> cat education.txt<br>
+                > Double Bachelor's Degree - Computer Science (L3) & Mathematics (L2) (2023–2025)<br>
+                > Université Paris-Est Créteil, France<br>
+                > High School Diploma with Honors (Mention Bien, 2023)<br>
+                > Class Representative for <span class="matrix-number">3</span> consecutive years
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Section -->
+    <section id="travel">
+        <h2>🌍 INTERNATIONAL EXPERIENCE</h2>
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> travel --countries<br>
+                > USA, Canada, UK, Spain, Portugal, Belgium, Turkey, Morocco, Senegal, Mauritania
+            </div>
+        </div>
+
+        <div class="travel-matrix">
+            <div class="country-node"><span class="country-flag">🇺🇸</span>USA</div>
+            <div class="country-node"><span class="country-flag">🇨🇦</span>Canada</div>
+            <div class="country-node"><span class="country-flag">🇬🇧</span>United Kingdom</div>
+            <div class="country-node"><span class="country-flag">🇪🇸</span>Spain</div>
+            <div class="country-node"><span class="country-flag">🇵🇹</span>Portugal</div>
+            <div class="country-node"><span class="country-flag">🇧🇪</span>Belgium</div>
+            <div class="country-node"><span class="country-flag">🇹🇷</span>Turkey</div>
+            <div class="country-node"><span class="country-flag">🇲🇦</span>Morocco</div>
+            <div class="country-node"><span class="country-flag">🇸🇳</span>Senegal</div>
+            <div class="country-node"><span class="country-flag">🇲🇷</span>Mauritania</div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community">
+        <h2>💡 COMMUNITY & CONTRIBUTIONS</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-number">A</div>
+                <div class="project-title">Technical Project Contributor</div>
+                <p>Designed technical schematics for well financing projects in Mauritania (AI-assisted). Developed residential plans, demonstrating rapid skill acquisition.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-number">B</div>
+                <div class="project-title">Content Creation</div>
+                <p>Produced educational content (fitness/grooming). Achieved several viral TikTok videos with strong engagement.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-number">C</div>
+                <div class="project-title">Community Involvement</div>
+                <p>Active member of local association and Mauritanian development projects. Supports family with technical and academic tasks.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Objectives Section -->
+    <section id="objectives">
+        <h2>🎯 CAREER OBJECTIVES</h2>
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> objective --internship<br>
+                > International internship (3–6 months) in software development & automation<br>
+                > Learn backend systems & APIs | Cross-cultural projects<br>
+                > Target regions: Singapore, Malaysia, Taiwan, Vietnam
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>📟 CONTACT & REFERENCES</h2>
+        <div class="contact-matrix">
+            <div class="contact-node">
+                <span class="contact-icon">✉️</span>
+                <div>Email</div>
+                <a href="mailto:soumare.birante05@gmail.com">soumare.birante05@gmail.com</a>
+            </div>
+            <div class="contact-node">
+                <span class="contact-icon">📞</span>
+                <div>Phone</div>
+                <a href="tel:+33644756028">+33 6 44 75 60 28</a>
+            </div>
+            <div class="contact-node">
+                <span class="contact-icon">📄</span>
+                <div>Download CV</div>
+                <a href="cv.txt" download="Birante_Soumare_CV.txt">Get the CV (txt)</a>
+            </div>
+            <div class="contact-node">
+                <span class="contact-icon">🌐</span>
+                <div>Location</div>
+                <div>France → Open internationally</div>
+            </div>
+        </div>
+
+        <div class="quote-morpheus" style="margin-top: 2rem;">
+            References available upon request. Inspired by builders and pioneers who see the Matrix for what it is: a system to navigate, learn, and reshape.
+        </div>
+    </section>
+
+    <footer style="text-align:center; padding:2rem 0; opacity:0.8;">
+        Press R for Matrix mode • Press B for Reality mode
+    </footer>
+
+    <script>
+        // Smooth scroll for nav links
+        document.querySelectorAll('nav a[href^="#"]').forEach(function(anchor) {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Loading screen transition
+        window.addEventListener('load', function() {
+            var loading = document.getElementById('loadingScreen');
+            setTimeout(function () {
+                loading.classList.add('hidden');
+                setTimeout(function(){ loading.style.display = 'none'; }, 2000);
+            }, 3200);
+        });
+
+        // Matrix rain generator
+        (function generateMatrixRain(){
+            var container = document.getElementById('matrixBg');
+            if (!container) return;
+            var charset = 'アカサタナハマヤラワ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var count = Math.min(Math.floor(window.innerWidth / 8), 220);
+            for (var i = 0; i < count; i++) {
+                var span = document.createElement('span');
+                span.className = 'matrix-char';
+                span.textContent = charset[Math.floor(Math.random() * charset.length)];
+                span.style.left = Math.random() * 100 + '%';
+                span.style.animationDuration = (4 + Math.random() * 10) + 's';
+                span.style.animationDelay = (Math.random() * 8) + 's';
+                container.appendChild(span);
+            }
+            setInterval(function(){
+                var chars = container.querySelectorAll('.matrix-char');
+                for (var j = 0; j < 10; j++) {
+                    var idx = Math.floor(Math.random() * chars.length);
+                    if (chars[idx]) {
+                        chars[idx].textContent = charset[Math.floor(Math.random() * charset.length)];
+                    }
+                }
+            }, 150);
+        })();
+
+        // Theme toggles
+        function showMatrix(){
+            document.body.classList.add('matrix-mode');
+            document.body.classList.remove('reality-mode');
+            var bg = document.getElementById('matrixBg');
+            if (bg) bg.style.opacity = '0.6';
+        }
+        function hideMatrix(){
+            document.body.classList.add('reality-mode');
+            document.body.classList.remove('matrix-mode');
+            var bg = document.getElementById('matrixBg');
+            if (bg) bg.style.opacity = '0.08';
+        }
+        window.showMatrix = showMatrix;
+        window.hideMatrix = hideMatrix;
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'r' || e.key === 'R') showMatrix();
+            if (e.key === 'b' || e.key === 'B') hideMatrix();
+        });
+    </script>
+    </body>
+    </html>
