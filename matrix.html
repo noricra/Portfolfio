@@ -197,6 +197,21 @@
             box-shadow: 0 0 20px rgba(0, 64, 255, 0.5);
         }
 
+        .green-pill {
+            background: linear-gradient(45deg, #00ff88, #00cc66);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .purple-pill {
+            background: linear-gradient(45deg, #8844ff, #aa66ff);
+            box-shadow: 0 0 20px rgba(136, 68, 255, 0.5);
+        }
+
+        .yellow-pill {
+            background: linear-gradient(45deg, #ffdd00, #ffaa00);
+            box-shadow: 0 0 20px rgba(255, 221, 0, 0.5);
+        }
+
         .pill:hover {
             transform: scale(1.1);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
@@ -214,12 +229,27 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Sections */
+        /* Sections - Better Layout Structure */
         section {
             min-height: 100vh;
-            padding: 120px 2rem 50px;
+            padding: 120px 0 80px;
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .section-container {
+            padding: 0 2rem;
+            max-width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 0 1rem;
+        }
+
+        .section-content {
+            padding: 0 1rem;
         }
 
         h1, h2 {
@@ -320,22 +350,25 @@
             50% { border-color: var(--matrix-green) }
         }
 
-        /* Cards */
+        /* Cards - Optimized for Performance */
         .project-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
+            padding: 1rem 0;
         }
 
         .project-card {
             background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.02));
             border: 1px solid var(--matrix-green);
             padding: 2rem;
-            transition: all 0.4s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             overflow: hidden;
             border-radius: 10px;
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         .project-card::before {
@@ -643,14 +676,10 @@
             text-shadow: 0 0 10px var(--matrix-glow);
         }
 
-        /* Advanced 3D Effects */
-        .project-card {
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-
+        /* Simplified Hover Effects for Better Performance */
         .project-card:hover {
-            transform: translateY(-10px) rotateX(5deg) rotateY(5deg) scale(1.02);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 0 30px var(--matrix-glow);
         }
 
         /* Morphing Background */
@@ -695,32 +724,60 @@
             50% { background-position: 100% 50%; }
         }
 
-        /* Neon Glow Borders */
+        /* Improved Layout and Spacing */
+        .project-grid, .skills-matrix, .travel-matrix, .contact-matrix {
+            margin: 3rem auto;
+            max-width: 1000px;
+        }
+
+        .terminal {
+            margin: 2rem auto !important;
+            max-width: 800px !important;
+        }
+
+        .quote-morpheus {
+            margin: 3rem auto !important;
+            max-width: 700px !important;
+        }
+
+        /* Neon Glow Borders - Optimized */
         .neon-border {
             border: 2px solid var(--matrix-green);
             box-shadow: 
                 0 0 5px var(--matrix-green),
-                inset 0 0 5px var(--matrix-green),
-                0 0 20px var(--matrix-green),
-                inset 0 0 20px var(--matrix-green);
-            animation: neon-flicker 2s infinite alternate;
+                0 0 20px var(--matrix-green);
+            animation: neon-flicker 3s infinite alternate;
         }
 
         @keyframes neon-flicker {
             0%, 100% {
                 box-shadow: 
                     0 0 5px var(--matrix-green),
-                    inset 0 0 5px var(--matrix-green),
-                    0 0 20px var(--matrix-green),
-                    inset 0 0 20px var(--matrix-green);
+                    0 0 20px var(--matrix-green);
             }
             50% {
                 box-shadow: 
                     0 0 10px var(--matrix-green),
-                    inset 0 0 10px var(--matrix-green),
-                    0 0 40px var(--matrix-green),
-                    inset 0 0 40px var(--matrix-green);
+                    0 0 30px var(--matrix-green);
             }
+        }
+
+        /* Better Visual Hierarchy */
+        h2 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+        }
+
+        /* Improved Pills Layout */
+        .pills-nav {
+            gap: 0.8rem;
+        }
+
+        .pill {
+            width: 50px;
+            height: 25px;
+            border-radius: 12px;
         }
     </style>
 </head>
@@ -750,10 +807,13 @@
         </div>
     </nav>
 
-    <!-- Pills Navigation -->
+    <!-- Pills Navigation - Enhanced -->
     <div class="pills-nav">
         <div class="pill red-pill" onclick="showMatrix()" title="Take the Red Pill - See the Code"></div>
         <div class="pill blue-pill" onclick="hideMatrix()" title="Take the Blue Pill - Return to Reality"></div>
+        <div class="pill green-pill" onclick="toggleSpeed()" title="Green Pill - Matrix Speed Control"></div>
+        <div class="pill purple-pill" onclick="toggleTheme()" title="Purple Pill - Reality Glitch"></div>
+        <div class="pill yellow-pill" onclick="togglePerformance()" title="Yellow Pill - Performance Mode"></div>
     </div>
 
     <!-- Hidden Numbers -->
@@ -764,136 +824,85 @@
 
     <!-- Home Section -->
     <section id="home">
-        <h1 class="glitch holographic" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
-        
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
-            </div>
-            <div class="typing-text">
-                > Computer Science Student | Aspiring Developer | Matrix Navigator
-            </div>
-        </div>
+        <div class="section-container">
+            <div class="section-header">
+                <h1 class="glitch holographic" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
+                
+                <div class="terminal" style="margin: 2rem auto; max-width: 600px;">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div class="typing-text">
+                        > Computer Science Student | Aspiring Developer | Matrix Navigator
+                    </div>
+                </div>
 
-        <div style="text-align: center; margin: 3rem 0;">
-            <p style="font-size: 1.2rem; margin-bottom: 1rem;">
-                📧 soumare.birante05@gmail.com | 📱 +33 6 44 75 60 28
-            </p>
-            <p style="font-size: 1.1rem; opacity: 0.8;">
-                🌐 France → Asia-Pacific | Ready to jack into the Matrix
-            </p>
-        </div>
-
-        <div class="quote-morpheus">
-            There is a difference between knowing the path and walking the path. 
-            I choose to walk the path of code, learning, and international adventure.
-        </div>
-
-        <div class="terminal" style="margin-top: 2rem;">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
-            </div>
-            <div>
-                <span class="matrix-number">birante@matrix:~$</span> cat /proc/skills<br>
-                > Programming Languages: Python, JavaScript (Learning)<br>
-                > Web Technologies: HTML, CSS, Selenium automation<br>
-                > Databases: SQL fundamentals<br>
-                > APIs: Telegram Bot API, Payment processing (Nowpayments)<br>
-                > Tools: 3D modeling (SketchUp), Discord automation<br>
-                > Academic: Cryptography (CryptoHack), Mathematics, Quantum physics<br>
-                > Learning Method: AI-assisted development + hands-on experimentation<br><br>
-                <span style="color: var(--neo-red);">WARNING:</span> Rapid skill acquisition detected<br>
-                <span style="color: var(--morpheus-blue);">INFO:</span> Self-directed learning protocol active
-            </div>
-        </div>
-
-        <div class="skills-matrix">
-            <div class="skill-node">
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🐍</div>
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">Python</div>
-                <div style="font-size: 0.9rem; opacity: 0.8;">Telegram Bots, Automation, Learning</div>
-                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
-                    <div class="progress-fill" style="width: 60%; animation: none;"></div>
+                <div style="text-align: center; margin: 3rem auto; max-width: 600px;">
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem; line-height: 1.4;">
+                        📧 soumare.birante05@gmail.com<br>
+                        📱 +33 6 44 75 60 28
+                    </p>
+                    <p style="font-size: 1.1rem; opacity: 0.8;">
+                        🌐 France → Asia-Pacific | Ready to jack into the Matrix
+                    </p>
                 </div>
             </div>
 
-            <div class="skill-node">
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌐</div>
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">Web Tech</div>
-                <div style="font-size: 0.9rem; opacity: 0.8;">HTML, CSS, JavaScript, Selenium</div>
-                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
-                    <div class="progress-fill" style="width: 55%; animation: none;"></div>
+            <div class="section-content">
+                <div class="quote-morpheus">
+                    There is a difference between knowing the path and walking the path. 
+                    I choose to walk the path of code, learning, and international adventure.
+                </div>
+
+                <div class="terminal" style="margin: 3rem auto; max-width: 800px;">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div>
+                        <span class="matrix-number">birante@matrix:~$</span> whoami<br>
+                        > Double Bachelor's Degree - Computer Science (L3) & Mathematics (L2)<br>
+                        > Université Paris-Est Créteil | Bac Mention Bien (2023)<br>
+                        > Class Representative for 3 consecutive years<br><br>
+                        <span class="matrix-number">birante@matrix:~$</span> mission --objective<br>
+                        > Seeking 3-6 month international internship<br>
+                        > Target: Software Development & Automation<br>
+                        > Regions: Singapore, Malaysia, Taiwan, Vietnam<br>
+                        > Status: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span> 🚀
+                    </div>
                 </div>
             </div>
-
-            <div class="skill-node">
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🗄️</div>
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">Database</div>
-                <div style="font-size: 0.9rem; opacity: 0.8;">SQL Fundamentals</div>
-                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
-                    <div class="progress-fill" style="width: 45%; animation: none;"></div>
-                </div>
-            </div>
-
-            <div class="skill-node">
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔐</div>
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">Cryptography</div>
-                <div style="font-size: 0.9rem; opacity: 0.8;">CryptoHack Challenges</div>
-                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
-                    <div class="progress-fill" style="width: 40%; animation: none;"></div>
-                </div>
-            </div>
-
-            <div class="skill-node">
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎨</div>
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">3D Design</div>
-                <div style="font-size: 0.9rem; opacity: 0.8;">SketchUp, Architectural Plans</div>
-                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
-                    <div class="progress-fill" style="width: 65%; animation: none;"></div>
-                </div>
-            </div>
-
-            <div class="skill-node">
-                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🧠</div>
-                <div style="font-weight: 700; margin-bottom: 0.5rem;">AI Integration</div>
-                <div style="font-size: 0.9rem; opacity: 0.8;">AI-Assisted Development</div>
-                <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
-                    <div class="progress-fill" style="width: 70%; animation: none;"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="quote-morpheus" style="margin-top: 3rem;">
-            I can only show you the door. You're the one that has to walk through it.
-            <br><small style="opacity: 0.7;">- Every debugging session ever</small>
         </div>
     </section>
 
     <!-- Travel Section -->
     <section id="travel">
-        <h2>🌍 INTERNATIONAL MATRIX</h2>
-        
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
+        <div class="section-container">
+            <div class="section-header">
+                <h2>🌍 INTERNATIONAL MATRIX</h2>
             </div>
-            <div>
-                <span class="matrix-number">birante@matrix:~$</span> ls -la /world/traveled<br>
-                > Total countries accessed: <span class="matrix-number">10+</span><br>
-                > Continents explored: <span class="matrix-number">4</span><br>
-                > Cultural adaptability: <span style="color: var(--matrix-green);">MAXIMUM</span><br>
-                > Language protocols: French (Native), English (Advanced)<br><br>
-                <span style="color: var(--morpheus-blue);">MORPHEUS:</span> "There's a difference between knowing the world and experiencing it."
-            </div>
-        </div>
+            
+            <div class="section-content">
+                <div class="terminal" style="margin: 0 auto 3rem; max-width: 800px;">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div>
+                        <span class="matrix-number">birante@matrix:~$</span> ls -la /world/traveled<br>
+                        > Total countries accessed: <span class="matrix-number">10+</span><br>
+                        > Continents explored: <span class="matrix-number">4</span><br>
+                        > Cultural adaptability: <span style="color: var(--matrix-green);">MAXIMUM</span><br>
+                        > Language protocols: French (Native), English (Advanced)<br><br>
+                        <span style="color: var(--morpheus-blue);">MORPHEUS:</span> "There's a difference between knowing the world and experiencing it."
+                    </div>
+                </div>
 
-        <div class="travel-matrix">
+                <div class="travel-matrix">
             <div class="country-node">
                 <span class="country-flag">🇺🇸</span>
                 <div>USA</div>
@@ -963,23 +972,29 @@
             </div>
         </div>
 
-        <div class="quote-morpheus" style="margin-top: 3rem;">
-            Free your mind. The body cannot live without the mind... 
-            but the code can live without borders.
+                <div class="quote-morpheus" style="margin-top: 3rem;">
+                    Free your mind. The body cannot live without the mind... 
+                    but the code can live without borders.
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
-        <h2>📡 ESTABLISH CONNECTION</h2>
-        
-        <div class="quote-morpheus">
-            This is your last chance. After this, there is no going back.
-            <br>You contact me - the story ends, you wake up in your office and believe whatever you want to believe.
-            <br><small style="opacity: 0.7;">- Ready for your next team member?</small>
-        </div>
+        <div class="section-container">
+            <div class="section-header">
+                <h2>📡 ESTABLISH CONNECTION</h2>
+            </div>
+            
+            <div class="section-content">
+                <div class="quote-morpheus">
+                    This is your last chance. After this, there is no going back.
+                    <br>You contact me - the story ends, you wake up in your office and believe whatever you want to believe.
+                    <br><small style="opacity: 0.7;">- Ready for your next team member?</small>
+                </div>
 
-        <div class="contact-matrix">
+                <div class="contact-matrix">
             <div class="contact-node">
                 <span class="contact-icon">📧</span>
                 <div style="font-weight: 700; margin-bottom: 0.5rem;">Email Protocol</div>
@@ -1036,6 +1051,8 @@
                     <div style="margin-top: 0.5rem; opacity: 0.7;">Click to initiate download protocol</div>
                 </div>
             </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1072,9 +1089,13 @@
 
     <!-- Projects Section -->
     <section id="projects">
-        <h2>🚀 TECHNICAL PROJECTS</h2>
-        
-        <div class="project-grid">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>🚀 TECHNICAL PROJECTS</h2>
+            </div>
+            
+            <div class="section-content">
+                <div class="project-grid">
             <div class="project-card fade-in-up">
                 <div class="project-number">01</div>
                 <div class="project-title">Telegram Bot with Payment API</div>
@@ -1146,23 +1167,104 @@
             </div>
         </div>
 
-        <div class="quote-morpheus" style="margin-top: 3rem;">
-            What is real? How do you define 'real'? If you're talking about what you can feel, 
-            what you can smell, what you can taste and see, then 'real' is simply... code that works.
+                <div class="quote-morpheus" style="margin-top: 3rem;">
+                    What is real? How do you define 'real'? If you're talking about what you can feel, 
+                    what you can smell, what you can taste and see, then 'real' is simply... code that works.
+                </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Skills Section -->
     <section id="skills">
-        <h2>💻 TECHNICAL MATRIX</h2>
-        
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
+        <div class="section-container">
+            <div class="section-header">
+                <h2>💻 TECHNICAL MATRIX</h2>
             </div>
-            <div>This skills section was moved to the home section for better user experience.</div>
+            
+            <div class="section-content">
+                <div class="terminal" style="margin: 0 auto 3rem; max-width: 800px;">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div>
+                        <span class="matrix-number">birante@matrix:~$</span> cat /proc/skills<br>
+                        > Programming Languages: Python, JavaScript (Learning)<br>
+                        > Web Technologies: HTML, CSS, Selenium automation<br>
+                        > Databases: SQL fundamentals<br>
+                        > APIs: Telegram Bot API, Payment processing<br>
+                        > Tools: 3D modeling, Discord automation<br>
+                        > Academic: Cryptography, Mathematics, Quantum physics<br>
+                        > Learning Method: AI-assisted development + experimentation<br><br>
+                        <span style="color: var(--neo-red);">WARNING:</span> Rapid skill acquisition detected<br>
+                        <span style="color: var(--morpheus-blue);">INFO:</span> Self-directed learning protocol active
+                    </div>
+                </div>
+
+                <div class="skills-matrix">
+                    <div class="skill-node">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🐍</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem;">Python</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Telegram Bots, Automation</div>
+                        <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                            <div class="progress-fill" style="width: 60%; animation: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-node">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🌐</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem;">Web Tech</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">HTML, CSS, JS, Selenium</div>
+                        <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                            <div class="progress-fill" style="width: 55%; animation: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-node">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🗄️</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem;">Database</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">SQL Fundamentals</div>
+                        <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                            <div class="progress-fill" style="width: 45%; animation: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-node">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔐</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem;">Cryptography</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">CryptoHack Challenges</div>
+                        <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                            <div class="progress-fill" style="width: 40%; animation: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-node">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🎨</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem;">3D Design</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">SketchUp, Architecture</div>
+                        <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                            <div class="progress-fill" style="width: 65%; animation: none;"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-node">
+                        <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🧠</div>
+                        <div style="font-weight: 700; margin-bottom: 0.5rem;">AI Integration</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">AI-Assisted Development</div>
+                        <div class="progress-bar" style="margin-top: 1rem; height: 6px;">
+                            <div class="progress-fill" style="width: 70%; animation: none;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote-morpheus" style="margin-top: 3rem;">
+                    I can only show you the door. You're the one that has to walk through it.
+                    <br><small style="opacity: 0.7;">- Every debugging session ever</small>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1196,7 +1298,7 @@
                 }, 5000);
             }
             
-            setInterval(createChar, 100);
+            setInterval(createChar, 150); // Reduced frequency for better performance
         }
 
         // Loading Screen Animation with Epic Messages
@@ -1244,32 +1346,30 @@
             addMatrixReferences();
         }
 
-        // Animate Elements on Scroll with Advanced Effects
+        // Optimized Scroll Animations with Performance
         function animateElements() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in-up');
-                        
-                        // Special animations for skills
-                        if (entry.target.classList.contains('skill-node')) {
-                            setTimeout(() => {
-                                const progressBar = entry.target.querySelector('.progress-fill');
-                                if (progressBar) {
-                                    progressBar.style.animation = 'loading 2s ease-in-out forwards';
-                                }
-                            }, 500);
-                        }
-                        
-                        // Special animations for countries
-                        if (entry.target.classList.contains('country-node')) {
-                            setTimeout(() => {
-                                entry.target.style.animation = 'glow 0.5s ease';
-                            }, Math.random() * 1000);
-                        }
+                        requestAnimationFrame(() => {
+                            entry.target.classList.add('fade-in-up');
+                            
+                            // Throttled special animations
+                            if (entry.target.classList.contains('skill-node')) {
+                                setTimeout(() => {
+                                    const progressBar = entry.target.querySelector('.progress-fill');
+                                    if (progressBar) {
+                                        progressBar.style.animation = 'loading 1.5s ease-out forwards';
+                                    }
+                                }, 300);
+                            }
+                        });
                     }
                 });
-            }, { threshold: 0.1 });
+            }, { 
+                threshold: 0.1,
+                rootMargin: '50px' // Preload animations
+            });
 
             document.querySelectorAll('.project-card, .skill-node, .country-node, .contact-node').forEach(el => {
                 observer.observe(el);
@@ -1411,7 +1511,7 @@
             canvas.height = window.innerHeight;
 
             const particles = [];
-            const particleCount = 60;
+            const particleCount = window.innerWidth > 768 ? 40 : 20; // Adaptive particle count
 
             class Particle {
                 constructor() {
@@ -1454,27 +1554,37 @@
                 particles.push(new Particle());
             }
 
-            function animate() {
+            let lastFrameTime = 0;
+            function animate(currentTime) {
+                // Throttle to 30fps for better performance
+                if (currentTime - lastFrameTime < 33) {
+                    requestAnimationFrame(animate);
+                    return;
+                }
+                lastFrameTime = currentTime;
+
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
                 particles.forEach((particle, index) => {
                     particle.update();
                     particle.draw();
 
-                    // Draw connections with dynamic opacity
-                    for (let j = index + 1; j < particles.length; j++) {
-                        const dx = particles[j].x - particle.x;
-                        const dy = particles[j].y - particle.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
+                    // Optimized connections - only check every other particle
+                    if (index % 2 === 0) {
+                        for (let j = index + 2; j < particles.length; j += 2) {
+                            const dx = particles[j].x - particle.x;
+                            const dy = particles[j].y - particle.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
 
-                        if (distance < 120) {
-                            ctx.beginPath();
-                            ctx.moveTo(particle.x, particle.y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            const connectionOpacity = 0.15 * (1 - distance / 120);
-                            ctx.strokeStyle = `rgba(0, 255, 0, ${connectionOpacity})`;
-                            ctx.lineWidth = 1;
-                            ctx.stroke();
+                            if (distance < 100) { // Reduced connection distance
+                                ctx.beginPath();
+                                ctx.moveTo(particle.x, particle.y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                const connectionOpacity = 0.1 * (1 - distance / 100);
+                                ctx.strokeStyle = `rgba(0, 255, 0, ${connectionOpacity})`;
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            }
                         }
                     }
                 });
@@ -1552,6 +1662,106 @@
 
             // Add "BLUE PILL TAKEN" message
             showTemporaryMessage("🔵 BLUE PILL TAKEN", "Welcome back to the comfortable illusion...", 2500);
+        }
+
+        // New Pill Functions
+        let matrixSpeed = 'normal';
+        let currentTheme = 'matrix';
+
+        function toggleSpeed() {
+            const speeds = ['slow', 'normal', 'fast', 'ludicrous'];
+            const currentIndex = speeds.indexOf(matrixSpeed);
+            matrixSpeed = speeds[(currentIndex + 1) % speeds.length];
+            
+            // Adjust Matrix rain speed
+            const matrixChars = document.querySelectorAll('.matrix-char');
+            const speedMultipliers = { slow: 0.3, normal: 1, fast: 2, ludicrous: 4 };
+            const multiplier = speedMultipliers[matrixSpeed];
+            
+            matrixChars.forEach(char => {
+                const currentDuration = parseFloat(char.style.animationDuration);
+                char.style.animationDuration = (currentDuration / multiplier) + 's';
+            });
+
+            const speedMessages = {
+                slow: "🟢 MATRIX SPEED: MEDITATION MODE",
+                normal: "🟢 MATRIX SPEED: NORMAL",
+                fast: "🟢 MATRIX SPEED: NEO MODE", 
+                ludicrous: "🟢 MATRIX SPEED: LUDICROUS MODE!"
+            };
+
+            showTemporaryMessage(speedMessages[matrixSpeed], `Reality flows at ${matrixSpeed} speed`, 2000);
+        }
+
+        function toggleTheme() {
+            const themes = ['matrix', 'zion', 'architect', 'oracle'];
+            const currentIndex = themes.indexOf(currentTheme);
+            currentTheme = themes[(currentIndex + 1) % themes.length];
+            
+            const themeConfigs = {
+                matrix: {
+                    primary: '#00ff00',
+                    secondary: '#001100',
+                    accent: 'rgba(0, 255, 0, 0.3)',
+                    name: '💚 MATRIX THEME'
+                },
+                zion: {
+                    primary: '#ffaa00',
+                    secondary: '#332200',
+                    accent: 'rgba(255, 170, 0, 0.3)',
+                    name: '🧡 ZION THEME'
+                },
+                architect: {
+                    primary: '#ffffff',
+                    secondary: '#333333',
+                    accent: 'rgba(255, 255, 255, 0.3)',
+                    name: '🤍 ARCHITECT THEME'
+                },
+                oracle: {
+                    primary: '#ff6600',
+                    secondary: '#331100',
+                    accent: 'rgba(255, 102, 0, 0.3)',
+                    name: '🧡 ORACLE THEME'
+                }
+            };
+
+            const config = themeConfigs[currentTheme];
+            document.documentElement.style.setProperty('--matrix-green', config.primary);
+            document.documentElement.style.setProperty('--matrix-dark', config.secondary);
+            document.documentElement.style.setProperty('--matrix-glow', config.accent);
+
+            showTemporaryMessage(`💜 ${config.name} ACTIVATED`, "Reality perception shifted", 2000);
+        }
+
+        // Performance Mode Toggle
+        let performanceMode = false;
+        function togglePerformance() {
+            performanceMode = !performanceMode;
+            
+            if (performanceMode) {
+                // Disable expensive animations
+                document.getElementById('matrixBg').style.display = 'none';
+                document.querySelector('canvas').style.display = 'none';
+                document.body.style.setProperty('--animation-speed', '0.1s');
+                
+                // Reduce visual effects
+                document.querySelectorAll('.matrix-char').forEach(char => {
+                    char.style.display = 'none';
+                });
+                
+                showTemporaryMessage("⚡ PERFORMANCE MODE ON", "Maximum speed, minimal effects", 2000);
+            } else {
+                // Re-enable animations
+                document.getElementById('matrixBg').style.display = 'block';
+                document.querySelector('canvas').style.display = 'block';
+                document.body.style.removeProperty('--animation-speed');
+                
+                document.querySelectorAll('.matrix-char').forEach(char => {
+                    char.style.display = 'block';
+                });
+                
+                showTemporaryMessage("🎨 VISUAL MODE ON", "Full Matrix experience restored", 2000);
+            }
         }
 
         function addFloatingCode() {
@@ -1807,22 +2017,25 @@
             });
         });
 
-        // Matrix-style cursor trail - Enhanced
+        // Optimized cursor trail - Reduced frequency for performance
+        let lastTrailTime = 0;
         document.addEventListener('mousemove', (e) => {
-            if (Math.random() > 0.82) {
+            const now = Date.now();
+            if (now - lastTrailTime > 200 && Math.random() > 0.9) { // Much less frequent
+                lastTrailTime = now;
                 const trail = document.createElement('div');
                 trail.style.cssText = `
                     position: fixed;
                     left: ${e.clientX}px;
                     top: ${e.clientY}px;
-                    width: 4px;
-                    height: 4px;
+                    width: 3px;
+                    height: 3px;
                     background: var(--matrix-green);
                     border-radius: 50%;
                     pointer-events: none;
                     z-index: 1001;
-                    animation: trail-fade 2s forwards;
-                    box-shadow: 0 0 12px var(--matrix-green);
+                    animation: trail-fade 1.5s forwards;
+                    will-change: transform, opacity;
                 `;
                 document.body.appendChild(trail);
 
@@ -1830,7 +2043,7 @@
                     if (trail.parentNode) {
                         trail.parentNode.removeChild(trail);
                     }
-                }, 2000);
+                }, 1500);
             }
         });
 
@@ -1879,6 +2092,23 @@
                 }
             }
 
+            /* Performance Optimizations */
+            * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+            }
+
+            .project-card, .skill-node, .country-node, .contact-node {
+                will-change: transform;
+                backface-visibility: hidden;
+                transform: translate3d(0, 0, 0); /* Force hardware acceleration */
+            }
+
+            .fade-in-up {
+                will-change: transform, opacity;
+                transform: translate3d(0, 30px, 0);
+            }
+
             /* Enhanced mobile animations */
             @media (max-width: 768px) {
                 .matrix-char {
@@ -1886,15 +2116,24 @@
                 }
                 
                 canvas {
-                    opacity: 0.2 !important;
+                    opacity: 0.15 !important;
                 }
                 
                 .project-card:hover {
-                    transform: translateY(-5px) scale(1.01);
+                    transform: translate3d(0, -5px, 0) scale(1.01);
                 }
                 
                 .skill-node:hover {
-                    transform: scale(1.02);
+                    transform: translate3d(0, 0, 0) scale(1.02);
+                }
+                
+                /* Disable expensive animations on mobile */
+                .matrix-bg {
+                    display: none;
+                }
+                
+                body::before {
+                    display: none;
                 }
             }
         `;
