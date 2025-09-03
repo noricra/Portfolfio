@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birante Soumare - Matrix Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
+        
+        :root {
+            --matrix-green: #00ff00;
+            --matrix-dark: #001100;
+            --matrix-glow: rgba(0, 255, 0, 0.3);
+            --neo-red: #ff0040;
+            --morpheus-blue: #0040ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: var(--matrix-green);
+            font-family: 'Courier Prime', monospace;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        .matrix-char {
+            position: absolute;
+            color: var(--matrix-green);
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { 
+                transform: translateY(-100vh); 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(100vh); 
+                opacity: 0; 
+            }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 2s ease;
+        }
+
+        .loading-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .progress-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(0, 255, 0, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--matrix-green), rgba(0, 255, 0, 0.5));
+            width: 0;
+            animation: loading 3s ease-in-out forwards;
+        }
+
+        @keyframes loading {
+            to { width: 100%; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--matrix-green);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--matrix-green);
+            text-shadow: 0 0 10px var(--matrix-glow);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--matrix-green);
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        nav a:hover {
+            text-shadow: 0 0 20px var(--matrix-glow);
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--matrix-green);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Pills Navigation */
+        .pills-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pill {
+            width: 60px;
+            height: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .red-pill {
+            background: linear-gradient(45deg, var(--neo-red), #ff6b6b);
+            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+        }
+
+        .blue-pill {
+            background: linear-gradient(45deg, var(--morpheus-blue), #4dabf7);
+            box-shadow: 0 0 20px rgba(0, 64, 255, 0.5);
+        }
+
+        .pill:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+        }
+
+        .pill::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 2rem 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            font-family: 'Orbitron', monospace;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: glow 2s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        h1::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, var(--matrix-green), transparent, var(--matrix-green));
+            z-index: -1;
+            opacity: 0.3;
+            border-radius: 10px;
+        }
+
+        @keyframes glow {
+            from { 
+                text-shadow: 0 0 20px var(--matrix-green); 
+            }
+            to { 
+                text-shadow: 0 0 40px var(--matrix-green), 0 0 60px var(--matrix-green); 
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--matrix-green);
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '1337';
+            position: absolute;
+            right: 0;
+            top: 0;
+            font-size: 0.8rem;
+            opacity: 0.5;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        /* Terminal Effect */
+        .terminal {
+            background: rgba(0, 20, 0, 0.8);
+            border: 1px solid var(--matrix-green);
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 2rem 0;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .terminal-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--matrix-green);
+        }
+
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: var(--neo-red); }
+        .dot-yellow { background: #ffff00; }
+        .dot-green { background: var(--matrix-green); }
+
+        .typing-text {
+            overflow: hidden;
+            border-right: 2px solid var(--matrix-green);
+            white-space: nowrap;
+            animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--matrix-green) }
+        }
+
+        /* Cards */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.02));
+            border: 1px solid var(--matrix-green);
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+            animation: sweep 1.5s ease-in-out;
+        }
+
+        @keyframes sweep {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .project-card:hover {
+            box-shadow: 0 0 40px var(--matrix-glow);
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--matrix-green);
+        }
+
+        .project-title {
+            color: var(--matrix-green);
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .project-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--matrix-green);
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        /* Skills Matrix */
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-node {
+            padding: 1.5rem;
+            border: 1px solid var(--matrix-green);
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), transparent);
+            transition: all 0.3s;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .skill-node::before {
+            content: '42';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.6rem;
+            opacity: 0.3;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .skill-node:hover {
+            background: rgba(0, 255, 0, 0.1);
+            box-shadow: 0 0 25px var(--matrix-glow);
+            transform: scale(1.05);
+        }
+
+        /* Travel Map */
+        .travel-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .country-node {
+            padding: 1rem;
+            border: 1px solid var(--matrix-green);
+            background: rgba(0, 255, 0, 0.05);
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .country-node:hover {
+            background: rgba(0, 255, 0, 0.15);
+            box-shadow: 0 0 20px var(--matrix-glow);
+            transform: translateY(-5px);
+        }
+
+        .country-flag {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* Contact Grid */
+        .contact-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-node {
+            padding: 2rem;
+            border: 1px solid var(--matrix-green);
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.02));
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .contact-node:hover {
+            background: rgba(0, 255, 0, 0.12);
+            box-shadow: 0 0 30px var(--matrix-glow);
+            transform: scale(1.05);
+        }
+
+        .contact-node a {
+            color: var(--matrix-green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Easter Eggs */
+        .hidden-number {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 0.7rem;
+            font-family: 'Courier Prime', monospace;
+            color: var(--matrix-green);
+        }
+
+        .quote-morpheus {
+            text-align: center;
+            font-style: italic;
+            margin: 3rem 0;
+            padding: 2rem;
+            border: 1px dashed var(--matrix-green);
+            background: rgba(0, 255, 0, 0.03);
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .quote-morpheus::before {
+            content: '"';
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            color: var(--matrix-green);
+            opacity: 0.5;
+        }
+
+        .quote-morpheus::after {
+            content: '- Morpheus';
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Glitch Effects */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch:hover::before,
+        .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch:hover::before {
+            animation: glitch-1 0.5s infinite linear alternate-reverse;
+            color: var(--neo-red);
+            z-index: -1;
+        }
+
+        .glitch:hover::after {
+            animation: glitch-2 0.5s infinite linear alternate-reverse;
+            color: var(--morpheus-blue);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0% { clip: rect(0, 900px, 0, 0); }
+            10% { clip: rect(32px, 900px, 36px, 0); }
+            20% { clip: rect(70px, 900px, 75px, 0); }
+            30% { clip: rect(95px, 900px, 100px, 0); }
+            40% { clip: rect(15px, 900px, 20px, 0); }
+            50% { clip: rect(55px, 900px, 60px, 0); }
+            60% { clip: rect(85px, 900px, 90px, 0); }
+            70% { clip: rect(25px, 900px, 30px, 0); }
+            80% { clip: rect(65px, 900px, 70px, 0); }
+            90% { clip: rect(105px, 900px, 110px, 0); }
+            100% { clip: rect(45px, 900px, 50px, 0); }
+        }
+
+        @keyframes glitch-2 {
+            0% { clip: rect(0, 900px, 0, 0); }
+            15% { clip: rect(12px, 900px, 17px, 0); }
+            25% { clip: rect(52px, 900px, 57px, 0); }
+            35% { clip: rect(82px, 900px, 87px, 0); }
+            45% { clip: rect(22px, 900px, 27px, 0); }
+            55% { clip: rect(62px, 900px, 67px, 0); }
+            65% { clip: rect(92px, 900px, 97px, 0); }
+            75% { clip: rect(32px, 900px, 37px, 0); }
+            85% { clip: rect(72px, 900px, 77px, 0); }
+            95% { clip: rect(102px, 900px, 107px, 0); }
+            100% { clip: rect(42px, 900px, 47px, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .pills-nav {
+                right: 1rem;
+                gap: 0.5rem;
+            }
+            
+            .pill {
+                width: 40px;
+                height: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            section {
+                padding: 100px 1rem 30px;
+            }
+            
+            .project-grid,
+            .skills-matrix,
+            .travel-matrix,
+            .contact-matrix {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Matrix Code Style Numbers */
+        .matrix-number {
+            color: var(--matrix-green);
+            font-family: 'Courier Prime', monospace;
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--matrix-glow);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-text">Wake up, Birante...</div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+
+    <!-- Matrix Rain Background -->
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">BIRANTE.EXE</div>
+            <ul>
+                <li><a href="#home">HOME</a></li>
+                <li><a href="#projects">PROJECTS</a></li>
+                <li><a href="#skills">SKILLS</a></li>
+                <li><a href="#travel">TRAVEL</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Pills Navigation -->
+    <div class="pills-nav">
+        <div class="pill red-pill" onclick="showMatrix()" title="Take the Red Pill - See the Code"></div>
+        <div class="pill blue-pill" onclick="hideMatrix()" title="Take the Blue Pill - Return to Reality"></div>
+    </div>
+
+    <!-- Hidden Numbers -->
+    <div class="hidden-number" style="top: 10%; left: 5%;">1337</div>
+    <div class="hidden-number" style="top: 25%; right: 3%;">42</div>
+    <div class="hidden-number" style="top: 60%; left: 2%;">2001</div>
+    <div class="hidden-number" style="bottom: 20%; right: 8%;">0xFF</div>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1 class="glitch" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div class="typing-text">
+                > Computer Science Student | Aspiring Developer | Matrix Navigator
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 3rem 0;">
+            <p style="font-size: 1.2rem; margin-bottom: 1rem;">
+                📧 soumare.birante05@gmail.com | 📱 +33 6 44 75 60 28
+            </p>
+            <p style="font-size: 1.1rem; opacity: 0.8;">
+                🌐 France → Asia-Pacific | Ready to jack into the Matrix
+            </p>
+        </div>
+
+        <div class="quote-morpheus">
+            There is a difference between knowing the path and walking the path. 
+            I choose to walk the path of code, learning, and international adventure.
+        </div>
+
+        <div class="terminal" style="margin-top: 2rem;">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-green"></div>
+            </div>
+            <div>
+                <span class="matrix-number">birante@matrix:~$</span> whoami<br>
+                > Double Bachelor's Degree - Computer Science (L3) & Mathematics (L2)<br>
+                > Université Paris-Est Créteil | Bac Mention Bien (<span class="matrix-number">2023</span>)<br>
+                > Class Representative for <span class="matrix-number">3</span> consecutive years<br><br>
+                <span class="matrix-number">birante@matrix:~$</span> mission --objective<br>
+                > Seeking 3-6 month international internship<br>
+                > Target: Software Development & Automation<br>
+                > Regions: Singapore, Malaysia, Taiwan, Vietnam<br>
+                > Status: Ready for deployment 🚀
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>🚀 TECHNICAL PROJECTS</h2>
+        
+        <div class="project-grid">
+            <div class="project-card fade-in-up">
+                <div class="project-number">01</div>
+                <div class="project-title">Telegram Bot with Payment API</div>
+                <p>Marketplace bot with Nowpayments integration. Learned through AI-assisted development, combining guided learning with hands-on implementation.</p>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Technologies: Python, Telegram Bot API, Payment processing</div>
+                    <div>Learning Method: AI-assisted + practical experimentation</div>
+                    <div>Status: <span style="color: var(--matrix-green);">OPERATIONAL</span></div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in-up">
+                <div class="project-number">02</div>
+                <div class="project-title">Web Automation Scripts</div>
+                <p>Python and Selenium scripts for email and web automation. Built basic but functional automation workflows for personal and learning purposes.</p>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Technologies: Python, Selenium, Web automation</div>
+                    <div>Applications: Email management, task automation</div>
+                    <div>Status: <span style="color: var(--matrix-green);">ACTIVE</span></div>
+                </div>
+            </div>
+
+            <div class="project-card fade-in-up">
+                <div class="project-number">03</div>
+                <div class="project-title">3D Technical Design</div>
+                <p>House plans and community project schematics. Demonstrated rapid skill acquisition by learning 3D modeling software from scratch for real-world projects.</p>
+                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
+                    <div>Software: 3D modeling applications</div>
+                    <div>Projects: Residential + community development</div>
+                    <div>Achievement: <span style="color: var(--matrix-green);">RAPID LEARNING</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quote-morpheus" style="margin-top: 3rem;">
+            What is real? How do you define 'real'? If you're talking about what you can feel, 
+            what you can smell, what you can taste and see, then 'real' is simply... code that works.
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>💻 TECHNICAL MATRIX</h2>
+        
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-dot dot-red"></div>
+                <div class="terminal-dot dot-yellow"></div>
+                <div class="terminal-dot dot-
