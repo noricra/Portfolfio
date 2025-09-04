@@ -269,13 +269,17 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 1px solid rgba(0, 255, 0, 0.5);
+            border: 2px solid rgba(0, 255, 0, 0.4);
             margin: 0 auto 0.8rem;
-            background: linear-gradient(45deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.1));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.8));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image:hover {
+            border-color: rgba(0, 255, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
         }
 
         .profile-name {
@@ -802,30 +806,50 @@
             transform: translateY(0);
         }
 
-        /* Light Mode Styles */
+        /* Enhanced Light Mode Styles */
         body.light-mode {
             background: #f8fff8 !important;
-            color: #006600 !important;
+            color: #003300 !important;
+        }
+
+        body.light-mode h1 {
+            color: #002200 !important;
+            text-shadow: 0 0 20px rgba(0, 102, 0, 0.6) !important;
+        }
+
+        body.light-mode h2 {
+            color: #004400 !important;
+        }
+
+        body.light-mode h3 {
+            color: #002200 !important;
         }
 
         body.light-mode .sidebar {
             background: rgba(248, 255, 248, 0.95) !important;
             border-color: rgba(0, 102, 0, 0.4) !important;
+            color: #003300 !important;
         }
 
         body.light-mode .content-card {
             background: rgba(248, 255, 248, 0.8) !important;
             border-color: rgba(0, 102, 0, 0.4) !important;
-            color: #006600 !important;
+            color: #003300 !important;
         }
 
         body.light-mode .terminal {
             background: rgba(240, 255, 240, 0.9) !important;
             border-color: rgba(0, 102, 0, 0.4) !important;
+            color: #003300 !important;
         }
 
         body.light-mode .matrix-char {
-            opacity: 0.1 !important;
+            opacity: 0.05 !important;
+        }
+
+        body.light-mode .profile-name,
+        body.light-mode .profile-title {
+            color: #003300 !important;
         }
 
         /* Dark Mode Styles */
@@ -978,12 +1002,13 @@
                 display: none !important;
             }
             
-            /* Mobile header layout */
+            /* Mobile header layout - Fixed */
             section#home > div:first-child {
                 flex-direction: column !important;
                 text-align: center !important;
                 gap: 1rem !important;
                 align-items: center !important;
+                margin-bottom: 1rem !important;
             }
             
             section#home > div:first-child > div:first-child {
@@ -994,8 +1019,30 @@
             }
             
             section#home h1 {
-                font-size: 1.5rem !important;
-                line-height: 1.2 !important;
+                font-size: 1.4rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            /* Mobile grid fixes */
+            .project-item {
+                grid-template-columns: 1fr !important;
+                text-align: center !important;
+                gap: 1rem !important;
+            }
+            
+            .skills-grid,
+            .travel-grid,
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            /* Mobile image sizes */
+            .project-image {
+                width: 120px !important;
+                height: 120px !important;
+                margin: 0 auto !important;
             }
         }
     </style>
@@ -1051,17 +1098,21 @@
         <div class="pill blue-pill" onclick="hideMatrix()" title="Dark Mode (Press B)"></div>
     </div>
 
-    <!-- Premium Progress Bar -->
-    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 4px; background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 255, 0, 0.1), rgba(0, 0, 0, 0.3)); z-index: 1001; backdrop-filter: blur(10px);">
-        <div id="progressFill" style="height: 100%; background: linear-gradient(90deg, var(--matrix-green), var(--accent-blue), var(--matrix-green)); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 15px var(--matrix-glow), 0 2px 8px rgba(0, 255, 0, 0.3);"></div>
+    <!-- Optimized Progress Bar -->
+    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 3px; background: rgba(0, 0, 0, 0.2); z-index: 1001;">
+        <div id="progressFill" style="height: 100%; background: var(--matrix-green); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 8px var(--matrix-glow);"></div>
     </div>
 
     <!-- R/B Indicators - Desktop Only -->
-    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 6rem; z-index: 1001; background: rgba(0, 0, 0, 0.8); padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 0, 0.4); font-family: 'Orbitron', monospace; font-size: 0.9rem;">
-        <div style="margin-bottom: 0.3rem; color: var(--matrix-green); font-weight: 700;">🎮 MODES</div>
-        <div style="display: flex; gap: 1rem;">
-            <div style="cursor: pointer;" onclick="showMatrix()"><strong>R</strong> = ☀️ Light</div>
-            <div style="cursor: pointer;" onclick="hideMatrix()"><strong>B</strong> = 🌙 Dark</div>
+    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 0, 0.4); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
+        <div style="margin-bottom: 0.4rem; color: var(--matrix-green); font-weight: 700; text-align: center;">MODES</div>
+        <div style="display: flex; gap: 1.5rem;">
+            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="showMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
+                <strong>R</strong> = ☀️ Light
+            </div>
+            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="hideMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
+                <strong>B</strong> = 🌙 Dark
+            </div>
         </div>
     </div>
 
@@ -1987,7 +2038,10 @@
                 const command = commands[cmd];
                 if (command) {
                     if (cmd === 'clear') {
-                        output.innerHTML = 'Terminal cleared.';
+                        output.innerHTML = `> Terminal cleared.<br>
+                        > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
+                        > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
+                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter`;
                     } else {
                         typeWriter(output, command.output, 20);
                     }
@@ -2044,13 +2098,29 @@
                 
                 const command = commands[cmd];
                 if (command) {
-                    output.innerHTML = command.output;
+                    typeWriter(output, command.output, 20);
                 }
                 
                 setTimeout(() => {
                     commandSpan.textContent = '';
                 }, 1000);
             }, 300);
+        }
+
+        // Simple TypeWriter Function for Terminal
+        function typeWriter(element, html, speed = 20) {
+            let i = 0;
+            const text = html;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML = text.substring(0, i + 1);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
         }
 
         // Apply Background Patterns to Sections
