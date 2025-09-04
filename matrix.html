@@ -1826,14 +1826,20 @@
         const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
 
         document.addEventListener('keydown', (e) => {
-            // Keyboard shortcuts R/B
-            if (e.key.toLowerCase() === 'r') {
-                showMatrix();
-                return;
-            }
-            if (e.key.toLowerCase() === 'b') {
-                hideMatrix();
-                return;
+            // Don't trigger shortcuts if user is typing in terminal
+            const activeElement = document.activeElement;
+            const isInTerminal = activeElement && (activeElement.id === 'skillsTerminal' || activeElement.closest('#skillsTerminal'));
+            
+            if (!isInTerminal) {
+                // Keyboard shortcuts R/B
+                if (e.key.toLowerCase() === 'r') {
+                    showMatrix();
+                    return;
+                }
+                if (e.key.toLowerCase() === 'b') {
+                    hideMatrix();
+                    return;
+                }
             }
             
             // Konami Code
