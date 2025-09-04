@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birante Soumare - Matrix Portfolio</title>
+    <link rel="stylesheet" href="matrix-assets.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
         
@@ -13,6 +14,14 @@
             --matrix-glow: rgba(0, 255, 0, 0.3);
             --neo-red: #ff0040;
             --morpheus-blue: #0040ff;
+            --accent-blue: #00aaff;
+            --accent-orange: #ff8800;
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-hover: rgba(255, 255, 255, 0.05);
         }
 
         * {
@@ -25,11 +34,107 @@
             background: #000000;
             color: var(--matrix-green);
             font-family: 'Courier Prime', monospace;
-            overflow-x: hidden;
             line-height: 1.6;
+            display: flex;
         }
 
-        /* Matrix Rain Effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        /* Apply different patterns to sections */
+        #home {
+            position: relative;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        #projects {
+            position: relative;
+        }
+
+        #projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        #skills {
+            position: relative;
+        }
+
+        #skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Pattern Application */
+        .pattern-section::before {
+            background-size: 50px 50px;
+        }
+
+        #home.pattern-section::before {
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        #projects.pattern-section::before {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, 0.02) 25%, rgba(0, 255, 0, 0.02) 26%, transparent 27%),
+                linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, 0.02) 25%, rgba(0, 255, 0, 0.02) 26%, transparent 27%);
+            background-size: 40px 40px;
+            animation: circuit-pulse 6s ease-in-out infinite;
+        }
+
+        #skills.pattern-section::before {
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.04) 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px, 40px 40px, 30px 30px;
+        }
+
+        @keyframes circuit-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Matrix Rain Background */
         .matrix-bg {
             position: fixed;
             top: 0;
@@ -38,7 +143,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.6;
+            opacity: 0.4;
         }
 
         .matrix-char {
@@ -50,14 +155,8 @@
         }
 
         @keyframes fall {
-            0% { 
-                transform: translateY(-100vh); 
-                opacity: 1; 
-            }
-            100% { 
-                transform: translateY(100vh); 
-                opacity: 0; 
-            }
+            0% { transform: translateY(-100vh); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
         }
 
         /* Loading Screen */
@@ -93,7 +192,7 @@
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--matrix-green), rgba(0, 255, 0, 0.5));
+            background: var(--matrix-green);
             width: 0;
             animation: loading 3s ease-in-out forwards;
         }
@@ -102,67 +201,140 @@
             to { width: 100%; }
         }
 
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 2rem;
-            z-index: 1000;
-            border-bottom: 1px solid var(--matrix-green);
+        @keyframes glow {
+            from { text-shadow: 0 0 20px var(--matrix-green); }
+            to { text-shadow: 0 0 40px var(--matrix-green); }
         }
 
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Premium Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: 
+                linear-gradient(180deg, rgba(0, 20, 0, 0.98), rgba(0, 10, 0, 0.95)),
+                radial-gradient(circle at top left, rgba(0, 255, 0, 0.03), transparent 60%);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(0, 255, 0, 0.3);
+            z-index: 1000;
+            padding: 1.5rem;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--matrix-green), transparent, var(--matrix-green));
+            opacity: 0.5;
         }
 
         .logo {
             font-family: 'Orbitron', monospace;
-            font-weight: 900;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-size: 1.1rem;
             color: var(--matrix-green);
-            text-shadow: 0 0 10px var(--matrix-glow);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem;
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            border-radius: 8px;
+            background: 
+                linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.01)),
+                radial-gradient(circle at center, rgba(0, 255, 0, 0.03), transparent);
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
         }
 
-        nav ul {
+
+        .profile-card {
+            background: rgba(0, 255, 0, 0.02);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 255, 0, 0.4);
+            margin: 0 auto 0.8rem;
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.8));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-image:hover {
+            border-color: rgba(0, 255, 0, 0.7);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+
+        .profile-name {
+            font-family: 'Orbitron', monospace;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+
+        .profile-title {
+            opacity: 0.7;
+            font-size: 0.75rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-status {
+            background: rgba(0, 255, 0, 0.08);
+            padding: 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            border: 1px solid rgba(0, 255, 0, 0.4);
+        }
+
+        .nav-menu {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex: 1;
         }
 
-        nav a {
+        .nav-menu a {
             color: var(--matrix-green);
             text-decoration: none;
             font-family: 'Orbitron', monospace;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            padding: 0.6rem 0.8rem;
+            border: 1px solid transparent;
+            border-radius: 6px;
+            display: block;
+            text-align: left;
+            font-size: 0.8rem;
+            font-weight: 500;
         }
 
-        nav a:hover {
-            text-shadow: 0 0 20px var(--matrix-glow);
+        .nav-menu a:hover {
             background: rgba(0, 255, 0, 0.1);
+            border-color: var(--matrix-green);
+            transform: translateX(3px);
         }
 
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--matrix-green);
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
+        .nav-menu a.active {
+            background: rgba(0, 255, 0, 0.15);
+            border-color: var(--matrix-green);
         }
 
         /* Pills Navigation */
@@ -178,111 +350,133 @@
         }
 
         .pill {
-            width: 60px;
-            height: 30px;
-            border-radius: 15px;
+            width: 50px;
+            height: 25px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .red-pill {
             background: linear-gradient(45deg, var(--neo-red), #ff6b6b);
-            box-shadow: 0 0 20px rgba(255, 0, 64, 0.5);
+            box-shadow: 0 0 15px rgba(255, 0, 64, 0.4);
         }
 
         .blue-pill {
             background: linear-gradient(45deg, var(--morpheus-blue), #4dabf7);
-            box-shadow: 0 0 20px rgba(0, 64, 255, 0.5);
+            box-shadow: 0 0 15px rgba(0, 64, 255, 0.4);
         }
 
         .pill:hover {
             transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
         }
 
-        .pill::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 10px;
-            height: 10px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Sections */
-        section {
+        /* Main Content */
+        .main-content {
+            margin-left: 240px;
+            width: calc(100% - 240px);
+            padding: 1.5rem 2rem;
             min-height: 100vh;
-            padding: 120px 2rem 50px;
-            max-width: 1200px;
-            margin: 0 auto;
         }
 
-        h1, h2 {
-            font-family: 'Orbitron', monospace;
-            text-transform: uppercase;
+        section {
+            margin-bottom: 3rem;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         h1 {
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             text-align: center;
-            margin-bottom: 2rem;
-            animation: glow 2s ease-in-out infinite alternate;
-            position: relative;
-        }
-
-        h1::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            background: linear-gradient(45deg, var(--matrix-green), transparent, var(--matrix-green));
-            z-index: -1;
-            opacity: 0.3;
-            border-radius: 10px;
-        }
-
-        @keyframes glow {
-            from { 
-                text-shadow: 0 0 20px var(--matrix-green); 
-            }
-            to { 
-                text-shadow: 0 0 40px var(--matrix-green), 0 0 60px var(--matrix-green); 
-            }
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-shadow: 0 0 20px var(--matrix-green);
+            line-height: 1.1;
         }
 
         h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--matrix-green);
-            padding-left: 1rem;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--matrix-green);
             position: relative;
         }
 
         h2::after {
-            content: '1337';
+            content: '';
             position: absolute;
-            right: 0;
-            top: 0;
-            font-size: 0.8rem;
-            opacity: 0.5;
-            font-family: 'Courier Prime', monospace;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
         }
 
-        /* Terminal Effect */
+        h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* Premium Content Cards */
+        .content-card {
+            background: 
+                linear-gradient(135deg, var(--bg-card), rgba(0, 20, 0, 0.1)),
+                radial-gradient(circle at top right, rgba(0, 255, 0, 0.02), transparent 70%);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--matrix-green), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: rgba(0, 255, 0, 0.4);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Refined Terminal Effect */
         .terminal {
-            background: rgba(0, 20, 0, 0.8);
-            border: 1px solid var(--matrix-green);
-            border-radius: 5px;
-            padding: 1rem;
-            margin: 2rem 0;
+            background: rgba(0, 10, 0, 0.6);
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
             font-family: 'Courier Prime', monospace;
+            backdrop-filter: blur(3px);
         }
 
         .terminal-header {
@@ -320,218 +514,207 @@
             50% { border-color: var(--matrix-green) }
         }
 
-        /* Cards */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.02));
-            border: 1px solid var(--matrix-green);
-            padding: 2rem;
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(0, 255, 0, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-            opacity: 0;
-        }
-
-        .project-card:hover::before {
-            opacity: 1;
-            animation: sweep 1.5s ease-in-out;
-        }
-
-        @keyframes sweep {
-            0% { transform: rotate(45deg) translateX(-100%); }
-            100% { transform: rotate(45deg) translateX(100%); }
-        }
-
-        .project-card:hover {
-            box-shadow: 0 0 40px var(--matrix-glow);
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--matrix-green);
-        }
-
-        .project-title {
+        /* Interactive Terminal Styles */
+        .terminal-cursor {
+            animation: blink-cursor 1s infinite;
             color: var(--matrix-green);
-            font-family: 'Orbitron', monospace;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            position: relative;
         }
 
-        .project-number {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--matrix-green);
-            color: #000;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        @keyframes blink-cursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        #skillsTerminal {
+            min-height: 100px;
+            cursor: text;
+        }
+
+        #skillsTerminal:focus {
+            outline: none;
+        }
+
+        /* Project Layout */
+        .project-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .project-item:nth-child(even) {
+            grid-template-columns: 1fr 200px;
+        }
+
+        .project-item:nth-child(even) .project-image {
+            order: 2;
+        }
+
+        .project-item:nth-child(even) .project-content {
+            order: 1;
+        }
+
+        .project-image {
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            border-radius: 12px;
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.03));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Orbitron', monospace;
-            font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 3rem;
+            margin: 0 auto;
+            transition: all 0.3s ease;
         }
 
-        /* Skills Matrix */
-        .skills-matrix {
+        .project-image:hover {
+            transform: scale(1.02);
+            border-color: rgba(0, 255, 0, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-content h3 {
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.02));
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(0, 255, 0, 0.05));
+            border-color: rgba(0, 255, 0, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 255, 0, 0.1);
+        }
+
+        /* Skills Grid */
+        .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1.5rem;
-            margin-top: 2rem;
+            margin: 2rem 0;
         }
 
-        .skill-node {
+        .skill-card {
+            text-align: center;
             padding: 1.5rem;
-            border: 1px solid var(--matrix-green);
-            text-align: center;
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.05), transparent);
-            transition: all 0.3s;
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--bg-card), rgba(0, 20, 0, 0.05));
+            transition: all 0.4s ease;
             position: relative;
-            border-radius: 5px;
+            overflow: hidden;
         }
 
-        .skill-node::before {
-            content: '42';
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            font-size: 0.6rem;
-            opacity: 0.3;
-            font-family: 'Courier Prime', monospace;
+        .skill-card:hover {
+            border-color: rgba(0, 255, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .skill-node:hover {
-            background: rgba(0, 255, 0, 0.1);
-            box-shadow: 0 0 25px var(--matrix-glow);
-            transform: scale(1.05);
-        }
-
-        /* Travel Map */
-        .travel-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .country-node {
-            padding: 1rem;
-            border: 1px solid var(--matrix-green);
-            background: rgba(0, 255, 0, 0.05);
-            text-align: center;
-            transition: all 0.3s;
-            position: relative;
-            border-radius: 5px;
-        }
-
-        .country-node:hover {
-            background: rgba(0, 255, 0, 0.15);
-            box-shadow: 0 0 20px var(--matrix-glow);
-            transform: translateY(-5px);
-        }
-
-        .country-flag {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
-
-        /* Contact Grid */
-        .contact-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .contact-node {
-            padding: 2rem;
-            border: 1px solid var(--matrix-green);
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.02));
-            text-align: center;
-            transition: all 0.3s;
-            position: relative;
-            border-radius: 10px;
-        }
-
-        .contact-node:hover {
-            background: rgba(0, 255, 0, 0.12);
-            box-shadow: 0 0 30px var(--matrix-glow);
-            transform: scale(1.05);
-        }
-
-        .contact-node a {
-            color: var(--matrix-green);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .contact-icon {
-            font-size: 2rem;
+        .skill-icon {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             display: block;
         }
 
-        /* Easter Eggs */
-        .hidden-number {
-            position: absolute;
-            opacity: 0.1;
-            font-size: 0.7rem;
-            font-family: 'Courier Prime', monospace;
-            color: var(--matrix-green);
+        /* Travel Grid */
+        .travel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
         }
 
+        .country-card {
+            text-align: center;
+            padding: 1rem;
+            border: 1px solid var(--matrix-green);
+            border-radius: 8px;
+            background: rgba(0, 255, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .country-card:hover {
+            background: rgba(0, 255, 0, 0.08);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--matrix-green);
+            border-radius: 10px;
+            background: rgba(0, 255, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(0, 255, 0, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Quote Styling */
         .quote-morpheus {
             text-align: center;
             font-style: italic;
-            margin: 3rem 0;
+            margin: 3rem auto;
             padding: 2rem;
             border: 1px dashed var(--matrix-green);
             background: rgba(0, 255, 0, 0.03);
-            position: relative;
             border-radius: 10px;
+            max-width: 600px;
+            position: relative;
         }
 
         .quote-morpheus::before {
             content: '"';
-            font-size: 4rem;
+            font-size: 3rem;
             position: absolute;
-            top: -10px;
-            left: 20px;
+            top: -5px;
+            left: 15px;
             color: var(--matrix-green);
             opacity: 0.5;
         }
 
-        .quote-morpheus::after {
-            content: '- Morpheus';
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-        }
-
-        /* Glitch Effects */
+        /* Glitch Effect */
         .glitch {
             position: relative;
             display: inline-block;
@@ -561,36 +744,233 @@
 
         @keyframes glitch-1 {
             0% { clip: rect(0, 900px, 0, 0); }
-            10% { clip: rect(32px, 900px, 36px, 0); }
             20% { clip: rect(70px, 900px, 75px, 0); }
-            30% { clip: rect(95px, 900px, 100px, 0); }
             40% { clip: rect(15px, 900px, 20px, 0); }
-            50% { clip: rect(55px, 900px, 60px, 0); }
             60% { clip: rect(85px, 900px, 90px, 0); }
-            70% { clip: rect(25px, 900px, 30px, 0); }
             80% { clip: rect(65px, 900px, 70px, 0); }
-            90% { clip: rect(105px, 900px, 110px, 0); }
             100% { clip: rect(45px, 900px, 50px, 0); }
         }
 
         @keyframes glitch-2 {
             0% { clip: rect(0, 900px, 0, 0); }
-            15% { clip: rect(12px, 900px, 17px, 0); }
             25% { clip: rect(52px, 900px, 57px, 0); }
-            35% { clip: rect(82px, 900px, 87px, 0); }
             45% { clip: rect(22px, 900px, 27px, 0); }
-            55% { clip: rect(62px, 900px, 67px, 0); }
             65% { clip: rect(92px, 900px, 97px, 0); }
-            75% { clip: rect(32px, 900px, 37px, 0); }
             85% { clip: rect(72px, 900px, 77px, 0); }
-            95% { clip: rect(102px, 900px, 107px, 0); }
             100% { clip: rect(42px, 900px, 47px, 0); }
         }
 
-        /* Responsive */
+        /* Hidden Numbers */
+        .hidden-number {
+            position: fixed;
+            opacity: 0.1;
+            font-size: 0.7rem;
+            font-family: 'Courier Prime', monospace;
+            color: var(--matrix-green);
+            z-index: -1;
+        }
+
+        /* Matrix Number Styling */
+        .matrix-number {
+            color: var(--matrix-green);
+            font-family: 'Courier Prime', monospace;
+            font-weight: 700;
+        }
+
+        /* Premium Button Styling */
+        .matrix-button {
+            background: linear-gradient(135deg, var(--matrix-green), rgba(0, 200, 0, 0.9));
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-family: 'Orbitron', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 16px rgba(0, 255, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .matrix-button:hover {
+            background: rgba(0, 255, 0, 0.9);
+            box-shadow: 0 4px 16px rgba(0, 255, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .matrix-button:active {
+            transform: translateY(0);
+        }
+
+        /* Enhanced Light Mode Styles */
+        body.light-mode {
+            background: #f8fff8 !important;
+            color: #003300 !important;
+        }
+
+        body.light-mode h1 {
+            color: #002200 !important;
+            text-shadow: 0 0 20px rgba(0, 102, 0, 0.6) !important;
+        }
+
+        body.light-mode h2 {
+            color: #004400 !important;
+        }
+
+        body.light-mode h3 {
+            color: #002200 !important;
+        }
+
+        body.light-mode .sidebar {
+            background: rgba(248, 255, 248, 0.95) !important;
+            border-color: rgba(0, 102, 0, 0.4) !important;
+            color: #003300 !important;
+        }
+
+        body.light-mode .content-card {
+            background: rgba(248, 255, 248, 0.8) !important;
+            border-color: rgba(0, 102, 0, 0.4) !important;
+            color: #003300 !important;
+        }
+
+        body.light-mode .terminal {
+            background: rgba(240, 255, 240, 0.9) !important;
+            border-color: rgba(0, 102, 0, 0.4) !important;
+            color: #003300 !important;
+        }
+
+        body.light-mode .matrix-char {
+            opacity: 0.05 !important;
+        }
+
+        body.light-mode .profile-name,
+        body.light-mode .profile-title {
+            color: #003300 !important;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #000000 !important;
+            color: #00ff00 !important;
+        }
+
+        body.dark-mode .sidebar {
+            background: rgba(0, 20, 0, 0.95) !important;
+            border-color: rgba(0, 255, 0, 0.3) !important;
+        }
+
+        body.dark-mode .content-card {
+            background: rgba(0, 15, 0, 0.2) !important;
+            border-color: rgba(0, 255, 0, 0.3) !important;
+            color: #00ff00 !important;
+        }
+
+        body.dark-mode .terminal {
+            background: rgba(0, 10, 0, 0.6) !important;
+            border-color: rgba(0, 255, 0, 0.4) !important;
+        }
+
+        body.dark-mode .matrix-char {
+            opacity: 0.4 !important;
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 200px !important;
+                padding: 1rem !important;
+                position: fixed !important;
+            }
+            .main-content {
+                margin-left: 200px !important;
+                width: calc(100% - 200px) !important;
+                padding: 1.5rem !important;
+            }
+            .logo {
+                font-size: 1rem;
+                padding: 0.6rem;
+            }
+            .profile-image {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
         @media (max-width: 768px) {
+            body {
+                flex-direction: column !important;
+            }
+            
+            .sidebar {
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(0, 255, 0, 0.3) !important;
+                padding: 1rem !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 1rem !important;
+                margin-left: 0 !important;
+            }
+            
+            .profile-card {
+                margin-bottom: 0;
+                padding: 1rem;
+                flex-shrink: 0;
+            }
+            
+            .nav-menu {
+                flex-direction: row;
+                gap: 0.5rem;
+                margin-bottom: 0;
+                flex-wrap: wrap;
+                flex: 1;
+            }
+            
+            .nav-menu a {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.7rem;
+                text-align: center;
+            }
+            
+            .main-content {
+                margin-left: 0 !important;
+                width: 100% !important;
+                padding: 1rem !important;
+            }
+            
+            section {
+                margin-bottom: 3rem;
+            }
+            
+            .project-item {
+                grid-template-columns: 1fr !important;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            
+            .project-item:nth-child(even) .project-image,
+            .project-item:nth-child(even) .project-content {
+                order: initial;
+            }
+            
+            .project-image {
+                width: 120px;
+                height: 120px;
+                font-size: 2.5rem;
+            }
+            
             .pills-nav {
+                position: fixed;
+                bottom: 1rem;
                 right: 1rem;
+                flex-direction: row;
                 gap: 0.5rem;
             }
             
@@ -599,48 +979,71 @@
                 height: 20px;
             }
             
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-                font-size: 0.9rem;
-            }
-            
-            section {
-                padding: 100px 1rem 30px;
-            }
-            
-            .project-grid,
-            .skills-matrix,
-            .travel-matrix,
-            .contact-matrix {
-                grid-template-columns: 1fr;
+            .matrix-bg {
+                opacity: 0.15;
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-        }
-
-        /* Animations */
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            h2 {
+                font-size: 1.4rem;
             }
-        }
-
-        /* Matrix Code Style Numbers */
-        .matrix-number {
-            color: var(--matrix-green);
-            font-family: 'Courier Prime', monospace;
-            font-weight: 700;
-            text-shadow: 0 0 10px var(--matrix-glow);
+            
+            /* Mobile progress bar */
+            #progressBar {
+                left: 0 !important;
+                width: 100% !important;
+            }
+            
+            /* Hide R/B indicator on mobile */
+            #rbIndicator {
+                display: none !important;
+            }
+            
+            /* Mobile header layout - Fixed */
+            section#home > div:first-child {
+                flex-direction: column !important;
+                text-align: center !important;
+                gap: 1rem !important;
+                align-items: center !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            section#home > div:first-child > div:first-child {
+                flex-direction: row !important;
+                justify-content: center !important;
+                gap: 1rem !important;
+                margin-top: 0 !important;
+            }
+            
+            section#home h1 {
+                font-size: 1.4rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: 0.5rem !important;
+            }
+            
+            /* Mobile grid fixes */
+            .project-item {
+                grid-template-columns: 1fr !important;
+                text-align: center !important;
+                gap: 1rem !important;
+            }
+            
+            .skills-grid,
+            .travel-grid,
+            .contact-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+            
+            /* Mobile image sizes */
+            .project-image {
+                width: 120px !important;
+                height: 120px !important;
+                margin: 0 auto !important;
+            }
         }
     </style>
 </head>
@@ -656,132 +1059,1118 @@
     <!-- Matrix Rain Background -->
     <div class="matrix-bg" id="matrixBg"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">BIRANTE.EXE</div>
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#projects">PROJECTS</a></li>
-                <li><a href="#skills">SKILLS</a></li>
-                <li><a href="#travel">TRAVEL</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
+    <!-- Hidden Numbers -->
+    <div class="hidden-number" style="top: 15%; left: 85%;">1337</div>
+    <div class="hidden-number" style="top: 35%; right: 15%;">42</div>
+    <div class="hidden-number" style="top: 65%; left: 10%;">2001</div>
+    <div class="hidden-number" style="bottom: 25%; right: 20%;">0xFF</div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">BIRANTE.EXE</div>
+        
+        <div class="profile-card">
+            <div class="profile-image"></div>
+            <div class="profile-name">Birante Soumare</div>
+            <div class="profile-title">Computer Science Student</div>
+            <div class="profile-status">🟢 Available for Internship</div>
         </div>
-    </nav>
+
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link active">🏠 HOME</a></li>
+            <li><a href="#about" class="nav-link">👨‍🎓 ABOUT</a></li>
+            <li><a href="#projects" class="nav-link">🚀 PROJECTS</a></li>
+            <li><a href="#skills" class="nav-link">💻 SKILLS</a></li>
+            <li><a href="#travel" class="nav-link">🌍 TRAVEL</a></li>
+            <li><a href="#contact" class="nav-link">📡 CONTACT</a></li>
+        </ul>
+
+
+        <div style="margin-top: auto; text-align: center; opacity: 0.6; font-size: 0.8rem;">
+            <div>Matrix Portfolio v2.0</div>
+            <div style="margin-top: 0.3rem;">🚀 Ready for deployment</div>
+        </div>
+    </div>
 
     <!-- Pills Navigation -->
     <div class="pills-nav">
-        <div class="pill red-pill" onclick="showMatrix()" title="Take the Red Pill - See the Code"></div>
-        <div class="pill blue-pill" onclick="hideMatrix()" title="Take the Blue Pill - Return to Reality"></div>
+        <div class="pill red-pill" onclick="showMatrix()" title="Light Mode (Press R)"></div>
+        <div class="pill blue-pill" onclick="hideMatrix()" title="Dark Mode (Press B)"></div>
     </div>
 
-    <!-- Hidden Numbers -->
-    <div class="hidden-number" style="top: 10%; left: 5%;">1337</div>
-    <div class="hidden-number" style="top: 25%; right: 3%;">42</div>
-    <div class="hidden-number" style="top: 60%; left: 2%;">2001</div>
-    <div class="hidden-number" style="bottom: 20%; right: 8%;">0xFF</div>
+    <!-- Optimized Progress Bar -->
+    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 3px; background: rgba(0, 0, 0, 0.2); z-index: 1001;">
+        <div id="progressFill" style="height: 100%; background: var(--matrix-green); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 8px var(--matrix-glow);"></div>
+    </div>
 
-    <!-- Home Section -->
-    <section id="home">
-        <h1 class="glitch" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
+    <!-- R/B Indicators - Desktop Only -->
+    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 0, 0.4); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
+        <div style="margin-bottom: 0.4rem; color: var(--matrix-green); font-weight: 700; text-align: center;">MODES</div>
+        <div style="display: flex; gap: 1.5rem;">
+            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="showMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
+                <strong>R</strong> = ☀️ Light
+            </div>
+            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="hideMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
+                <strong>B</strong> = 🌙 Dark
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
         
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
+        <!-- Home Section -->
+        <section id="home">
+            <div style="display: flex; align-items: flex-start; margin-bottom: 1.5rem; gap: 2rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
+                    <!-- Language Toggle -->
+                    <button id="langToggle" onclick="toggleLanguage()" style="background: rgba(0, 255, 0, 0.08); border: 1px solid rgba(0, 255, 0, 0.3); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Orbitron', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.3s ease;">
+                        🌐 EN
+                    </button>
+                    
+                    <!-- UTC Clock -->
+                    <div style="padding: 0.4rem 0.8rem; border: 1px solid rgba(0, 255, 0, 0.25); border-radius: 5px; background: rgba(0, 255, 0, 0.02); text-align: center;">
+                        <div style="font-size: 0.6rem; opacity: 0.6; margin-bottom: 0.1rem;">UTC</div>
+                        <div id="utcClock" style="font-family: 'Courier Prime', monospace; font-size: 0.7rem; font-weight: 700;">--:--:--</div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; text-align: center;">
+                    <h1 class="glitch" data-text="WELCOME TO THE MATRIX">WELCOME TO THE MATRIX</h1>
+                    <div style="font-size: 1rem; opacity: 0.8; font-family: 'Orbitron', monospace; margin-top: 0.8rem;">
+                        Computer Science Student | International Seeker
+                    </div>
+                </div>
             </div>
-            <div class="typing-text">
-                > Computer Science Student | Aspiring Developer | Matrix Navigator
+            
+            <!-- Hero Image Section -->
+            <div class="content-card" style="text-align: center;">
+                <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2rem; align-items: center;">
+                    <div style="text-align: center;">
+                        <div style="width: 120px; height: 120px; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(0, 255, 0, 0.02), rgba(0, 0, 0, 0.6));"></div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div style="width: 200px; height: 200px; border: 2px solid var(--matrix-green); border-radius: 15px; margin: 0 auto; background: linear-gradient(135deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.8)); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);"></div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <div style="width: 120px; height: 120px; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(0, 255, 0, 0.02), rgba(0, 0, 0, 0.6));"></div>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem; padding: 1.5rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; margin-bottom: 1.5rem;">
+                        <div>
+                            <div style="color: var(--matrix-green); font-weight: 700; font-size: 1.1rem;">📧 Contact</div>
+                            <div style="font-size: 0.9rem; margin-top: 0.5rem;">soumare.birante05@gmail.com</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--matrix-green); font-weight: 700; font-size: 1.1rem;">📱 Phone</div>
+                            <div style="font-size: 0.9rem; margin-top: 0.5rem;">+33 6 44 75 60 28</div>
+                        </div>
+                        <div>
+                            <div style="color: var(--matrix-green); font-weight: 700; font-size: 1.1rem;">🎯 Target</div>
+                            <div style="font-size: 0.9rem; margin-top: 0.5rem;">Asia-Pacific Internship</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div style="text-align: center; margin: 3rem 0;">
-            <p style="font-size: 1.2rem; margin-bottom: 1rem;">
-                📧 soumare.birante05@gmail.com | 📱 +33 6 44 75 60 28
-            </p>
-            <p style="font-size: 1.1rem; opacity: 0.8;">
-                🌐 France → Asia-Pacific | Ready to jack into the Matrix
-            </p>
-        </div>
-
-        <div class="quote-morpheus">
-            There is a difference between knowing the path and walking the path. 
-            I choose to walk the path of code, learning, and international adventure.
-        </div>
-
-        <div class="terminal" style="margin-top: 2rem;">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-green"></div>
+        <!-- About Section -->
+        <section id="about">
+            <div class="section-header">
+                <h2>🎓 EDUCATION & BACKGROUND</h2>
             </div>
-            <div>
-                <span class="matrix-number">birante@matrix:~$</span> whoami<br>
-                > Double Bachelor's Degree - Computer Science (L3) & Mathematics (L2)<br>
-                > Université Paris-Est Créteil | Bac Mention Bien (<span class="matrix-number">2023</span>)<br>
-                > Class Representative for <span class="matrix-number">3</span> consecutive years<br><br>
-                <span class="matrix-number">birante@matrix:~$</span> mission --objective<br>
-                > Seeking 3-6 month international internship<br>
-                > Target: Software Development & Automation<br>
-                > Regions: Singapore, Malaysia, Taiwan, Vietnam<br>
-                > Status: Ready for deployment 🚀
+            
+            <div class="content-card">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+                        <h3>Double Bachelor's Degree</h3>
+                        <p>Computer Science (L3) + Mathematics (L2)</p>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Université Paris-Est Créteil</div>
+                        <div style="margin-top: 1rem; color: var(--matrix-green); font-weight: 700;">2023-2025</div>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+                        <h3>Academic Excellence & Leadership</h3>
+                        <p>Bac Mention Bien (2023)<br>Class Representative 3 Years</p>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Leadership Experience 2020-2023</div>
+                        <div style="margin-top: 1rem; color: var(--matrix-green); font-weight: 700;">PROVEN TRACK RECORD</div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>🚀 TECHNICAL PROJECTS</h2>
-        
-        <div class="project-grid">
-            <div class="project-card fade-in-up">
-                <div class="project-number">01</div>
-                <div class="project-title">Telegram Bot with Payment API</div>
-                <p>Marketplace bot with Nowpayments integration. Learned through AI-assisted development, combining guided learning with hands-on implementation.</p>
-                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
-                    <div>Technologies: Python, Telegram Bot API, Payment processing</div>
-                    <div>Learning Method: AI-assisted + practical experimentation</div>
-                    <div>Status: <span style="color: var(--matrix-green);">OPERATIONAL</span></div>
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="section-header">
+                <h2>🚀 PROJECTS</h2>
+            </div>
+            
+            <!-- Project 1 -->
+            <div class="content-card">
+                <div class="project-item">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Telegram Bot with Payment API</h3>
+                        <p>Marketplace bot with Nowpayments integration. Learned through AI-assisted development, combining guided learning with hands-on implementation.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Telegram API</span>
+                            <span class="tech-tag">Payment Processing</span>
+                        </div>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Status: OPERATIONAL</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card fade-in-up">
-                <div class="project-number">02</div>
-                <div class="project-title">Web Automation Scripts</div>
-                <p>Python and Selenium scripts for email and web automation. Built basic but functional automation workflows for personal and learning purposes.</p>
-                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
-                    <div>Technologies: Python, Selenium, Web automation</div>
-                    <div>Applications: Email management, task automation</div>
-                    <div>Status: <span style="color: var(--matrix-green);">ACTIVE</span></div>
+            <!-- Project 2 -->
+            <div class="content-card">
+                <div class="project-item">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Web Automation Scripts</h3>
+                        <p>Python and Selenium scripts for email and web automation. Built functional automation workflows for personal and learning purposes.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Selenium</span>
+                            <span class="tech-tag">Automation</span>
+                        </div>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Status: ACTIVE</div>
+                    </div>
                 </div>
             </div>
 
-            <div class="project-card fade-in-up">
-                <div class="project-number">03</div>
-                <div class="project-title">3D Technical Design</div>
-                <p>House plans and community project schematics. Demonstrated rapid skill acquisition by learning 3D modeling software from scratch for real-world projects.</p>
-                <div class="terminal" style="margin-top: 1rem; font-size: 0.9rem;">
-                    <div>Software: 3D modeling applications</div>
-                    <div>Projects: Residential + community development</div>
-                    <div>Achievement: <span style="color: var(--matrix-green);">RAPID LEARNING</span></div>
+            <!-- Project 3 -->
+            <div class="content-card">
+                <div class="project-item">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Community Development Projects</h3>
+                        <p>House plans and well financing schematics for Mauritania. Rapid skill acquisition in 3D modeling software for real-world community impact.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">SketchUp</span>
+                            <span class="tech-tag">Architecture</span>
+                            <span class="tech-tag">Community Impact</span>
+                        </div>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Achievement: RAPID LEARNING</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="quote-morpheus" style="margin-top: 3rem;">
-            What is real? How do you define 'real'? If you're talking about what you can feel, 
-            what you can smell, what you can taste and see, then 'real' is simply... code that works.
-        </div>
-    </section>
+            <!-- Project 4 -->
+            <div class="content-card">
+                <div class="project-item">
+                    <div class="project-image"></div>
+                    <div class="project-content">
+                        <h3>Content Creation & Digital Marketing</h3>
+                        <p>Educational fitness and grooming content with viral reach on TikTok. Demonstrated digital engagement and audience connection skills.</p>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Content Strategy</span>
+                            <span class="tech-tag">Social Media</span>
+                            <span class="tech-tag">Digital Marketing</span>
+                        </div>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Result: VIRAL ENGAGEMENT</div>
+                    </div>
+                </div>
+            </div>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <h2>💻 TECHNICAL MATRIX</h2>
+            <!-- Additional Projects Gallery -->
+            <div class="content-card">
+                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--matrix-green);">📸 PROJECT SHOWCASE</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
+                    <div style="text-align: center;">
+                        <div style="width: 140px; height: 140px; border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-card), rgba(0, 0, 0, 0.6));"></div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 140px; height: 140px; border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-card), rgba(0, 0, 0, 0.6));"></div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="width: 140px; height: 140px; border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-card), rgba(0, 0, 0, 0.6));"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="section-header">
+                <h2>💻 TECHNICAL SKILLS</h2>
+            </div>
+            
+            <!-- Interactive Terminal -->
+            <div class="content-card">
+                <div class="terminal" style="margin-bottom: 2rem;">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div id="skillsTerminal">
+                        <span class="matrix-number">birante@matrix:~$</span> <span id="terminalCommand"></span><span class="terminal-cursor">|</span><br>
+                        <div id="terminalOutput" style="margin-top: 0.5rem;">
+                            > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
+                            > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
+                            > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <div style="margin-bottom: 1rem; opacity: 0.8; font-size: 0.9rem;">
+                        💡 Click on the terminal and type commands, or use quick buttons:
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <button onclick="executeTerminalCommand('skills')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            📊 skills
+                        </button>
+                        <button onclick="executeTerminalCommand('projects')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            🚀 projects
+                        </button>
+                        <button onclick="executeTerminalCommand('status')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            ⚡ status
+                        </button>
+                        <button onclick="executeTerminalCommand('clear')" style="background: rgba(255, 0, 64, 0.1); border: 1px solid rgba(255, 0, 64, 0.4); color: var(--neo-red); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            🗑️ clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div style="width: 60px; height: 60px; border: 1px solid var(--accent-blue); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(0, 170, 255, 0.1), rgba(0, 0, 0, 0.6));"></div>
+                        <h3>Python</h3>
+                        <p style="color: var(--text-secondary);">Telegram Bots, Web Automation, Payment APIs</p>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Intermediate</div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div style="width: 60px; height: 60px; border: 1px solid var(--accent-orange); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(255, 136, 0, 0.1), rgba(0, 0, 0, 0.6));"></div>
+                        <h3>Web Technologies</h3>
+                        <p style="color: var(--text-secondary);">HTML, CSS, JavaScript, Selenium</p>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Learning</div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div style="width: 60px; height: 60px; border: 1px solid var(--morpheus-blue); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(0, 64, 255, 0.1), rgba(0, 0, 0, 0.6));"></div>
+                        <h3>Database</h3>
+                        <p style="color: var(--text-secondary);">SQL Fundamentals, Data Modeling</p>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Foundation</div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div style="width: 60px; height: 60px; border: 1px solid var(--neo-red); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(255, 0, 64, 0.1), rgba(0, 0, 0, 0.6));"></div>
+                        <h3>3D Design</h3>
+                        <p style="color: var(--text-secondary);">SketchUp, Architectural Planning</p>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Rapid Acquisition</div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div style="width: 60px; height: 60px; border: 1px solid var(--accent-blue); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(0, 170, 255, 0.1), rgba(0, 0, 0, 0.6));"></div>
+                        <h3>Cryptography</h3>
+                        <p style="color: var(--text-secondary);">CryptoHack Challenges, Security</p>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Academic</div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div style="width: 60px; height: 60px; border: 1px solid var(--matrix-green); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 0, 0, 0.6));"></div>
+                        <h3>AI Integration</h3>
+                        <p style="color: var(--text-secondary);">AI-Assisted Development</p>
+                        <div style="color: var(--matrix-green); font-weight: 700;">Advanced</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Travel Section -->
+        <section id="travel">
+            <div class="section-header">
+                <h2>🌍 INTERNATIONAL EXPERIENCE</h2>
+            </div>
+            
+            <div class="content-card">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 1.2rem; margin-bottom: 1rem;">
+                        <span style="color: var(--matrix-green); font-weight: 700;">10+</span> Countries | 
+                        <span style="color: var(--matrix-green); font-weight: 700;">4</span> Continents
+                    </div>
+                    <div style="opacity: 0.8;">Cultural adaptability through diverse travel experiences</div>
+                </div>
+                
+                <div class="travel-grid">
+                    <div class="country-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇺🇸</div>
+                        <div style="font-weight: 700;">USA</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Tech Hubs</div>
+                    </div>
+                    <div class="country-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇨🇦</div>
+                        <div style="font-weight: 700;">Canada</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Multicultural</div>
+                    </div>
+                    <div class="country-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇬🇧</div>
+                        <div style="font-weight: 700;">UK</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Language</div>
+                    </div>
+                    <div class="country-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇪🇸</div>
+                        <div style="font-weight: 700;">Spain</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Culture</div>
+                    </div>
+                    <div class="country-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇲🇦</div>
+                        <div style="font-weight: 700;">Morocco</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Gateway</div>
+                    </div>
+                    <div class="country-card">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🇲🇷</div>
+                        <div style="font-weight: 700;">Mauritania</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">Community</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px dashed var(--neo-red); border-radius: 15px; background: rgba(255, 0, 64, 0.05);">
+                    <h3 style="color: var(--neo-red); margin-bottom: 1.5rem;">🎯 TARGET DESTINATIONS</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                        <div style="padding: 1.5rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
+                            <div style="font-size: 2rem; margin-bottom: 0.8rem;">🇸🇬</div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem;">Singapore</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Tech Innovation Hub</div>
+                        </div>
+                        <div style="padding: 1.5rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
+                            <div style="font-size: 2rem; margin-bottom: 0.8rem;">🇲🇾</div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem;">Malaysia</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Multicultural Tech Scene</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        Also considering: Taiwan 🇹🇼 | Vietnam 🇻🇳
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="section-header">
+                <h2>📡 GET IN TOUCH</h2>
+            </div>
+            
+            <div class="content-card">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                    <div class="contact-card">
+                        <span class="contact-icon">📧</span>
+                        <h3>Email</h3>
+                        <a href="mailto:soumare.birante05@gmail.com" style="color: var(--matrix-green); text-decoration: none; font-weight: 700;">
+                            soumare.birante05@gmail.com
+                        </a>
+                        <div style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Primary contact</div>
+                    </div>
+
+                    <div class="contact-card">
+                        <span class="contact-icon">📱</span>
+                        <h3>Phone</h3>
+                        <a href="tel:+33644756028" style="color: var(--matrix-green); text-decoration: none; font-weight: 700;">
+                            +33 6 44 75 60 28
+                        </a>
+                        <div style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Direct line</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                    <span style="font-size: 2.5rem; margin-bottom: 1rem; display: block;">⏰</span>
+                    <h3>Availability & Mission</h3>
+                    <div style="font-weight: 700; margin: 1rem 0;">3-6 Month International Internships</div>
+                    <div style="opacity: 0.8; margin-bottom: 1rem;">Ready for immediate deployment to Asia-Pacific region</div>
+                    <div style="color: var(--neo-red); font-weight: 700;">STATUS: READY FOR ADVENTURE 🚀</div>
+                </div>
+
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px solid var(--matrix-green); border-radius: 15px; background: rgba(0, 255, 0, 0.05);">
+                    <div style="font-size: 1.3rem; margin-bottom: 1rem; font-family: 'Orbitron', monospace; color: var(--matrix-green);">
+                        💾 DOWNLOAD CV
+                    </div>
+                    <div style="margin-bottom: 1rem; opacity: 0.8;">
+                        Traditional format available for corporate systems
+                    </div>
+                    <div style="margin-bottom: 1.5rem; padding: 0.8rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 8px; background: rgba(0, 255, 0, 0.02); font-size: 0.9rem;">
+                        <div style="margin-bottom: 0.3rem; font-weight: 700;">💡 TIP: Switch viewing modes</div>
+                        <div><strong>R</strong> = Light Mode | <strong>B</strong> = Dark Mode</div>
+                    </div>
+                    <button onclick="downloadCV()" class="matrix-button">
+                        DOWNLOAD MATRIX DATA
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hidden Achievement Section -->
+        <section id="achievements" style="display: none;">
+            <div class="section-header">
+                <h2>🏆 HIDDEN ACHIEVEMENTS</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div>
+                        <span class="matrix-number">birante@matrix:~$</span> cat /var/log/achievements.log<br><br>
+                        > [UNLOCKED] Class Representative x3 Years<br>
+                        > [UNLOCKED] International Traveler (10+ Countries)<br>
+                        > [UNLOCKED] Rapid Skill Acquisition<br>
+                        > [UNLOCKED] AI-Assisted Learning Pioneer<br>
+                        > [UNLOCKED] Community Project Contributor<br>
+                        > [UNLOCKED] Content Creator (Viral Videos)<br>
+                        > [UNLOCKED] Athletic Discipline (5x/week Runner)<br>
+                        > [UNLOCKED] Artistic Vision (Painting Hobby)<br>
+                        > [HIDDEN] Konami Code Master<br>
+                        > [HIDDEN] Matrix Navigator<br>
+                    </div>
+                </div>
+                
+                <div class="quote-morpheus" style="margin-top: 2rem;">
+                    You have to understand, most people are not ready to be unplugged. 
+                    But you... you found the hidden section. Welcome to the real Matrix.
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Multilingual System
+        let currentLanguage = 'en'; // Default to English for international appeal
         
-        <div class="terminal">
-            <div class="terminal-header">
-                <div class="terminal-dot dot-red"></div>
-                <div class="terminal-dot dot-yellow"></div>
-                <div class="terminal-dot dot-
+        const translations = {
+            en: {
+                // Loading messages
+                loading: [
+                    "Wake up, Birante...",
+                    "The Matrix has you...",
+                    "Follow the white rabbit...",
+                    "Knock, knock, Birante...",
+                    "Loading portfolio.exe...",
+                    "Initializing skills matrix...",
+                    "Connecting to the real world...",
+                    "Welcome to the Matrix."
+                ],
+                // Navigation
+                nav: {
+                    home: "🏠 HOME",
+                    about: "👨‍🎓 ABOUT",
+                    projects: "🚀 PROJECTS",
+                    skills: "💻 SKILLS",
+                    travel: "🌍 TRAVEL",
+                    contact: "📡 CONTACT"
+                },
+                // Titles
+                titles: {
+                    welcome: "WELCOME TO THE MATRIX",
+                    education: "🎓 EDUCATION & BACKGROUND",
+                    projects: "🚀 PROJECTS",
+                    skills: "💻 TECHNICAL SKILLS",
+                    travel: "🌍 INTERNATIONAL EXPERIENCE",
+                    contact: "📡 GET IN TOUCH"
+                },
+                // Content
+                profile: {
+                    title: "Computer Science Student | International Seeker",
+                    status: "🟢 Available for Internship",
+                    mission: "Ready for immediate deployment to Asia-Pacific region"
+                }
+            },
+            fr: {
+                // Loading messages
+                loading: [
+                    "Réveille-toi, Birante...",
+                    "La Matrice te tient...",
+                    "Suis le lapin blanc...",
+                    "Toc, toc, Birante...",
+                    "Chargement portfolio.exe...",
+                    "Initialisation matrice compétences...",
+                    "Connexion au monde réel...",
+                    "Bienvenue dans la Matrice."
+                ],
+                // Navigation
+                nav: {
+                    home: "🏠 ACCUEIL",
+                    about: "👨‍🎓 À PROPOS",
+                    projects: "🚀 PROJETS",
+                    skills: "💻 COMPÉTENCES",
+                    travel: "🌍 VOYAGES",
+                    contact: "📡 CONTACT"
+                },
+                // Titles
+                titles: {
+                    welcome: "BIENVENUE DANS LA MATRICE",
+                    education: "🎓 FORMATION & PARCOURS",
+                    projects: "🚀 PROJETS",
+                    skills: "💻 COMPÉTENCES TECHNIQUES",
+                    travel: "🌍 EXPÉRIENCE INTERNATIONALE",
+                    contact: "📡 CONTACT"
+                },
+                // Content
+                profile: {
+                    title: "Étudiant en Informatique | Chercheur International",
+                    status: "🟢 Disponible pour Stage",
+                    mission: "Prêt pour déploiement immédiat en Asie-Pacifique"
+                }
+            }
+        };
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            const lang = translations[currentLanguage];
+            
+            // Update language button
+            document.getElementById('langToggle').innerHTML = `🌐 ${currentLanguage.toUpperCase()}`;
+            
+            // Update navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navKeys = Object.keys(lang.nav);
+            navLinks.forEach((link, index) => {
+                if (navKeys[index]) {
+                    link.textContent = lang.nav[navKeys[index]];
+                }
+            });
+            
+            // Update titles
+            document.querySelector('h1').textContent = lang.titles.welcome;
+            document.querySelector('h1').setAttribute('data-text', lang.titles.welcome);
+            
+            // Update profile
+            document.querySelector('.profile-title').textContent = lang.profile.title;
+            document.querySelector('.profile-status').textContent = lang.profile.status;
+            
+            // Update section titles
+            const sections = ['education', 'projects', 'skills', 'travel', 'contact'];
+            sections.forEach((section, index) => {
+                const h2 = document.querySelectorAll('h2')[index];
+                if (h2 && lang.titles[section]) {
+                    h2.textContent = lang.titles[section];
+                }
+            });
+        }
+
+        // Simple Matrix Rain Effect
+        function createMatrixRain() {
+            const container = document.getElementById('matrixBg');
+            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+            
+            function createChar() {
+                if (container.children.length > 30) return; // Limit for performance
+                
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + '%';
+                char.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                char.style.opacity = Math.random() * 0.6 + 0.2;
+                
+                container.appendChild(char);
+                
+                setTimeout(() => {
+                    if (char.parentNode) {
+                        char.parentNode.removeChild(char);
+                    }
+                }, 7000);
+            }
+            
+            setInterval(createChar, 1000); // Much slower for performance
+        }
+
+        // Epic Loading Screen with Progressive Messages
+        function initializeMatrix() {
+            const messages = translations[currentLanguage].loading;
+            
+            let messageIndex = 0;
+            const loadingText = document.querySelector('.loading-text');
+            
+            // Keep "Wake up" longer (first message)
+            setTimeout(() => {
+                const messageInterval = setInterval(() => {
+                    if (messageIndex < messages.length - 1) {
+                        messageIndex++;
+                        loadingText.textContent = messages[messageIndex];
+                        loadingText.style.textShadow = '0 0 20px var(--matrix-green)';
+                    } else {
+                        clearInterval(messageInterval);
+                    }
+                }, 450);
+            }, 1500); // "Wake up" stays 1.5 seconds longer
+
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    createMatrixRain();
+                    setupNavigation();
+                    updateLanguage(); // Set initial language
+                    startClock();
+                    startProgressTracking();
+                    // Minimal effects only
+                    applyBackgroundPatterns();
+                }, 1500);
+            }, 5500); // Extended total time
+        }
+
+        // Enhanced Navigation with Visual Feedback
+        function setupNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Smooth scrolling with enhanced feedback
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
+                    if (target) {
+                        // Update active state
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // Auto-highlight current section on scroll
+            const sections = document.querySelectorAll('section[id]');
+            const observerOptions = {
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const activeLink = document.querySelector(`a[href="#${id}"]`);
+                        if (activeLink) {
+                            navLinks.forEach(l => l.classList.remove('active'));
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => observer.observe(section));
+        }
+
+        // UTC Clock Function
+        function startClock() {
+            function updateClock() {
+                const now = new Date();
+                const utcTime = now.toUTCString().split(' ')[4]; // Extract HH:MM:SS
+                document.getElementById('utcClock').textContent = utcTime;
+            }
+            
+            updateClock();
+            setInterval(updateClock, 1000);
+        }
+
+        // Progress Bar Tracking
+        function startProgressTracking() {
+            const progressBar = document.getElementById('progressFill');
+            
+            function updateProgress() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / scrollHeight) * 100;
+                
+                progressBar.style.width = Math.min(progress, 100) + '%';
+            }
+            
+            window.addEventListener('scroll', updateProgress);
+            updateProgress(); // Initial call
+        }
+
+
+        // Simplified Light/Dark Mode Functions
+        function showMatrix() {
+            // Light Mode (R key) - White background
+            document.documentElement.style.setProperty('--matrix-green', '#006600');
+            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 102, 0, 0.3)');
+            document.documentElement.style.setProperty('--neo-red', '#cc0033');
+            document.documentElement.style.setProperty('--morpheus-blue', '#003399');
+            
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+            
+            showMessage("☀️ LIGHT MODE", "Professional light theme activated");
+        }
+
+        function hideMatrix() {
+            // Dark Mode (B key) - Original dark
+            document.documentElement.style.setProperty('--matrix-green', '#00ff00');
+            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 255, 0, 0.3)');
+            document.documentElement.style.setProperty('--neo-red', '#ff0040');
+            document.documentElement.style.setProperty('--morpheus-blue', '#0040ff');
+            
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+            
+            showMessage("🌙 DARK MODE", "Matrix dark theme activated");
+        }
+
+        function showMessage(title, subtitle) {
+            const message = document.createElement('div');
+            message.style.cssText = `
+                position: fixed;
+                top: 20%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.95);
+                padding: 1.5rem 2rem;
+                border: 2px solid var(--matrix-green);
+                border-radius: 10px;
+                text-align: center;
+                color: var(--matrix-green);
+                z-index: 10001;
+                font-family: 'Orbitron', monospace;
+                box-shadow: 0 0 30px var(--matrix-glow);
+            `;
+            message.innerHTML = `
+                <div style="font-size: 1.1rem; margin-bottom: 0.5rem;">${title}</div>
+                <div style="font-size: 0.9rem; opacity: 0.8;">${subtitle}</div>
+            `;
+            document.body.appendChild(message);
+
+            setTimeout(() => message.remove(), 2000);
+        }
+
+        // Enhanced CV Download Animation
+        function downloadCV() {
+            const button = event.target;
+            button.disabled = true;
+            button.style.background = 'rgba(0, 255, 0, 0.3)';
+            button.innerHTML = '⏳ PREPARING...';
+            
+            // Create progress overlay
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: rgba(0, 0, 0, 0.95);
+                padding: 2rem;
+                border: 2px solid var(--matrix-green);
+                border-radius: 15px;
+                text-align: center;
+                color: var(--matrix-green);
+                z-index: 10001;
+                font-family: 'Orbitron', monospace;
+                min-width: 300px;
+            `;
+            
+            overlay.innerHTML = `
+                <div style="font-size: 1.2rem; margin-bottom: 1rem;">💾 EXTRACTING MATRIX DATA</div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="width: 200px; height: 6px; background: rgba(0, 255, 0, 0.2); border-radius: 3px; margin: 0 auto;">
+                        <div id="download-progress" style="width: 0%; height: 100%; background: var(--matrix-green); border-radius: 3px; transition: width 0.3s ease;"></div>
+                    </div>
+                </div>
+                <div id="download-status" style="font-size: 0.9rem; opacity: 0.8;">Initializing...</div>
+            `;
+            
+            document.body.appendChild(overlay);
+            
+            const progressBar = document.getElementById('download-progress');
+            const statusText = document.getElementById('download-status');
+            
+            const steps = [
+                { progress: 20, text: "Scanning profile data..." },
+                { progress: 40, text: "Compiling skills matrix..." },
+                { progress: 60, text: "Processing projects..." },
+                { progress: 80, text: "Formatting CV structure..." },
+                { progress: 100, text: "Download ready!" }
+            ];
+            
+            let currentStep = 0;
+            
+            const progressInterval = setInterval(() => {
+                if (currentStep < steps.length) {
+                    const step = steps[currentStep];
+                    progressBar.style.width = step.progress + '%';
+                    statusText.textContent = step.text;
+                    currentStep++;
+                } else {
+                    clearInterval(progressInterval);
+                    setTimeout(() => {
+                        overlay.remove();
+                        button.disabled = false;
+                        button.style.background = 'var(--matrix-green)';
+                        button.innerHTML = 'DOWNLOAD MATRIX DATA';
+                        showMessage("✅ CV READY", "Download would start in real implementation");
+                    }, 1000);
+                }
+            }, 800);
+        }
+
+        // Konami Code Easter Egg
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger shortcuts if user is typing in terminal
+            const activeElement = document.activeElement;
+            const isInTerminal = activeElement && (activeElement.id === 'skillsTerminal' || activeElement.closest('#skillsTerminal'));
+            
+            if (!isInTerminal) {
+                // Keyboard shortcuts R/B
+                if (e.key.toLowerCase() === 'r') {
+                    showMatrix();
+                    return;
+                }
+                if (e.key.toLowerCase() === 'b') {
+                    hideMatrix();
+                    return;
+                }
+            }
+            
+            // Konami Code
+            konamiCode.push(e.code);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                const achievementsSection = document.getElementById('achievements');
+                if (achievementsSection) {
+                    achievementsSection.style.display = 'block';
+                    achievementsSection.scrollIntoView({ behavior: 'smooth' });
+                    showMessage("🥋 I KNOW KUNG FU", "Hidden section unlocked!");
+                }
+                konamiCode = [];
+            }
+        });
+
+        // Interactive Terminal System
+        function setupInteractiveTerminal() {
+            const terminal = document.getElementById('skillsTerminal');
+            const output = document.getElementById('terminalOutput');
+            const commandSpan = document.getElementById('terminalCommand');
+            let currentCommand = '';
+            
+            const commands = {
+                skills: {
+                    output: `> <span style="color: var(--matrix-green);">TECHNICAL SKILLS MATRIX</span><br>
+                    > Python: Intermediate (Telegram Bots, Automation)<br>
+                    > Web Tech: Learning (HTML, CSS, JS, Selenium)<br>
+                    > Database: Foundation (SQL fundamentals)<br>
+                    > 3D Design: Rapid acquisition (SketchUp, Architecture)<br>
+                    > Cryptography: Academic (CryptoHack challenges)<br>
+                    > AI Integration: Advanced (AI-assisted development)<br>
+                    > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
+                },
+                projects: {
+                    output: `> <span style="color: var(--matrix-green);">PROJECT STATUS</span><br>
+                    > [01] Telegram Bot + Payment API: <span style="color: var(--matrix-green);">OPERATIONAL</span><br>
+                    > [02] Web Automation Scripts: <span style="color: var(--matrix-green);">ACTIVE</span><br>
+                    > [03] 3D Community Projects: <span style="color: var(--matrix-green);">COMPLETED</span><br>
+                    > [04] Content Creation: <span style="color: var(--matrix-green);">VIRAL</span><br>
+                    > Total projects: <span style="color: var(--matrix-green);">4+</span><br>`
+                },
+                status: {
+                    output: `> <span style="color: var(--matrix-green);">SYSTEM STATUS</span><br>
+                    > Name: Birante Soumare<br>
+                    > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
+                    > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
+                    > Location: France → Asia-Pacific<br>
+                    > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
+                    > Mission: 3-6 month international internship<br>`
+                },
+                clear: {
+                    output: 'Terminal cleared.'
+                },
+                help: {
+                    output: `> <span style="color: var(--matrix-green);">AVAILABLE COMMANDS</span><br>
+                    > skills - Display technical competencies<br>
+                    > projects - Show project status<br>
+                    > status - System information<br>
+                    > clear - Clear terminal<br>
+                    > help - Show this help<br>`
+                }
+            };
+            
+            terminal.addEventListener('click', () => {
+                terminal.focus();
+            });
+            
+            terminal.setAttribute('tabindex', '0');
+            
+            terminal.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    executeCommand(currentCommand.trim().toLowerCase());
+                    currentCommand = '';
+                    commandSpan.textContent = '';
+                } else if (e.key === 'Backspace') {
+                    currentCommand = currentCommand.slice(0, -1);
+                    commandSpan.textContent = currentCommand;
+                } else if (e.key.length === 1 && e.key.match(/[a-zA-Z0-9\s]/)) {
+                    currentCommand += e.key;
+                    commandSpan.textContent = currentCommand;
+                }
+                e.preventDefault();
+            });
+            
+            function executeCommand(cmd) {
+                const command = commands[cmd];
+                if (command) {
+                    if (cmd === 'clear') {
+                        output.innerHTML = `> Terminal cleared.<br>
+                        > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
+                        > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
+                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter`;
+                    } else {
+                        typeWriter(output, command.output, 20);
+                    }
+                } else {
+                    output.innerHTML = `> Command not found: ${cmd}<br>> Type <span style="color: var(--matrix-green);">help</span> for available commands`;
+                }
+            }
+        }
+
+        // Function for quick terminal buttons
+        function executeTerminalCommand(cmd) {
+            const output = document.getElementById('terminalOutput');
+            const commandSpan = document.getElementById('terminalCommand');
+            
+            // Show the command being executed
+            commandSpan.textContent = cmd;
+            
+            setTimeout(() => {
+                const commands = {
+                    skills: {
+                        output: `> <span style="color: var(--matrix-green);">TECHNICAL SKILLS MATRIX</span><br>
+                        > Python: Intermediate (Telegram Bots, Automation)<br>
+                        > Web Tech: Learning (HTML, CSS, JS, Selenium)<br>
+                        > Database: Foundation (SQL fundamentals)<br>
+                        > 3D Design: Rapid acquisition (SketchUp, Architecture)<br>
+                        > Cryptography: Academic (CryptoHack challenges)<br>
+                        > AI Integration: Advanced (AI-assisted development)<br>
+                        > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
+                    },
+                    projects: {
+                        output: `> <span style="color: var(--matrix-green);">PROJECT STATUS</span><br>
+                        > [01] Telegram Bot + Payment API: <span style="color: var(--matrix-green);">OPERATIONAL</span><br>
+                        > [02] Web Automation Scripts: <span style="color: var(--matrix-green);">ACTIVE</span><br>
+                        > [03] 3D Community Projects: <span style="color: var(--matrix-green);">COMPLETED</span><br>
+                        > [04] Content Creation: <span style="color: var(--matrix-green);">VIRAL</span><br>
+                        > Total projects: <span style="color: var(--matrix-green);">4+</span><br>`
+                    },
+                    status: {
+                        output: `> <span style="color: var(--matrix-green);">SYSTEM STATUS</span><br>
+                        > Name: Birante Soumare<br>
+                        > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
+                        > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
+                        > Location: France → Asia-Pacific<br>
+                        > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
+                        > Mission: 3-6 month international internship<br>`
+                    },
+                    clear: {
+                        output: `> Terminal cleared.<br>
+                        > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
+                        > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
+                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter`
+                    }
+                };
+                
+                const command = commands[cmd];
+                if (command) {
+                    typeWriter(output, command.output, 20);
+                }
+                
+                setTimeout(() => {
+                    commandSpan.textContent = '';
+                }, 1000);
+            }, 300);
+        }
+
+        // Simple TypeWriter Function for Terminal
+        function typeWriter(element, html, speed = 20) {
+            let i = 0;
+            const text = html;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML = text.substring(0, i + 1);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Apply Background Patterns to Sections
+        function applyBackgroundPatterns() {
+            // Apply different patterns to each section
+            const sections = {
+                'home': 'grid-pattern',
+                'projects': 'circuit-pattern animated-circuit',
+                'skills': 'neural-pattern',
+                'travel': 'hex-pattern',
+                'contact': 'binary-pattern'
+            };
+            
+            Object.keys(sections).forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    // Add pattern to ::before pseudo-element via CSS class
+                    section.style.setProperty('--pattern-class', sections[sectionId]);
+                    section.classList.add('pattern-section');
+                }
+            });
+        }
+
+
+        // Initialize on load
+        window.addEventListener('load', () => {
+            initializeMatrix();
+            setTimeout(() => {
+                setupInteractiveTerminal();
+            }, 6000); // After loading screen
+        });
+
+        // Console message with instructions
+        console.log(`
+        ╔══════════════════════════════════════╗
+        ║  Birante Soumare - Matrix Portfolio  ║
+        ║                                      ║
+        ║  Professional • Clean • Fast         ║
+        ║                                      ║
+        ║  Keyboard Controls:                  ║
+        ║  • Press R = Light Mode              ║
+        ║  • Press B = Dark Mode               ║
+        ║                                      ║
+        ║  🔴 Red Pill: Light Theme            ║
+        ║  🔵 Blue Pill: Dark Theme            ║
+        ║  ⬆⬆⬇⬇⬅➡⬅➡BA: Easter Egg       ║
+        ║                                      ║
+        ║  Contact: soumare.birante05@gmail.com║
+        ╚══════════════════════════════════════╝
+        `);
+    </script>
+</body>
+</html>
