@@ -248,36 +248,37 @@
         .main-content {
             margin-left: 240px;
             width: calc(100% - 240px);
-            padding: 2rem 3rem;
+            padding: 1.5rem 2rem;
             min-height: 100vh;
         }
 
         section {
-            margin-bottom: 5rem;
-            max-width: 800px;
+            margin-bottom: 3rem;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         h1 {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: glow 2s ease-in-out infinite alternate;
             text-transform: uppercase;
+            line-height: 1.1;
         }
 
         h2 {
             font-family: 'Orbitron', monospace;
-            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             text-transform: uppercase;
             color: var(--matrix-green);
         }
@@ -293,8 +294,8 @@
             background: rgba(0, 15, 0, 0.2);
             border: 1px solid rgba(0, 255, 0, 0.3);
             border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(5px);
         }
@@ -374,16 +375,15 @@
         }
 
         .project-image {
-            width: 180px;
-            height: 180px;
-            border: 2px solid var(--matrix-green);
-            border-radius: 15px;
-            background: linear-gradient(45deg, rgba(0, 255, 0, 0.1), rgba(0, 255, 0, 0.05));
+            width: 150px;
+            height: 150px;
+            border: 1px solid rgba(0, 255, 0, 0.4);
+            border-radius: 12px;
+            background: linear-gradient(45deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.03));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            box-shadow: 0 0 20px var(--matrix-glow);
+            font-size: 3rem;
             margin: 0 auto;
             transition: all 0.3s ease;
         }
@@ -784,16 +784,19 @@
                 flex-direction: column !important;
                 text-align: center !important;
                 gap: 1rem !important;
+                align-items: center !important;
             }
             
             section#home > div:first-child > div:first-child {
                 flex-direction: row !important;
                 justify-content: center !important;
                 gap: 1rem !important;
+                margin-top: 0 !important;
             }
             
-            section#home > div:first-child > div:last-child {
-                display: none !important; /* Hide spacer on mobile */
+            section#home h1 {
+                font-size: 1.5rem !important;
+                line-height: 1.2 !important;
             }
         }
     </style>
@@ -868,28 +871,26 @@
         
         <!-- Home Section -->
         <section id="home">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem;">
-                <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; align-items: flex-start; margin-bottom: 1.5rem; gap: 2rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
                     <!-- Language Toggle -->
-                    <button id="langToggle" onclick="toggleLanguage()" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.5rem 1rem; border-radius: 6px; font-family: 'Orbitron', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                    <button id="langToggle" onclick="toggleLanguage()" style="background: rgba(0, 255, 0, 0.08); border: 1px solid rgba(0, 255, 0, 0.3); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Orbitron', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.3s ease;">
                         🌐 EN
                     </button>
                     
                     <!-- UTC Clock -->
-                    <div style="padding: 0.5rem 1rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 6px; background: rgba(0, 255, 0, 0.02); text-align: center;">
-                        <div style="font-size: 0.7rem; opacity: 0.7; margin-bottom: 0.2rem;">UTC</div>
-                        <div id="utcClock" style="font-family: 'Courier Prime', monospace; font-size: 0.8rem; font-weight: 700;">--:--:--</div>
+                    <div style="padding: 0.4rem 0.8rem; border: 1px solid rgba(0, 255, 0, 0.25); border-radius: 5px; background: rgba(0, 255, 0, 0.02); text-align: center;">
+                        <div style="font-size: 0.6rem; opacity: 0.6; margin-bottom: 0.1rem;">UTC</div>
+                        <div id="utcClock" style="font-family: 'Courier Prime', monospace; font-size: 0.7rem; font-weight: 700;">--:--:--</div>
                     </div>
                 </div>
                 
                 <div style="flex: 1; text-align: center;">
-                    <h1 class="glitch" data-text="BIRANTE SOUMARE">BIRANTE SOUMARE</h1>
-                    <div style="font-size: 1.1rem; opacity: 0.8; font-family: 'Orbitron', monospace; margin-top: 1rem;">
+                    <h1 class="glitch" data-text="WELCOME TO THE MATRIX">WELCOME TO THE MATRIX</h1>
+                    <div style="font-size: 1rem; opacity: 0.8; font-family: 'Orbitron', monospace; margin-top: 0.8rem;">
                         Computer Science Student | International Seeker
                     </div>
                 </div>
-                
-                <div style="width: 120px;"> <!-- Spacer for balance --> </div>
             </div>
             
             <!-- Hero Image Section -->
@@ -1229,8 +1230,8 @@
                         Traditional format available for corporate systems
                     </div>
                     <div style="margin-bottom: 1.5rem; padding: 0.8rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 8px; background: rgba(0, 255, 0, 0.02); font-size: 0.9rem;">
-                        <div style="margin-bottom: 0.5rem; font-weight: 700;">💡 TIP: Switch viewing modes</div>
-                        <div><strong>R</strong> = Light Mode (Professional) | <strong>B</strong> = Dark Mode (Matrix)</div>
+                        <div style="margin-bottom: 0.3rem; font-weight: 700;">💡 TIP: Switch viewing modes</div>
+                        <div><strong>R</strong> = Light Mode | <strong>B</strong> = Dark Mode</div>
                     </div>
                     <button onclick="downloadCV()" class="matrix-button">
                         DOWNLOAD MATRIX DATA
