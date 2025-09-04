@@ -1,0 +1,114 @@
+/* Matrix Portfolio - Background Assets & Patterns */
+
+/* Circuit Board Pattern */
+.circuit-pattern {
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.08) 1px, transparent 1px),
+        linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, 0.05) 25%, rgba(0, 255, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, 0.05) 75%, rgba(0, 255, 0, 0.05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, 0.05) 25%, rgba(0, 255, 0, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 0, 0.05) 75%, rgba(0, 255, 0, 0.05) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+}
+
+/* Matrix Code Pattern */
+.matrix-code-pattern {
+    background-image: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 255, 0, 0.03) 2px,
+            rgba(0, 255, 0, 0.03) 4px
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 20px,
+            rgba(0, 255, 0, 0.02) 20px,
+            rgba(0, 255, 0, 0.02) 40px
+        );
+}
+
+/* Hexagonal Pattern */
+.hex-pattern {
+    background-image: 
+        radial-gradient(circle at 50% 50%, rgba(0, 255, 0, 0.1) 2px, transparent 2px),
+        radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+        radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px, 60px 60px, 60px 60px;
+    background-position: 0 0, 15px 15px, 45px 45px;
+}
+
+/* Grid Pattern */
+.grid-pattern {
+    background-image: 
+        linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* Neural Network Pattern */
+.neural-pattern {
+    background-image: 
+        radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.08) 2px, transparent 2px),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.06) 1px, transparent 1px),
+        radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(135deg, transparent 46%, rgba(0, 255, 0, 0.02) 47%, rgba(0, 255, 0, 0.02) 48%, transparent 49%);
+    background-size: 100px 100px, 60px 60px, 40px 40px, 80px 80px;
+}
+
+/* Binary Pattern */
+.binary-pattern {
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 255, 0, 0.02) 10px,
+            rgba(0, 255, 0, 0.02) 11px
+        );
+}
+
+/* Animated Background Classes */
+.animated-circuit {
+    animation: circuit-pulse 4s ease-in-out infinite;
+}
+
+@keyframes circuit-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 0.8; }
+}
+
+.animated-matrix {
+    animation: matrix-shift 8s linear infinite;
+}
+
+@keyframes matrix-shift {
+    0% { background-position: 0 0; }
+    100% { background-position: 100px 100px; }
+}
+
+/* Light Mode Patterns */
+.light-mode .circuit-pattern {
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(0, 102, 0, 0.15) 2px, transparent 2px),
+        radial-gradient(circle at 75% 75%, rgba(0, 102, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(0deg, transparent 24%, rgba(0, 102, 0, 0.08) 25%, rgba(0, 102, 0, 0.08) 26%, transparent 27%),
+        linear-gradient(90deg, transparent 24%, rgba(0, 102, 0, 0.08) 25%, rgba(0, 102, 0, 0.08) 26%, transparent 27%);
+}
+
+.light-mode .grid-pattern {
+    background-image: 
+        linear-gradient(rgba(0, 102, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 102, 0, 0.1) 1px, transparent 1px);
+}
+
+/* Hover Effects for Patterns */
+.pattern-hover:hover {
+    animation: pattern-glow 1s ease-in-out;
+}
+
+@keyframes pattern-glow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.2) contrast(1.1); }
+}

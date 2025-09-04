@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birante Soumare - Matrix Portfolio</title>
+    <link rel="stylesheet" href="matrix-assets.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
         
@@ -27,6 +28,102 @@
             font-family: 'Courier Prime', monospace;
             line-height: 1.6;
             display: flex;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.4;
+        }
+
+        /* Apply different patterns to sections */
+        #home {
+            position: relative;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        #projects {
+            position: relative;
+        }
+
+        #projects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        #skills {
+            position: relative;
+        }
+
+        #skills::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -2rem;
+            right: -2rem;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* Pattern Application */
+        .pattern-section::before {
+            background-size: 50px 50px;
+        }
+
+        #home.pattern-section::before {
+            background-image: 
+                linear-gradient(rgba(0, 255, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        #projects.pattern-section::before {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, 0.02) 25%, rgba(0, 255, 0, 0.02) 26%, transparent 27%),
+                linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, 0.02) 25%, rgba(0, 255, 0, 0.02) 26%, transparent 27%);
+            background-size: 40px 40px;
+            animation: circuit-pulse 6s ease-in-out infinite;
+        }
+
+        #skills.pattern-section::before {
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.04) 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+                radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px, 40px 40px, 30px 30px;
+        }
+
+        @keyframes circuit-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
         }
 
         /* Matrix Rain Background */
@@ -351,6 +448,26 @@
         @keyframes blink-caret {
             from, to { border-color: transparent }
             50% { border-color: var(--matrix-green) }
+        }
+
+        /* Interactive Terminal Styles */
+        .terminal-cursor {
+            animation: blink-cursor 1s infinite;
+            color: var(--matrix-green);
+        }
+
+        @keyframes blink-cursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        #skillsTerminal {
+            min-height: 100px;
+            cursor: text;
+        }
+
+        #skillsTerminal:focus {
+            outline: none;
         }
 
         /* Project Layout */
@@ -1071,6 +1188,27 @@
                 <h2>💻 TECHNICAL SKILLS</h2>
             </div>
             
+            <!-- Interactive Terminal -->
+            <div class="content-card">
+                <div class="terminal" style="margin-bottom: 2rem;">
+                    <div class="terminal-header">
+                        <div class="terminal-dot dot-red"></div>
+                        <div class="terminal-dot dot-yellow"></div>
+                        <div class="terminal-dot dot-green"></div>
+                    </div>
+                    <div id="skillsTerminal">
+                        <span class="matrix-number">birante@matrix:~$</span> <span id="terminalCommand">help</span><span class="terminal-cursor">|</span><br>
+                        <div id="terminalOutput" style="margin-top: 0.5rem;">
+                            Type a command: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">clear</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-bottom: 1rem; opacity: 0.8; font-size: 0.9rem;">
+                    💡 Click on the terminal and type commands to explore my skills interactively
+                </div>
+            </div>
+            
             <div class="content-card">
                 <div class="skills-grid">
                     <div class="skill-card">
@@ -1453,7 +1591,10 @@
                     updateLanguage(); // Set initial language
                     startClock();
                     startProgressTracking();
-                    setTimeout(() => addTypingEffects(), 2000); // Add typing effects after load
+                    setTimeout(() => {
+                        addTypingEffects();
+                        applyBackgroundPatterns();
+                    }, 2000); // Add typing effects after load
                 }, 1500);
             }, 5500); // Extended total time
         }
@@ -1694,8 +1835,117 @@
             }
         });
 
+        // Interactive Terminal System
+        function setupInteractiveTerminal() {
+            const terminal = document.getElementById('skillsTerminal');
+            const output = document.getElementById('terminalOutput');
+            const commandSpan = document.getElementById('terminalCommand');
+            let currentCommand = '';
+            
+            const commands = {
+                skills: {
+                    output: `> <span style="color: var(--matrix-green);">TECHNICAL SKILLS MATRIX</span><br>
+                    > Python: Intermediate (Telegram Bots, Automation)<br>
+                    > Web Tech: Learning (HTML, CSS, JS, Selenium)<br>
+                    > Database: Foundation (SQL fundamentals)<br>
+                    > 3D Design: Rapid acquisition (SketchUp, Architecture)<br>
+                    > Cryptography: Academic (CryptoHack challenges)<br>
+                    > AI Integration: Advanced (AI-assisted development)<br>
+                    > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
+                },
+                projects: {
+                    output: `> <span style="color: var(--matrix-green);">PROJECT STATUS</span><br>
+                    > [01] Telegram Bot + Payment API: <span style="color: var(--matrix-green);">OPERATIONAL</span><br>
+                    > [02] Web Automation Scripts: <span style="color: var(--matrix-green);">ACTIVE</span><br>
+                    > [03] 3D Community Projects: <span style="color: var(--matrix-green);">COMPLETED</span><br>
+                    > [04] Content Creation: <span style="color: var(--matrix-green);">VIRAL</span><br>
+                    > Total projects: <span style="color: var(--matrix-green);">4+</span><br>`
+                },
+                status: {
+                    output: `> <span style="color: var(--matrix-green);">SYSTEM STATUS</span><br>
+                    > Name: Birante Soumare<br>
+                    > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
+                    > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
+                    > Location: France → Asia-Pacific<br>
+                    > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
+                    > Mission: 3-6 month international internship<br>`
+                },
+                clear: {
+                    output: 'Terminal cleared.'
+                },
+                help: {
+                    output: `> <span style="color: var(--matrix-green);">AVAILABLE COMMANDS</span><br>
+                    > skills - Display technical competencies<br>
+                    > projects - Show project status<br>
+                    > status - System information<br>
+                    > clear - Clear terminal<br>
+                    > help - Show this help<br>`
+                }
+            };
+            
+            terminal.addEventListener('click', () => {
+                terminal.focus();
+            });
+            
+            terminal.setAttribute('tabindex', '0');
+            
+            terminal.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    executeCommand(currentCommand.trim().toLowerCase());
+                    currentCommand = '';
+                    commandSpan.textContent = '';
+                } else if (e.key === 'Backspace') {
+                    currentCommand = currentCommand.slice(0, -1);
+                    commandSpan.textContent = currentCommand;
+                } else if (e.key.length === 1 && e.key.match(/[a-zA-Z0-9\s]/)) {
+                    currentCommand += e.key;
+                    commandSpan.textContent = currentCommand;
+                }
+                e.preventDefault();
+            });
+            
+            function executeCommand(cmd) {
+                const command = commands[cmd];
+                if (command) {
+                    if (cmd === 'clear') {
+                        output.innerHTML = 'Terminal cleared.';
+                    } else {
+                        typeWriter(output, command.output, 20);
+                    }
+                } else {
+                    output.innerHTML = `> Command not found: ${cmd}<br>> Type <span style="color: var(--matrix-green);">help</span> for available commands`;
+                }
+            }
+        }
+
+        // Apply Background Patterns to Sections
+        function applyBackgroundPatterns() {
+            // Apply different patterns to each section
+            const sections = {
+                'home': 'grid-pattern',
+                'projects': 'circuit-pattern animated-circuit',
+                'skills': 'neural-pattern',
+                'travel': 'hex-pattern',
+                'contact': 'binary-pattern'
+            };
+            
+            Object.keys(sections).forEach(sectionId => {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    // Add pattern to ::before pseudo-element via CSS class
+                    section.style.setProperty('--pattern-class', sections[sectionId]);
+                    section.classList.add('pattern-section');
+                }
+            });
+        }
+
         // Initialize on load
-        window.addEventListener('load', initializeMatrix);
+        window.addEventListener('load', () => {
+            initializeMatrix();
+            setTimeout(() => {
+                setupInteractiveTerminal();
+            }, 6000); // After loading screen
+        });
 
         // Console message with instructions
         console.log(`
