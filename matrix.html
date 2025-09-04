@@ -1197,15 +1197,33 @@
                         <div class="terminal-dot dot-green"></div>
                     </div>
                     <div id="skillsTerminal">
-                        <span class="matrix-number">birante@matrix:~$</span> <span id="terminalCommand">help</span><span class="terminal-cursor">|</span><br>
+                        <span class="matrix-number">birante@matrix:~$</span> <span id="terminalCommand"></span><span class="terminal-cursor">|</span><br>
                         <div id="terminalOutput" style="margin-top: 0.5rem;">
-                            Type a command: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">clear</span>
+                            > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
+                            > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
+                            > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter
                         </div>
                     </div>
                 </div>
                 
-                <div style="text-align: center; margin-bottom: 1rem; opacity: 0.8; font-size: 0.9rem;">
-                    💡 Click on the terminal and type commands to explore my skills interactively
+                <div style="text-align: center; margin-bottom: 1rem;">
+                    <div style="margin-bottom: 1rem; opacity: 0.8; font-size: 0.9rem;">
+                        💡 Click on the terminal and type commands, or use quick buttons:
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                        <button onclick="executeTerminalCommand('skills')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            📊 skills
+                        </button>
+                        <button onclick="executeTerminalCommand('projects')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            🚀 projects
+                        </button>
+                        <button onclick="executeTerminalCommand('status')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            ⚡ status
+                        </button>
+                        <button onclick="executeTerminalCommand('clear')" style="background: rgba(255, 0, 64, 0.1); border: 1px solid rgba(255, 0, 64, 0.4); color: var(--neo-red); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                            🗑️ clear
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -1916,6 +1934,62 @@
                     output.innerHTML = `> Command not found: ${cmd}<br>> Type <span style="color: var(--matrix-green);">help</span> for available commands`;
                 }
             }
+        }
+
+        // Function for quick terminal buttons
+        function executeTerminalCommand(cmd) {
+            const output = document.getElementById('terminalOutput');
+            const commandSpan = document.getElementById('terminalCommand');
+            
+            // Show the command being executed
+            commandSpan.textContent = cmd;
+            
+            setTimeout(() => {
+                const commands = {
+                    skills: {
+                        output: `> <span style="color: var(--matrix-green);">TECHNICAL SKILLS MATRIX</span><br>
+                        > Python: Intermediate (Telegram Bots, Automation)<br>
+                        > Web Tech: Learning (HTML, CSS, JS, Selenium)<br>
+                        > Database: Foundation (SQL fundamentals)<br>
+                        > 3D Design: Rapid acquisition (SketchUp, Architecture)<br>
+                        > Cryptography: Academic (CryptoHack challenges)<br>
+                        > AI Integration: Advanced (AI-assisted development)<br>
+                        > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
+                    },
+                    projects: {
+                        output: `> <span style="color: var(--matrix-green);">PROJECT STATUS</span><br>
+                        > [01] Telegram Bot + Payment API: <span style="color: var(--matrix-green);">OPERATIONAL</span><br>
+                        > [02] Web Automation Scripts: <span style="color: var(--matrix-green);">ACTIVE</span><br>
+                        > [03] 3D Community Projects: <span style="color: var(--matrix-green);">COMPLETED</span><br>
+                        > [04] Content Creation: <span style="color: var(--matrix-green);">VIRAL</span><br>
+                        > Total projects: <span style="color: var(--matrix-green);">4+</span><br>`
+                    },
+                    status: {
+                        output: `> <span style="color: var(--matrix-green);">SYSTEM STATUS</span><br>
+                        > Name: Birante Soumare<br>
+                        > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
+                        > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
+                        > Location: France → Asia-Pacific<br>
+                        > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
+                        > Mission: 3-6 month international internship<br>`
+                    },
+                    clear: {
+                        output: `> Terminal cleared.<br>
+                        > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
+                        > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
+                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter`
+                    }
+                };
+                
+                const command = commands[cmd];
+                if (command) {
+                    typeWriter(output, command.output, 15);
+                }
+                
+                setTimeout(() => {
+                    commandSpan.textContent = '';
+                }, 1000);
+            }, 300);
         }
 
         // Apply Background Patterns to Sections
