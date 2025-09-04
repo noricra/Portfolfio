@@ -603,16 +603,69 @@
             transform: translateY(-2px);
         }
 
+        /* Light Mode Styles */
+        body.light-mode {
+            background: #f8fff8 !important;
+            color: #006600 !important;
+        }
+
+        body.light-mode .sidebar {
+            background: rgba(248, 255, 248, 0.95) !important;
+            border-color: rgba(0, 102, 0, 0.4) !important;
+        }
+
+        body.light-mode .content-card {
+            background: rgba(248, 255, 248, 0.8) !important;
+            border-color: rgba(0, 102, 0, 0.4) !important;
+            color: #006600 !important;
+        }
+
+        body.light-mode .terminal {
+            background: rgba(240, 255, 240, 0.9) !important;
+            border-color: rgba(0, 102, 0, 0.4) !important;
+        }
+
+        body.light-mode .matrix-char {
+            opacity: 0.1 !important;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: #000000 !important;
+            color: #00ff00 !important;
+        }
+
+        body.dark-mode .sidebar {
+            background: rgba(0, 20, 0, 0.95) !important;
+            border-color: rgba(0, 255, 0, 0.3) !important;
+        }
+
+        body.dark-mode .content-card {
+            background: rgba(0, 15, 0, 0.2) !important;
+            border-color: rgba(0, 255, 0, 0.3) !important;
+            color: #00ff00 !important;
+        }
+
+        body.dark-mode .terminal {
+            background: rgba(0, 10, 0, 0.6) !important;
+            border-color: rgba(0, 255, 0, 0.4) !important;
+        }
+
+        body.dark-mode .matrix-char {
+            opacity: 0.4 !important;
+        }
+
         /* Enhanced Responsive Design */
         @media (max-width: 1024px) {
             .sidebar {
-                width: 200px;
-                padding: 1rem;
+                width: 200px !important;
+                padding: 1rem !important;
+                position: fixed !important;
             }
             .main-content {
-                margin-left: 200px;
-                width: calc(100% - 200px);
-                padding: 1.5rem;
+                margin-left: 200px !important;
+                width: calc(100% - 200px) !important;
+                padding: 1.5rem !important;
             }
             .logo {
                 font-size: 1rem;
@@ -627,19 +680,20 @@
 
         @media (max-width: 768px) {
             body {
-                flex-direction: column;
+                flex-direction: column !important;
             }
             
             .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid rgba(0, 255, 0, 0.3);
-                padding: 1rem;
-                flex-direction: row;
-                align-items: center;
-                gap: 1rem;
+                position: relative !important;
+                width: 100% !important;
+                height: auto !important;
+                border-right: none !important;
+                border-bottom: 1px solid rgba(0, 255, 0, 0.3) !important;
+                padding: 1rem !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 1rem !important;
+                margin-left: 0 !important;
             }
             
             .profile-card {
@@ -663,9 +717,9 @@
             }
             
             .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 1rem;
+                margin-left: 0 !important;
+                width: 100% !important;
+                padding: 1rem !important;
             }
             
             section {
@@ -835,26 +889,21 @@
             </div>
             
             <div class="content-card">
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-                    <div style="text-align: center; padding: 1.5rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
-                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎓</div>
-                        <h3>Double Bachelor's</h3>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+                        <h3>Double Bachelor's Degree</h3>
                         <p>Computer Science (L3) + Mathematics (L2)</p>
                         <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Université Paris-Est Créteil</div>
+                        <div style="margin-top: 1rem; color: var(--matrix-green); font-weight: 700;">2023-2025</div>
                     </div>
                     
-                    <div style="text-align: center; padding: 1.5rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
-                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🏆</div>
-                        <h3>Academic Excellence</h3>
-                        <p>Bac Mention Bien (2023)</p>
-                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">High School with Honors</div>
-                    </div>
-                    
-                    <div style="text-align: center; padding: 1.5rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
-                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">👥</div>
-                        <h3>Leadership</h3>
-                        <p>Class Representative 3 Years</p>
-                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">2020-2023</div>
+                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🏆</div>
+                        <h3>Academic Excellence & Leadership</h3>
+                        <p>Bac Mention Bien (2023)<br>Class Representative 3 Years</p>
+                        <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 0.5rem;">Leadership Experience 2020-2023</div>
+                        <div style="margin-top: 1rem; color: var(--matrix-green); font-weight: 700;">PROVEN TRACK RECORD</div>
                     </div>
                 </div>
             </div>
@@ -1062,28 +1111,21 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px dashed var(--neo-red); border-radius: 15px; background: rgba(255, 0, 64, 0.05);">
-                    <h3 style="color: var(--neo-red); margin-bottom: 1.5rem;">🎯 NEXT DESTINATIONS</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
-                        <div style="padding: 1rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇸🇬</div>
-                            <div style="font-weight: 700;">Singapore</div>
-                            <div style="font-size: 0.8rem; opacity: 0.7;">Tech Innovation</div>
+                    <h3 style="color: var(--neo-red); margin-bottom: 1.5rem;">🎯 TARGET DESTINATIONS</h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                        <div style="padding: 1.5rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
+                            <div style="font-size: 2rem; margin-bottom: 0.8rem;">🇸🇬</div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem;">Singapore</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Tech Innovation Hub</div>
                         </div>
-                        <div style="padding: 1rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇲🇾</div>
-                            <div style="font-weight: 700;">Malaysia</div>
-                            <div style="font-size: 0.8rem; opacity: 0.7;">Multicultural Tech</div>
+                        <div style="padding: 1.5rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
+                            <div style="font-size: 2rem; margin-bottom: 0.8rem;">🇲🇾</div>
+                            <div style="font-weight: 700; margin-bottom: 0.5rem;">Malaysia</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Multicultural Tech Scene</div>
                         </div>
-                        <div style="padding: 1rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇹🇼</div>
-                            <div style="font-weight: 700;">Taiwan</div>
-                            <div style="font-size: 0.8rem; opacity: 0.7;">Hardware + Software</div>
-                        </div>
-                        <div style="padding: 1rem; border: 1px solid var(--neo-red); border-radius: 8px; background: rgba(255, 0, 64, 0.03);">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🇻🇳</div>
-                            <div style="font-weight: 700;">Vietnam</div>
-                            <div style="font-size: 0.8rem; opacity: 0.7;">Emerging Market</div>
-                        </div>
+                    </div>
+                    <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.8;">
+                        Also considering: Taiwan 🇹🇼 | Vietnam 🇻🇳
                     </div>
                 </div>
             </div>
@@ -1096,7 +1138,7 @@
             </div>
             
             <div class="content-card">
-                <div class="contact-grid">
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
                     <div class="contact-card">
                         <span class="contact-icon">📧</span>
                         <h3>Email</h3>
@@ -1114,13 +1156,14 @@
                         </a>
                         <div style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Direct line</div>
                     </div>
-
-                    <div class="contact-card">
-                        <span class="contact-icon">⏰</span>
-                        <h3>Availability</h3>
-                        <div style="font-weight: 700;">3-6 Month Internships</div>
-                        <div style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Immediate start possible</div>
-                    </div>
+                </div>
+                
+                <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                    <span style="font-size: 2.5rem; margin-bottom: 1rem; display: block;">⏰</span>
+                    <h3>Availability & Mission</h3>
+                    <div style="font-weight: 700; margin: 1rem 0;">3-6 Month International Internships</div>
+                    <div style="opacity: 0.8; margin-bottom: 1rem;">Ready for immediate deployment to Asia-Pacific region</div>
+                    <div style="color: var(--neo-red); font-weight: 700;">STATUS: READY FOR ADVENTURE 🚀</div>
                 </div>
 
                 <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px solid var(--matrix-green); border-radius: 15px; background: rgba(0, 255, 0, 0.05);">
@@ -1259,43 +1302,31 @@
             });
         }
 
-        // Professional Light/Dark Mode Functions
+        // Simplified Light/Dark Mode Functions
         function showMatrix() {
-            // Light Mode (R key)
-            document.documentElement.style.setProperty('--matrix-green', '#00cc44');
-            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 204, 68, 0.3)');
-            document.body.style.background = '#001a00';
-            document.body.style.filter = 'contrast(1.1) brightness(1.2)';
+            // Light Mode (R key) - White background
+            document.documentElement.style.setProperty('--matrix-green', '#006600');
+            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 102, 0, 0.3)');
+            document.documentElement.style.setProperty('--neo-red', '#cc0033');
+            document.documentElement.style.setProperty('--morpheus-blue', '#003399');
             
-            document.querySelectorAll('.content-card').forEach(card => {
-                card.style.background = 'rgba(0, 30, 0, 0.4)';
-                card.style.borderColor = 'rgba(0, 204, 68, 0.5)';
-            });
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
             
-            document.querySelectorAll('.matrix-char').forEach(char => {
-                char.style.opacity = '0.6';
-            });
-            
-            showMessage("💡 LIGHT MODE", "Professional light theme activated");
+            showMessage("☀️ LIGHT MODE", "Professional light theme activated");
         }
 
         function hideMatrix() {
-            // Dark Mode (B key)
-            document.documentElement.style.setProperty('--matrix-green', '#008822');
-            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 136, 34, 0.3)');
-            document.body.style.background = '#000000';
-            document.body.style.filter = 'contrast(0.9) brightness(0.8)';
+            // Dark Mode (B key) - Original dark
+            document.documentElement.style.setProperty('--matrix-green', '#00ff00');
+            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 255, 0, 0.3)');
+            document.documentElement.style.setProperty('--neo-red', '#ff0040');
+            document.documentElement.style.setProperty('--morpheus-blue', '#0040ff');
             
-            document.querySelectorAll('.content-card').forEach(card => {
-                card.style.background = 'rgba(0, 15, 0, 0.3)';
-                card.style.borderColor = 'rgba(0, 136, 34, 0.4)';
-            });
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
             
-            document.querySelectorAll('.matrix-char').forEach(char => {
-                char.style.opacity = '0.2';
-            });
-            
-            showMessage("🌙 DARK MODE", "Professional dark theme activated");
+            showMessage("🌙 DARK MODE", "Matrix dark theme activated");
         }
 
         function showMessage(title, subtitle) {
