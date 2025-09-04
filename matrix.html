@@ -1045,6 +1045,78 @@
                 margin: 0 auto !important;
             }
         }
+
+        /* iPhone-specific fixes */
+        @media (max-width: 430px) {
+            .main-content {
+                padding: 0.75rem !important;
+            }
+
+            /* Hide decorative fixed overlays to avoid visual overlap */
+            .hidden-number {
+                display: none !important;
+            }
+
+            /* Compact sidebar and nav for very small widths */
+            .sidebar {
+                padding: 0.8rem !important;
+                gap: 0.5rem !important;
+            }
+
+            .nav-menu a {
+                font-size: 0.65rem !important;
+                padding: 0.35rem 0.5rem !important;
+            }
+
+            /* Center pills at the bottom to prevent covering content */
+            .pills-nav {
+                top: auto !important;
+                right: auto !important;
+                left: 50% !important;
+                bottom: 0.75rem !important;
+                transform: translateX(-50%) !important;
+                flex-direction: row !important;
+                gap: 0.5rem !important;
+            }
+
+            .pill {
+                width: 36px !important;
+                height: 18px !important;
+            }
+
+            /* Tighter headings */
+            h1 {
+                font-size: 1.3rem !important;
+            }
+
+            h2 {
+                font-size: 1.2rem !important;
+            }
+
+            /* Home hero grid -> single column */
+            section#home .content-card > div:first-child {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            /* Collapse inline grids in other sections to 1 column */
+            #about .content-card > div[style*="grid-template-columns"],
+            #travel .content-card > div[style*="grid-template-columns"],
+            #contact .content-card > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
+
+            /* Tighter project spacing and images */
+            .project-item {
+                gap: 0.75rem !important;
+            }
+
+            .project-image {
+                width: 100px !important;
+                height: 100px !important;
+            }
+        }
     </style>
 </head>
 <body>
