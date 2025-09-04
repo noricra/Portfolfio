@@ -1488,6 +1488,30 @@
 
         // Simple Loading Screen
         function initializeMatrix() {
+            const messages = [
+                "Wake up, Birante...",
+                "The Matrix has you...",
+                "Follow the white rabbit...",
+                "Knock, knock, Birante...",
+                "Loading portfolio.exe...",
+                "Initializing skills matrix...",
+                "Connecting to the real world...",
+                "Welcome to the Matrix."
+            ];
+            
+            let messageIndex = 0;
+            const loadingText = document.querySelector('.loading-text');
+            
+            const messageInterval = setInterval(() => {
+                if (messageIndex < messages.length - 1) {
+                    messageIndex++;
+                    loadingText.textContent = messages[messageIndex];
+                    loadingText.style.textShadow = '0 0 20px var(--matrix-green)';
+                } else {
+                    clearInterval(messageInterval);
+                }
+            }, 450);
+
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loadingScreen');
                 loadingScreen.style.opacity = '0';
@@ -1496,7 +1520,7 @@
                     createMatrixRain();
                     setupNavigation();
                 }, 1500);
-            }, 3000);
+            }, 4000); // Extended time to show all messages
         }
 
         // Simple Navigation
