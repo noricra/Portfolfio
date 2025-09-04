@@ -206,21 +206,35 @@
             to { text-shadow: 0 0 40px var(--matrix-green); }
         }
 
-        /* Refined Sidebar Navigation */
+        /* Premium Sidebar Navigation */
         .sidebar {
             position: fixed;
             left: 0;
             top: 0;
             width: 240px;
             height: 100vh;
-            background: rgba(0, 15, 0, 0.98);
-            backdrop-filter: blur(15px);
+            background: 
+                linear-gradient(180deg, rgba(0, 20, 0, 0.98), rgba(0, 10, 0, 0.95)),
+                radial-gradient(circle at top left, rgba(0, 255, 0, 0.03), transparent 60%);
+            backdrop-filter: blur(20px);
             border-right: 1px solid rgba(0, 255, 0, 0.3);
             z-index: 1000;
             padding: 1.5rem;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            box-shadow: 4px 0 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--matrix-green), transparent, var(--matrix-green));
+            opacity: 0.5;
         }
 
         .logo {
@@ -233,8 +247,27 @@
             padding: 0.8rem;
             border: 1px solid rgba(0, 255, 0, 0.4);
             border-radius: 8px;
-            background: rgba(0, 255, 0, 0.03);
+            background: 
+                linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.01)),
+                radial-gradient(circle at center, rgba(0, 255, 0, 0.03), transparent);
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .logo:hover::before {
+            left: 100%;
         }
 
         .profile-card {
@@ -412,41 +445,46 @@
             letter-spacing: 0.5px;
         }
 
-        /* Enhanced Content Cards */
+        /* Premium Content Cards */
         .content-card {
-            background: linear-gradient(135deg, var(--bg-card), rgba(0, 20, 0, 0.1));
+            background: 
+                linear-gradient(135deg, var(--bg-card), rgba(0, 20, 0, 0.1)),
+                radial-gradient(circle at top right, rgba(0, 255, 0, 0.02), transparent 70%);
             border: 1px solid var(--border-subtle);
             border-radius: 16px;
             padding: 2rem;
             margin-bottom: 2rem;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(8px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(12px);
             position: relative;
             overflow: hidden;
         }
 
-        .content-card::before {
+        .content-card::after {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--matrix-green), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .content-card:hover {
-            background: linear-gradient(135deg, var(--bg-hover), rgba(0, 30, 0, 0.15));
+            background: 
+                linear-gradient(135deg, var(--bg-hover), rgba(0, 30, 0, 0.15)),
+                radial-gradient(circle at top right, rgba(0, 255, 0, 0.05), transparent 70%);
             border-color: rgba(0, 255, 0, 0.4);
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(0, 255, 0, 0.1);
-            transform: translateY(-4px);
+                0 12px 48px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(0, 255, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
         }
 
-        .content-card:hover::before {
+        .content-card:hover::after {
             opacity: 1;
         }
 
@@ -552,8 +590,9 @@
         }
 
         .project-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px var(--matrix-glow);
+            transform: scale(1.02);
+            border-color: rgba(0, 255, 0, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .project-content h3 {
@@ -610,29 +649,13 @@
             overflow: hidden;
         }
 
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
         .skill-card:hover {
             background: linear-gradient(135deg, var(--bg-hover), rgba(0, 30, 0, 0.1));
             border-color: rgba(0, 255, 0, 0.3);
-            transform: translateY(-6px);
+            transform: translateY(-4px);
             box-shadow: 
-                0 10px 40px rgba(0, 0, 0, 0.3),
+                0 8px 24px rgba(0, 0, 0, 0.3),
                 0 0 0 1px rgba(0, 255, 0, 0.1);
-        }
-
-        .skill-card:hover::before {
-            opacity: 1;
         }
 
         .skill-icon {
@@ -777,9 +800,9 @@
             font-weight: 700;
         }
 
-        /* Button Styling */
+        /* Premium Button Styling */
         .matrix-button {
-            background: var(--matrix-green);
+            background: linear-gradient(135deg, var(--matrix-green), rgba(0, 200, 0, 0.9));
             color: #000;
             border: none;
             padding: 1rem 2rem;
@@ -787,14 +810,40 @@
             font-family: 'Orbitron', monospace;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 16px rgba(0, 255, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .matrix-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
         }
 
         .matrix-button:hover {
-            background: rgba(0, 255, 0, 0.8);
-            box-shadow: 0 0 20px var(--matrix-glow);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(0, 255, 0, 0.9), rgba(0, 220, 0, 0.8));
+            box-shadow: 
+                0 8px 32px rgba(0, 255, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .matrix-button:hover::before {
+            left: 100%;
+        }
+
+        .matrix-button:active {
+            transform: translateY(-1px) scale(1);
         }
 
         /* Light Mode Styles */
@@ -1052,9 +1101,9 @@
         <div class="pill blue-pill" onclick="hideMatrix()" title="Dark Mode (Press B)"></div>
     </div>
 
-    <!-- Progress Bar -->
-    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 3px; background: rgba(0, 255, 0, 0.1); z-index: 1001;">
-        <div id="progressFill" style="height: 100%; background: var(--matrix-green); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 10px var(--matrix-glow);"></div>
+    <!-- Premium Progress Bar -->
+    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 4px; background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), rgba(0, 255, 0, 0.1), rgba(0, 0, 0, 0.3)); z-index: 1001; backdrop-filter: blur(10px);">
+        <div id="progressFill" style="height: 100%; background: linear-gradient(90deg, var(--matrix-green), var(--accent-blue), var(--matrix-green)); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 0 0 15px var(--matrix-glow), 0 2px 8px rgba(0, 255, 0, 0.3);"></div>
     </div>
 
     <!-- R/B Indicators - Desktop Only -->
@@ -1104,7 +1153,6 @@
                                 <div style="font-size: 0.6rem; margin-top: 0.2rem;">120x120px</div>
                             </div>
                         </div>
-                        <div style="margin-top: 0.8rem; font-size: 0.8rem; opacity: 0.7;">University/Graduation</div>
                     </div>
                     
                     <div style="text-align: center;">
@@ -1116,8 +1164,6 @@
                                 <div style="font-size: 0.6rem; margin-top: 0.5rem; color: var(--text-muted);">200x200px</div>
                             </div>
                         </div>
-                        <div style="margin-top: 1rem; font-weight: 700; color: var(--matrix-green); font-family: 'Orbitron', monospace; font-size: 0.9rem;">Hero Profile Image</div>
-                        <div style="opacity: 0.7; font-size: 0.8rem;">High-quality professional photo</div>
                     </div>
                     
                     <div style="text-align: center;">
@@ -1128,7 +1174,6 @@
                                 <div style="font-size: 0.6rem; margin-top: 0.2rem;">120x120px</div>
                             </div>
                         </div>
-                        <div style="margin-top: 0.8rem; font-size: 0.8rem; opacity: 0.7;">International Experience</div>
                     </div>
                 </div>
                 
@@ -1288,7 +1333,6 @@
                                 <div style="font-size: 0.6rem; color: var(--text-muted);">140x140px</div>
                             </div>
                         </div>
-                        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-secondary);">Development Setup</div>
                     </div>
                     <div style="text-align: center;">
                         <div style="width: 140px; height: 140px; border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-card), rgba(0, 0, 0, 0.6)); position: relative; overflow: hidden;">
@@ -1298,7 +1342,6 @@
                                 <div style="font-size: 0.6rem; color: var(--text-muted);">140x140px</div>
                             </div>
                         </div>
-                        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-secondary);">Project Metrics</div>
                     </div>
                     <div style="text-align: center;">
                         <div style="width: 140px; height: 140px; border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-card), rgba(0, 0, 0, 0.6)); position: relative; overflow: hidden;">
@@ -1308,7 +1351,6 @@
                                 <div style="font-size: 0.6rem; color: var(--text-muted);">140x140px</div>
                             </div>
                         </div>
-                        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: var(--text-secondary);">Achievements</div>
                     </div>
                 </div>
             </div>
@@ -1779,24 +1821,62 @@
             }, 5500); // Extended total time
         }
 
-        // Navigation
+        // Enhanced Navigation with Visual Feedback
         function setupNavigation() {
             const navLinks = document.querySelectorAll('.nav-link');
             
-            // Smooth scrolling
+            // Smooth scrolling with enhanced feedback
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const target = document.querySelector(link.getAttribute('href'));
+                    const targetId = link.getAttribute('href');
+                    const target = document.querySelector(targetId);
+                    
                     if (target) {
                         // Update active state
                         navLinks.forEach(l => l.classList.remove('active'));
                         link.classList.add('active');
                         
-                        target.scrollIntoView({ behavior: 'smooth' });
+                        // Add visual transition effect
+                        document.body.style.transition = 'filter 0.2s ease';
+                        document.body.style.filter = 'brightness(1.1)';
+                        
+                        target.scrollIntoView({ 
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        setTimeout(() => {
+                            document.body.style.filter = '';
+                        }, 300);
+                        
+                        // Show navigation feedback
+                        showMessage(`🎯 ${targetId.replace('#', '').toUpperCase()}`, "Section loaded");
                     }
                 });
             });
+            
+            // Auto-highlight current section on scroll
+            const sections = document.querySelectorAll('section[id]');
+            const observerOptions = {
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        const activeLink = document.querySelector(`a[href="#${id}"]`);
+                        if (activeLink) {
+                            navLinks.forEach(l => l.classList.remove('active'));
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+            
+            sections.forEach(section => observer.observe(section));
         }
 
         // UTC Clock Function
@@ -2181,11 +2261,73 @@
             });
         }
 
+        // Premium Entrance Animations
+        function addEntranceAnimations() {
+            const cards = document.querySelectorAll('.content-card');
+            const skillCards = document.querySelectorAll('.skill-card');
+            const projectItems = document.querySelectorAll('.project-item');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                    }
+                });
+            }, observerOptions);
+            
+            // Apply to all animated elements
+            [...cards, ...skillCards, ...projectItems].forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                observer.observe(el);
+            });
+        }
+
+        // Premium Visual Enhancements
+        function addPremiumEffects() {
+            // Add subtle parallax to background patterns
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallax = scrolled * 0.1;
+                
+                document.querySelectorAll('.pattern-section::before').forEach(el => {
+                    el.style.transform = `translateY(${parallax}px)`;
+                });
+            });
+            
+            // Add premium hover effects to navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    link.style.transform = 'translateX(5px) scale(1.02)';
+                    link.style.textShadow = '0 0 10px var(--matrix-green)';
+                });
+                
+                link.addEventListener('mouseleave', () => {
+                    if (!link.classList.contains('active')) {
+                        link.style.transform = '';
+                        link.style.textShadow = '';
+                    }
+                });
+            });
+        }
+
         // Initialize on load
         window.addEventListener('load', () => {
             initializeMatrix();
             setTimeout(() => {
                 setupInteractiveTerminal();
+                addEntranceAnimations();
+                addPremiumEffects();
             }, 6000); // After loading screen
         });
 
