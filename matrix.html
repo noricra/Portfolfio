@@ -378,6 +378,30 @@
             gap: 1rem;
         }
 
+        /* Mobile top navbar (GitHub-like) */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: sticky !important;
+                top: 0;
+                width: 100% !important;
+                height: auto !important;
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                justify-content: space-between !important;
+                padding: 0.75rem 1rem !important;
+                border-bottom: 1px solid var(--border-subtle) !important;
+                border-right: none !important;
+                background: rgba(10, 12, 18, 0.9) !important;
+                backdrop-filter: blur(10px);
+                z-index: 1002;
+            }
+            .mobile-menu-toggle { display: inline-flex !important; background: transparent; border: 1px solid var(--border-subtle); color: #e0e0e0; padding: 0.25rem 0.5rem; border-radius: 6px; }
+            .nav-menu { display: none; position: absolute; top: 56px; left: 0; right: 0; background: rgba(10, 12, 18, 0.98); padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-subtle); }
+            .nav-menu.show { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
+            .main-content { padding-top: 0.75rem !important; }
+        }
+
         .pill {
             width: 50px;
             height: 25px;
@@ -1150,6 +1174,9 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="logo">BIRANTE.EXE</div>
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle navigation" onclick="toggleMobileMenu()" style="display:none;">
+            ☰
+        </button>
         
         <div class="profile-card">
             <div class="profile-image"></div>
@@ -1906,6 +1933,7 @@
         // Enhanced Navigation with Visual Feedback
         function setupNavigation() {
             const navLinks = document.querySelectorAll('.nav-link');
+            const navMenu = document.querySelector('.nav-menu');
             
             // Smooth scrolling with enhanced feedback
             navLinks.forEach(link => {
@@ -1948,6 +1976,10 @@
             }, observerOptions);
             
             sections.forEach(section => observer.observe(section));
+            // Mobile menu toggle
+            window.toggleMobileMenu = function() {
+                if (navMenu) { navMenu.classList.toggle('show'); }
+            }
         }
 
         // UTC Clock Function
