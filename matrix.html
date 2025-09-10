@@ -15,6 +15,8 @@
             --neo-red: #e53935; /* keep subtle color accents */
             --morpheus-blue: #3949ab; /* keep subtle color accents */
             --accent-blue: #90a4ae;
+            --accent-primary: #6ec1ff; /* premium blue accent */
+            --accent-glow: rgba(110, 193, 255, 0.35);
             --accent-orange: #b0bec5;
             --text-primary: #ffffff;
             --text-secondary: #c7c7c7;
@@ -284,8 +286,8 @@
         }
 
         .profile-image:hover {
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 18px var(--accent-glow);
         }
 
         .profile-name {
@@ -302,11 +304,11 @@
         }
 
         .profile-status {
-            background: rgba(255, 255, 255, 0.06);
+            background: rgba(110, 193, 255, 0.08);
             padding: 0.4rem;
             border-radius: 4px;
             font-size: 0.7rem;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(110, 193, 255, 0.25);
         }
 
         .nav-menu {
@@ -333,14 +335,14 @@
         }
 
         .nav-menu a:hover {
-            background: rgba(255, 255, 255, 0.06);
-            border-color: rgba(255, 255, 255, 0.12);
+            background: rgba(110, 193, 255, 0.08);
+            border-color: var(--accent-primary);
             transform: translateX(3px);
         }
 
         .nav-menu a.active {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(110, 193, 255, 0.10);
+            border-color: var(--accent-primary);
         }
 
         /* Pills Navigation */
@@ -406,7 +408,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--text-primary);
-            text-shadow: 0 0 18px rgba(255,255,255,0.25);
+            text-shadow: 0 0 12px var(--accent-glow), 0 0 18px rgba(255,255,255,0.18);
             line-height: 1.1;
         }
 
@@ -429,7 +431,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
         }
 
         h3 {
@@ -463,14 +465,14 @@
             right: 0;
             width: 1px;
             height: 100%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
-            opacity: 0;
+            background: linear-gradient(180deg, var(--accent-primary), transparent);
+            opacity: 0.15;
             transition: opacity 0.3s ease;
         }
 
         .content-card:hover {
-            border-color: rgba(255, 255, 255, 0.16);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 24px var(--accent-glow);
             transform: translateY(-2px);
         }
 
@@ -1051,6 +1053,14 @@
                 grid-template-columns: 1fr !important;
                 gap: 1rem !important;
             }
+
+            /* Force single column on inline grids with inline styles */
+            .grid-hero,
+            .grid-about-cards,
+            .grid-contact-cards {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+            }
             
             /* Mobile image sizes */
             .project-image {
@@ -1150,12 +1160,12 @@
 
     <!-- Optimized Progress Bar -->
     <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 3px; background: rgba(0, 0, 0, 0.2); z-index: 1001;">
-        <div id="progressFill" style="height: 100%; background: var(--matrix-green); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 8px var(--matrix-glow);"></div>
+        <div id="progressFill" style="height: 100%; background: var(--accent-primary); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 10px var(--accent-glow);"></div>
     </div>
 
     <!-- R/B Indicators - Desktop Only -->
-    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
-        <div style="margin-bottom: 0.4rem; color: #e0e0e0; font-weight: 700; text-align: center;">MODES</div>
+    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid var(--accent-primary); box-shadow: 0 0 14px var(--accent-glow); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
+        <div style="margin-bottom: 0.4rem; color: var(--accent-primary); font-weight: 700; text-align: center;">MODES</div>
         <div style="display: flex; gap: 1.5rem;">
             <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="showMatrix()" onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'" onmouseout="this.style.background=''">
                 <strong>R</strong> = ☀️ Light
@@ -1195,7 +1205,7 @@
             
             <!-- Hero Image Section -->
             <div class="content-card" style="text-align: center;">
-                <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2rem; align-items: center;">
+                <div class="grid-hero" style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2rem; align-items: center;">
                     <div style="text-align: center;">
                         <div style="width: 120px; height: 120px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.6));"></div>
                     </div>
@@ -1237,7 +1247,7 @@
             </div>
             
             <div class="content-card">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+                <div class="grid-about-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
                     <div style="text-align: center; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; background: rgba(255, 255, 255, 0.02);">
                         <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
                         <h3>Double Bachelor's Degree</h3>
@@ -1606,7 +1616,7 @@
             </div>
             
             <div class="content-card">
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
+                <div class="grid-contact-cards" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-bottom: 2rem;">
                     <div class="contact-card">
                         <span class="contact-icon"></span>
                         <h3>Email</h3>
