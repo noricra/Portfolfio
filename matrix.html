@@ -21,9 +21,10 @@
             --text-primary: #ffffff;
             --text-secondary: #c7c7c7;
             --text-muted: #9a9a9a;
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-hover: rgba(255, 255, 255, 0.06);
+            --border-subtle: rgba(255, 255, 255, 0.14);
+            --border-strong: rgba(255, 255, 255, 0.22);
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-hover: rgba(255, 255, 255, 0.07);
         }
 
         * {
@@ -33,7 +34,7 @@
         }
 
         body {
-            background: #000000;
+            background: #0a0c12;
             color: #e0e0e0;
             font-family: 'Courier Prime', monospace;
             line-height: 1.6;
@@ -53,6 +54,23 @@
             background: radial-gradient(800px 400px at 20% 10%, rgba(110, 193, 255, 0.08), transparent 60%),
                         radial-gradient(1000px 600px at 80% 90%, rgba(110, 193, 255, 0.06), transparent 60%);
             filter: saturate(110%);
+        }
+
+        /* Subtle grid overlay for depth without perf cost */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -3;
+            opacity: 0.08;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
 
         /* Apply different patterns to sections */
@@ -474,15 +492,15 @@
         }
 
         .content-card:hover {
-            border-color: rgba(255, 255, 255, 0.18);
+            border-color: var(--border-strong);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 24px var(--accent-glow);
             transform: translateY(-2px);
         }
 
         /* Refined Terminal Effect */
         .terminal {
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(15, 17, 23, 0.7);
+            border: 1px solid var(--border-strong);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
@@ -495,7 +513,7 @@
             gap: 0.5rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            border-bottom: 1px solid var(--border-subtle);
         }
 
         .terminal-dot {
@@ -507,12 +525,12 @@
      
 
         .dot-red { background: var(--neo-red); }
-        .dot-yellow { background: #ffff00; }
-        .dot-green { background: #9e9e9e; }
+        .dot-yellow { background: #ffd166; }
+        .dot-green { background: var(--accent-primary); }
 
         .typing-text {
             overflow: hidden;
-            border-right: 2px solid #9e9e9e;
+            border-right: 2px solid var(--accent-primary);
             white-space: nowrap;
             animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
         }
@@ -524,13 +542,13 @@
 
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: #9e9e9e }
+            50% { border-color: var(--accent-primary) }
         }
 
         /* Interactive Terminal Styles */
         .terminal-cursor {
             animation: blink-cursor 1s infinite;
-            color: #bdbdbd;
+            color: var(--accent-primary);
         }
 
         @keyframes blink-cursor {
@@ -827,39 +845,39 @@
 
         /* Enhanced Light Mode Styles */
         body.light-mode {
-            background: #f5f5f5 !important;
-            color: #1a1a1a !important;
+            background: #f7fafc !important;
+            color: #0a0c12 !important;
         }
 
         body.light-mode h1 {
-            color: #111 !important;
-            text-shadow: 0 0 20px rgba(0, 0, 0, 0.1) !important;
+            color: #0a0c12 !important;
+            text-shadow: 0 0 6px rgba(0, 0, 0, 0.08) !important;
         }
 
         body.light-mode h2 {
-            color: #222 !important;
+            color: #0a0c12 !important;
         }
 
         body.light-mode h3 {
-            color: #333 !important;
+            color: #0a0c12 !important;
         }
 
         body.light-mode .sidebar {
             background: rgba(255, 255, 255, 0.95) !important;
-            border-color: rgba(0, 0, 0, 0.08) !important;
-            color: #222 !important;
+            border-color: rgba(0, 0, 0, 0.1) !important;
+            color: #0a0c12 !important;
         }
 
         body.light-mode .content-card {
-            background: rgba(255, 255, 255, 0.8) !important;
-            border-color: rgba(0, 0, 0, 0.08) !important;
-            color: #222 !important;
+            background: rgba(255, 255, 255, 0.92) !important;
+            border-color: rgba(0, 0, 0, 0.12) !important;
+            color: #0a0c12 !important;
         }
 
         body.light-mode .terminal {
-            background: rgba(250, 250, 250, 0.9) !important;
-            border-color: rgba(0, 0, 0, 0.08) !important;
-            color: #222 !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-color: rgba(0, 0, 0, 0.14) !important;
+            color: #0a0c12 !important;
         }
 
         body.light-mode .matrix-char {
@@ -1060,10 +1078,10 @@
             /* Force single column on inline grids with inline styles */
             .grid-hero,
             .grid-about-cards,
-            .grid-contact-cards {
-                grid-template-columns: 1fr !important;
-                gap: 1rem !important;
-            }
+            .grid-contact-cards { grid-template-columns: 1fr !important; gap: 1rem !important; }
+            .grid-hero > div,
+            .grid-about-cards > div,
+            .grid-contact-cards > div { text-align: center !important; }
             
             /* Mobile image sizes */
             .project-image {
@@ -1120,7 +1138,8 @@
     
 
     <!-- Matrix Rain Background -->
-    <div class="matrix-bg" id="matrixBg"></div>
+    <!-- Matrix background disabled for performance -->
+    <div class="matrix-bg" id="matrixBg" style="display:none"></div>
 
     <!-- Hidden Numbers -->
     <div class="hidden-number" style="top: 15%; left: 85%;">1337</div>
@@ -1873,7 +1892,7 @@
                 loadingScreen.style.opacity = '0';
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
-                    createMatrixRain();
+                    // createMatrixRain(); // disabled for performance
                     setupNavigation();
                     updateLanguage(); // Set initial language
                     startClock();
@@ -2201,7 +2220,7 @@
                         typeWriter(output, command.output, 20);
                     }
                 } else {
-                    output.innerHTML = `> Command not found: ${cmd}<br>> Type <span style="color: var(--matrix-green);">help</span> for available commands`;
+                    output.innerHTML = `> Command not found: ${cmd}<br>> Type <span style="color: #e0e0e0;">help</span> for available commands`;
                 }
             }
         }
@@ -2237,8 +2256,8 @@
                     status: {
                         output: `> <span style="color: #e0e0e0;">SYSTEM STATUS</span><br>
                         > Name: Birante Soumare<br>
-                        > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
-                        > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
+                        > Status: <span style="color: #e0e0e0;">ONLINE</span><br>
+                        > Mode: <span style="color: #e0e0e0;">LEARNING</span><br>
                         > Location: France → Asia-Pacific<br>
                         > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
                         > Mission: 3-6 month international internship<br>`
@@ -2283,7 +2302,7 @@
             // Apply different patterns to each section
             const sections = {
                 'home': 'grid-pattern',
-                'projects': 'circuit-pattern animated-circuit',
+                'projects': 'circuit-pattern',
                 'skills': 'neural-pattern',
                 'travel': 'hex-pattern',
                 'contact': 'binary-pattern'
