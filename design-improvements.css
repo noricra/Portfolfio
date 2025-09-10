@@ -1,0 +1,233 @@
+/* ===== DESIGN IMPROVEMENTS - EXPERT RECOMMENDATIONS ===== */
+
+/* Enhanced Color Palette for Better Visual Hierarchy */
+:root {
+    /* Gradient variations for depth */
+    --gradient-primary: linear-gradient(135deg, var(--matrix-green) 0%, var(--accent-cyan) 100%);
+    --gradient-secondary: linear-gradient(135deg, var(--neo-red) 0%, var(--accent-orange) 100%);
+    --gradient-accent: linear-gradient(135deg, var(--morpheus-blue) 0%, var(--accent-purple) 100%);
+    
+    /* Enhanced shadows for depth */
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.15), 0 0 40px var(--shadow-glow);
+    --shadow-hover: 0 8px 32px rgba(0, 0, 0, 0.2), 0 0 60px var(--shadow-glow);
+    
+    /* Improved transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Enhanced Typography Hierarchy */
+.text-hierarchy-primary {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.text-hierarchy-secondary {
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.text-hierarchy-accent {
+    color: var(--text-accent);
+    font-weight: 600;
+}
+
+.text-hierarchy-muted {
+    color: var(--text-muted);
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+/* Improved Card System with Color Balance */
+.card-enhanced {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.card-enhanced:hover {
+    border-color: var(--border-accent);
+    background: var(--bg-card-hover);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+.card-enhanced:hover::before {
+    opacity: 1;
+}
+
+/* Color-coded sections for better navigation */
+.section-home { --section-color: var(--matrix-green); }
+.section-about { --section-color: var(--accent-cyan); }
+.section-projects { --section-color: var(--neo-red); }
+.section-skills { --section-color: var(--morpheus-blue); }
+.section-travel { --section-color: var(--accent-purple); }
+.section-contact { --section-color: var(--accent-orange); }
+
+/* Subtle section indicators */
+.section-indicator {
+    position: relative;
+}
+
+.section-indicator::before {
+    content: '';
+    position: absolute;
+    left: -2rem;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--section-color, var(--matrix-green));
+    border-radius: 2px;
+    opacity: 0.6;
+}
+
+/* Enhanced Button System */
+.btn-matrix {
+    background: var(--gradient-primary);
+    color: var(--bg-primary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-family: 'Orbitron', monospace;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-matrix::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition-smooth);
+}
+
+.btn-matrix:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-matrix:hover::before {
+    left: 100%;
+}
+
+/* Improved Status Indicators */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-active {
+    background: rgba(0, 204, 136, 0.15);
+    color: var(--matrix-green);
+    border: 1px solid var(--matrix-green);
+}
+
+.status-learning {
+    background: rgba(68, 136, 255, 0.15);
+    color: var(--morpheus-blue);
+    border: 1px solid var(--morpheus-blue);
+}
+
+.status-completed {
+    background: rgba(255, 68, 102, 0.15);
+    color: var(--neo-red);
+    border: 1px solid var(--neo-red);
+}
+
+/* Enhanced Mobile Experience */
+@media (max-width: 768px) {
+    .card-enhanced {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+    
+    .btn-matrix {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+    
+    .section-indicator::before {
+        left: -1rem;
+        width: 2px;
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    :root {
+        --border-subtle: rgba(0, 204, 136, 0.4);
+        --border-accent: rgba(0, 204, 136, 0.8);
+        --text-muted: #cccccc;
+    }
+}
+
+/* Focus indicators for keyboard navigation */
+.nav-link:focus,
+.btn-matrix:focus,
+button:focus {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 2px;
+}
+
+/* Print styles for CV functionality */
+@media print {
+    .sidebar,
+    .pills-nav,
+    #progressBar,
+    #rbIndicator,
+    .matrix-bg {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    .content-card {
+        border: 1px solid #ccc !important;
+        background: white !important;
+        color: black !important;
+        page-break-inside: avoid;
+    }
+}
