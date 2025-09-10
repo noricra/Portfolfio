@@ -366,6 +366,16 @@
             background: rgba(110, 193, 255, 0.10);
             border-color: var(--accent-primary);
         }
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            left: 8px;
+            right: 8px;
+            bottom: -3px;
+            height: 2px;
+            border-radius: 2px;
+            background: var(--accent-primary);
+        }
 
         /* Mode pills removed */
 
@@ -1157,8 +1167,10 @@
             <div style="display: flex; align-items: flex-start; margin-bottom: 1.5rem; gap: 2rem;">
                 <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
                     <!-- Language Toggle -->
-                    <button id="langToggle" onclick="toggleLanguage()" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Orbitron', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.3s ease;">
-                         EN
+                    <button id="langToggle" class="lang-switch" onclick="toggleLanguage()" aria-label="Switch language" aria-pressed="false" data-lang="en">
+                        <span class="label">FR</span>
+                        <span class="label">EN</span>
+                        <span class="thumb"></span>
                     </button>
                     
                     <!-- UTC Clock -->
@@ -1764,7 +1776,12 @@
             const lang = translations[currentLanguage];
             
             // Update language button
-            document.getElementById('langToggle').innerHTML = `🌐 ${currentLanguage.toUpperCase()}`;
+            const toggle = document.getElementById('langToggle');
+            if (toggle) {
+                toggle.setAttribute('data-lang', currentLanguage);
+                toggle.setAttribute('aria-pressed', String(currentLanguage === 'fr'));
+                toggle.setAttribute('title', currentLanguage === 'fr' ? 'Basculer en anglais' : 'Switch to French');
+            }
             
             // Update navigation
             const navLinks = document.querySelectorAll('.nav-link');
