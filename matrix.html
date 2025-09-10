@@ -353,6 +353,7 @@
             text-align: left;
             font-size: 0.8rem;
             font-weight: 500;
+            position: relative;
         }
 
         .nav-menu a:hover {
@@ -394,6 +395,10 @@
             .main-content { padding-top: 0.75rem !important; }
         }
 
+        @media (prefers-reduced-motion: reduce) {
+            .glitch::before { animation: none; }
+        }
+
         
 
         /* Main Content */
@@ -426,6 +431,22 @@
             color: var(--text-primary);
             text-shadow: 0 0 14px var(--accent-glow), 0 0 22px rgba(110,193,255,0.25), 0 0 30px rgba(255,255,255,0.22);
             line-height: 1.1;
+        }
+        .glitch { position: relative; overflow: hidden; }
+        .glitch::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+            transform: skewX(-20deg);
+            animation: sweep 1.2s ease-out 1;
+        }
+        @keyframes sweep {
+            from { left: -150%; }
+            to { left: 150%; }
         }
 
         h2 {
@@ -1542,7 +1563,7 @@
 
                 <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px dashed var(--accent-primary); border-radius: 15px; background: rgba(110, 193, 255, 0.06);">
                     <h3 style="color: var(--accent-primary); margin-bottom: 1.5rem;"> TARGET DESTINATIONS</h3>
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem;">
                         <div style="padding: 1.5rem; border: 1px solid var(--accent-primary); border-radius: 8px; background: rgba(110, 193, 255, 0.05);">
                             <div style="font-size: 2rem; margin-bottom: 0.8rem;">🇸</div>
                             <div style="font-weight: 700; margin-bottom: 0.5rem;">Singapore</div>
