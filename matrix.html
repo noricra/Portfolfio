@@ -2230,6 +2230,7 @@
         }
 
         // Function for quick terminal buttons
+        let currentTypeTimer = null;
         function executeTerminalCommand(cmd) {
             const output = document.getElementById('terminalOutput');
             const commandSpan = document.getElementById('terminalCommand');
@@ -2276,6 +2277,11 @@
                 
                 const command = commands[cmd];
                 if (command) {
+                    // Cancel any previous typing
+                    if (currentTypeTimer) {
+                        clearTimeout(currentTypeTimer);
+                        currentTypeTimer = null;
+                    }
                     typeWriter(output, command.output, 20);
                 }
                 
@@ -2291,14 +2297,16 @@
             const text = html;
             element.innerHTML = '';
             
-            function type() {
+            function step() {
                 if (i < text.length) {
                     element.innerHTML = text.substring(0, i + 1);
                     i++;
-                    setTimeout(type, speed);
+                    currentTypeTimer = setTimeout(step, speed);
+                } else {
+                    currentTypeTimer = null;
                 }
             }
-            type();
+            step();
         }
 
         // Apply Background Patterns to Sections
