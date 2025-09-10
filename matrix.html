@@ -9,19 +9,19 @@
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
         
         :root {
-            --matrix-green: #00ff00;
-            --matrix-dark: #001100;
-            --matrix-glow: rgba(0, 255, 0, 0.3);
-            --neo-red: #ff0040;
-            --morpheus-blue: #0040ff;
-            --accent-blue: #00aaff;
-            --accent-orange: #ff8800;
+            --matrix-green: #9e9e9e; /* neutral primary accent (replacing green) */
+            --matrix-dark: #0a0a0a;
+            --matrix-glow: rgba(158, 158, 158, 0.25);
+            --neo-red: #e53935; /* keep subtle color accents */
+            --morpheus-blue: #3949ab; /* keep subtle color accents */
+            --accent-blue: #90a4ae;
+            --accent-orange: #b0bec5;
             --text-primary: #ffffff;
-            --text-secondary: #cccccc;
-            --text-muted: #888888;
-            --border-subtle: rgba(255, 255, 255, 0.1);
-            --bg-card: rgba(255, 255, 255, 0.02);
-            --bg-hover: rgba(255, 255, 255, 0.05);
+            --text-secondary: #c7c7c7;
+            --text-muted: #9a9a9a;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-hover: rgba(255, 255, 255, 0.06);
         }
 
         * {
@@ -32,7 +32,7 @@
 
         body {
             background: #000000;
-            color: var(--matrix-green);
+            color: #e0e0e0;
             font-family: 'Courier Prime', monospace;
             line-height: 1.6;
             display: flex;
@@ -106,26 +106,26 @@
 
         #home.pattern-section::before {
             background-image: 
-                linear-gradient(rgba(0, 255, 0, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 20px 20px;
         }
 
         #projects.pattern-section::before {
             background-image: 
-                radial-gradient(circle at 25% 25%, rgba(0, 255, 0, 0.05) 2px, transparent 2px),
-                radial-gradient(circle at 75% 75%, rgba(0, 255, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(0deg, transparent 24%, rgba(0, 255, 0, 0.02) 25%, rgba(0, 255, 0, 0.02) 26%, transparent 27%),
-                linear-gradient(90deg, transparent 24%, rgba(0, 255, 0, 0.02) 25%, rgba(0, 255, 0, 0.02) 26%, transparent 27%);
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.06) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.03) 26%, transparent 27%),
+                linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.03) 25%, rgba(255, 255, 255, 0.03) 26%, transparent 27%);
             background-size: 40px 40px;
             animation: circuit-pulse 6s ease-in-out infinite;
         }
 
         #skills.pattern-section::before {
             background-image: 
-                radial-gradient(circle at 20% 80%, rgba(0, 255, 0, 0.04) 2px, transparent 2px),
-                radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.03) 1px, transparent 1px),
-                radial-gradient(circle at 40% 40%, rgba(0, 255, 0, 0.02) 1px, transparent 1px);
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
             background-size: 60px 60px, 40px 40px, 30px 30px;
         }
 
@@ -148,7 +148,7 @@
 
         .matrix-char {
             position: absolute;
-            color: var(--matrix-green);
+            color: #bdbdbd;
             font-family: 'Courier Prime', monospace;
             font-size: 12px;
             animation: fall linear infinite;
@@ -185,7 +185,7 @@
         .progress-bar {
             width: 300px;
             height: 4px;
-            background: rgba(0, 255, 0, 0.2);
+            background: rgba(255, 255, 255, 0.18);
             border-radius: 2px;
             overflow: hidden;
         }
@@ -198,7 +198,7 @@
 
         .progress-fill {
             height: 100%;
-            background: var(--matrix-green);
+            background: #e0e0e0;
             width: 0;
             animation: loading 3s ease-in-out forwards;
         }
@@ -208,8 +208,8 @@
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 20px var(--matrix-green); }
-            to { text-shadow: 0 0 40px var(--matrix-green); }
+            from { text-shadow: 0 0 20px rgba(255,255,255,0.25); }
+            to { text-shadow: 0 0 40px rgba(255,255,255,0.35); }
         }
 
         /* Premium Sidebar Navigation */
@@ -220,10 +220,10 @@
             width: 240px;
             height: 100vh;
             background: 
-                linear-gradient(180deg, rgba(0, 20, 0, 0.98), rgba(0, 10, 0, 0.95)),
-                radial-gradient(circle at top left, rgba(0, 255, 0, 0.03), transparent 60%);
+                linear-gradient(180deg, rgba(10, 10, 10, 0.98), rgba(5, 5, 5, 0.95)),
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 60%);
             backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(0, 255, 0, 0.3);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
             z-index: 1000;
             padding: 1.5rem;
             display: flex;
@@ -239,7 +239,7 @@
             right: 0;
             width: 1px;
             height: 100%;
-            background: linear-gradient(180deg, var(--matrix-green), transparent, var(--matrix-green));
+            background: linear-gradient(180deg, rgba(255,255,255,0.45), transparent, rgba(255,255,255,0.45));
             opacity: 0.5;
         }
 
@@ -247,15 +247,15 @@
             font-family: 'Orbitron', monospace;
             font-weight: 700;
             font-size: 1.1rem;
-            color: var(--matrix-green);
+            color: #eeeeee;
             text-align: center;
             margin-bottom: 1.5rem;
             padding: 0.8rem;
-            border: 1px solid rgba(0, 255, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
             background: 
-                linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.01)),
-                radial-gradient(circle at center, rgba(0, 255, 0, 0.03), transparent);
+                linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+                radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent);
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
@@ -263,8 +263,8 @@
 
 
         .profile-card {
-            background: rgba(0, 255, 0, 0.02);
-            border: 1px solid rgba(0, 255, 0, 0.3);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 12px;
             padding: 1.2rem;
             text-align: center;
@@ -275,17 +275,17 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 2px solid rgba(0, 255, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.18);
             margin: 0 auto 0.8rem;
-            background: linear-gradient(45deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.8));
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.8));
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .profile-image:hover {
-            border-color: rgba(0, 255, 0, 0.7);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
         }
 
         .profile-name {
@@ -302,11 +302,11 @@
         }
 
         .profile-status {
-            background: rgba(0, 255, 0, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             padding: 0.4rem;
             border-radius: 4px;
             font-size: 0.7rem;
-            border: 1px solid rgba(0, 255, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .nav-menu {
@@ -319,7 +319,7 @@
         }
 
         .nav-menu a {
-            color: var(--matrix-green);
+            color: #e0e0e0;
             text-decoration: none;
             font-family: 'Orbitron', monospace;
             transition: all 0.3s ease;
@@ -333,14 +333,14 @@
         }
 
         .nav-menu a:hover {
-            background: rgba(0, 255, 0, 0.1);
-            border-color: var(--matrix-green);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
             transform: translateX(3px);
         }
 
         .nav-menu a.active {
-            background: rgba(0, 255, 0, 0.15);
-            border-color: var(--matrix-green);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         /* Pills Navigation */
@@ -406,7 +406,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--text-primary);
-            text-shadow: 0 0 20px var(--matrix-green);
+            text-shadow: 0 0 18px rgba(255,255,255,0.25);
             line-height: 1.1;
         }
 
@@ -417,7 +417,7 @@
             margin-bottom: 1.5rem;
             font-weight: 600;
             letter-spacing: 1px;
-            color: var(--matrix-green);
+            color: #e0e0e0;
             position: relative;
         }
 
@@ -429,7 +429,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 2px;
-            background: linear-gradient(90deg, transparent, var(--matrix-green), transparent);
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
         }
 
         h3 {
@@ -444,8 +444,8 @@
         /* Premium Content Cards */
         .content-card {
             background: 
-                linear-gradient(135deg, var(--bg-card), rgba(0, 20, 0, 0.1)),
-                radial-gradient(circle at top right, rgba(0, 255, 0, 0.02), transparent 70%);
+                linear-gradient(135deg, var(--bg-card), rgba(255, 255, 255, 0.02)),
+                radial-gradient(circle at top right, rgba(255, 255, 255, 0.03), transparent 70%);
             border: 1px solid var(--border-subtle);
             border-radius: 16px;
             padding: 2rem;
@@ -463,21 +463,21 @@
             right: 0;
             width: 1px;
             height: 100%;
-            background: linear-gradient(180deg, var(--matrix-green), transparent);
+            background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
         .content-card:hover {
-            border-color: rgba(0, 255, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.16);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             transform: translateY(-2px);
         }
 
         /* Refined Terminal Effect */
         .terminal {
-            background: rgba(0, 10, 0, 0.6);
-            border: 1px solid rgba(0, 255, 0, 0.4);
+            background: rgba(20, 20, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
             padding: 1.5rem;
             margin: 1.5rem 0;
@@ -490,7 +490,7 @@
             gap: 0.5rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid var(--matrix-green);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .terminal-dot {
@@ -503,11 +503,11 @@
 
         .dot-red { background: var(--neo-red); }
         .dot-yellow { background: #ffff00; }
-        .dot-green { background: var(--matrix-green); }
+        .dot-green { background: #9e9e9e; }
 
         .typing-text {
             overflow: hidden;
-            border-right: 2px solid var(--matrix-green);
+            border-right: 2px solid #9e9e9e;
             white-space: nowrap;
             animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
         }
@@ -519,13 +519,13 @@
 
         @keyframes blink-caret {
             from, to { border-color: transparent }
-            50% { border-color: var(--matrix-green) }
+            50% { border-color: #9e9e9e }
         }
 
         /* Interactive Terminal Styles */
         .terminal-cursor {
             animation: blink-cursor 1s infinite;
-            color: var(--matrix-green);
+            color: #bdbdbd;
         }
 
         @keyframes blink-cursor {
@@ -566,9 +566,9 @@
         .project-image {
             width: 150px;
             height: 150px;
-            border: 1px solid rgba(0, 255, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.14);
             border-radius: 12px;
-            background: linear-gradient(45deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.03));
+            background: linear-gradient(45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -579,7 +579,7 @@
 
         .project-image:hover {
             transform: scale(1.02);
-            border-color: rgba(0, 255, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.24);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -601,21 +601,21 @@
         }
 
         .tech-tag {
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.08), rgba(0, 255, 0, 0.02));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             padding: 0.4rem 0.9rem;
             border-radius: 20px;
             font-size: 0.75rem;
             font-weight: 500;
-            border: 1px solid rgba(0, 255, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             color: var(--text-primary);
             transition: all 0.3s ease;
         }
 
         .tech-tag:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 0, 0.15), rgba(0, 255, 0, 0.05));
-            border-color: rgba(0, 255, 0, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+            border-color: rgba(255, 255, 255, 0.2);
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 255, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.08);
         }
 
         /* Skills Grid */
@@ -631,14 +631,14 @@
             padding: 1.5rem;
             border: 1px solid var(--border-subtle);
             border-radius: 12px;
-            background: linear-gradient(135deg, var(--bg-card), rgba(0, 20, 0, 0.05));
+            background: linear-gradient(135deg, var(--bg-card), rgba(255, 255, 255, 0.02));
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
         .skill-card:hover {
-            border-color: rgba(0, 255, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.14);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
@@ -652,7 +652,7 @@
            .skill-icon svg {
             width: 60px;                        /* largeur du SVG à l'intérieur du cadre */
             height: 60px;                       /* hauteur du SVG */
-            fill: var(--matrix-green);         /* couleur principale du SVG */
+            fill: #bdbdbd;         /* couleur principale du SVG */
         }
 
         /* Travel Grid */
@@ -666,14 +666,14 @@
         .country-card {
             text-align: center;
             padding: 1rem;
-            border: 1px solid var(--matrix-green);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
-            background: rgba(0, 255, 0, 0.03);
+            background: rgba(255, 255, 255, 0.03);
             transition: all 0.3s ease;
         }
 
         .country-card:hover {
-            background: rgba(0, 255, 0, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             transform: translateY(-3px);
         }
 
@@ -688,14 +688,14 @@
         .contact-card {
             text-align: center;
             padding: 2rem;
-            border: 1px solid var(--matrix-green);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 10px;
-            background: rgba(0, 255, 0, 0.03);
+            background: rgba(255, 255, 255, 0.03);
             transition: all 0.3s ease;
         }
 
         .contact-card:hover {
-            background: rgba(0, 255, 0, 0.08);
+            background: rgba(255, 255, 255, 0.06);
             transform: translateY(-3px);
         }
 
@@ -711,8 +711,8 @@
             font-style: italic;
             margin: 3rem auto;
             padding: 2rem;
-            border: 1px dashed var(--matrix-green);
-            background: rgba(0, 255, 0, 0.03);
+            border: 1px dashed rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 10px;
             max-width: 600px;
             position: relative;
@@ -724,7 +724,7 @@
             position: absolute;
             top: -5px;
             left: 15px;
-            color: var(--matrix-green);
+            color: #bdbdbd;
             opacity: 0.5;
         }
 
@@ -780,21 +780,21 @@
             opacity: 0.1;
             font-size: 0.7rem;
             font-family: 'Courier Prime', monospace;
-            color: var(--matrix-green);
+            color: #9e9e9e;
             z-index: -1;
         }
 
         /* Matrix Number Styling */
         .matrix-number {
-            color: var(--matrix-green);
+            color: #bdbdbd;
             font-family: 'Courier Prime', monospace;
             font-weight: 700;
         }
 
         /* Premium Button Styling */
         .matrix-button {
-            background: linear-gradient(135deg, var(--matrix-green), rgba(0, 200, 0, 0.9));
-            color: #000;
+            background: linear-gradient(135deg, #f5f5f5, #c2c2c2);
+            color: #111;
             border: none;
             padding: 1rem 2rem;
             border-radius: 8px;
@@ -806,13 +806,13 @@
             position: relative;
             overflow: hidden;
             box-shadow: 
-                0 4px 16px rgba(0, 255, 0, 0.2),
+                0 4px 16px rgba(0, 0, 0, 0.25),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
         .matrix-button:hover {
-            background: rgba(0, 255, 0, 0.9);
-            box-shadow: 0 4px 16px rgba(0, 255, 0, 0.2);
+            background: #e0e0e0;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
             transform: translateY(-2px);
         }
 
@@ -822,39 +822,39 @@
 
         /* Enhanced Light Mode Styles */
         body.light-mode {
-            background: #f8fff8 !important;
-            color: #003300 !important;
+            background: #f5f5f5 !important;
+            color: #1a1a1a !important;
         }
 
         body.light-mode h1 {
-            color: #002200 !important;
-            text-shadow: 0 0 20px rgba(0, 102, 0, 0.6) !important;
+            color: #111 !important;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.1) !important;
         }
 
         body.light-mode h2 {
-            color: #004400 !important;
+            color: #222 !important;
         }
 
         body.light-mode h3 {
-            color: #002200 !important;
+            color: #333 !important;
         }
 
         body.light-mode .sidebar {
-            background: rgba(248, 255, 248, 0.95) !important;
-            border-color: rgba(0, 102, 0, 0.4) !important;
-            color: #003300 !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            color: #222 !important;
         }
 
         body.light-mode .content-card {
-            background: rgba(248, 255, 248, 0.8) !important;
-            border-color: rgba(0, 102, 0, 0.4) !important;
-            color: #003300 !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            color: #222 !important;
         }
 
         body.light-mode .terminal {
-            background: rgba(240, 255, 240, 0.9) !important;
-            border-color: rgba(0, 102, 0, 0.4) !important;
-            color: #003300 !important;
+            background: rgba(250, 250, 250, 0.9) !important;
+            border-color: rgba(0, 0, 0, 0.08) !important;
+            color: #222 !important;
         }
 
         body.light-mode .matrix-char {
@@ -869,23 +869,23 @@
         /* Dark Mode Styles */
         body.dark-mode {
             background: #000000 !important;
-            color: #00ff00 !important;
+            color: #e0e0e0 !important;
         }
 
         body.dark-mode .sidebar {
-            background: rgba(0, 20, 0, 0.95) !important;
-            border-color: rgba(0, 255, 0, 0.3) !important;
+            background: rgba(10, 10, 10, 0.95) !important;
+            border-color: rgba(255, 255, 255, 0.08) !important;
         }
 
         body.dark-mode .content-card {
-            background: rgba(0, 15, 0, 0.2) !important;
-            border-color: rgba(0, 255, 0, 0.3) !important;
-            color: #00ff00 !important;
+            background: rgba(255, 255, 255, 0.03) !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+            color: #e0e0e0 !important;
         }
 
         body.dark-mode .terminal {
-            background: rgba(0, 10, 0, 0.6) !important;
-            border-color: rgba(0, 255, 0, 0.4) !important;
+            background: rgba(20, 20, 20, 0.6) !important;
+            border-color: rgba(255, 255, 255, 0.12) !important;
         }
 
         body.dark-mode .matrix-char {
@@ -925,7 +925,7 @@
                 width: 100% !important;
                 height: auto !important;
                 border-right: none !important;
-                border-bottom: 1px solid rgba(0, 255, 0, 0.3) !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
                 padding: 1rem !important;
                 flex-direction: row !important;
                 align-items: center !important;
@@ -1059,6 +1059,40 @@
                 margin: 0 auto !important;
             }
         }
+
+        /* Extra small devices */
+        @media (max-width: 480px) {
+            .sidebar {
+                padding: 0.75rem !important;
+                gap: 0.5rem !important;
+            }
+            .logo {
+                font-size: 0.9rem;
+                padding: 0.5rem;
+            }
+            .profile-image {
+                width: 48px;
+                height: 48px;
+            }
+            .nav-menu a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.65rem;
+            }
+            .main-content {
+                padding: 0.75rem !important;
+            }
+            .content-card {
+                padding: 1rem;
+            }
+            .project-image {
+                width: 100px !important;
+                height: 100px !important;
+                font-size: 2rem;
+            }
+            h1 { font-size: 1.2rem !important; }
+            h2 { font-size: 1rem !important; }
+            h3 { font-size: 0.95rem !important; }
+        }
     </style>
 </head>
 <body>
@@ -1120,13 +1154,13 @@
     </div>
 
     <!-- R/B Indicators - Desktop Only -->
-    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 0, 0.4); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
-        <div style="margin-bottom: 0.4rem; color: var(--matrix-green); font-weight: 700; text-align: center;">MODES</div>
+    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.15); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
+        <div style="margin-bottom: 0.4rem; color: #e0e0e0; font-weight: 700; text-align: center;">MODES</div>
         <div style="display: flex; gap: 1.5rem;">
-            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="showMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
+            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="showMatrix()" onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'" onmouseout="this.style.background=''">
                 <strong>R</strong> = ☀️ Light
             </div>
-            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="hideMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
+            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="hideMatrix()" onmouseover="this.style.background='rgba(255, 255, 255, 0.08)'" onmouseout="this.style.background=''">
                 <strong>B</strong> = 🌙 Dark
             </div>
         </div>
@@ -1140,12 +1174,12 @@
             <div style="display: flex; align-items: flex-start; margin-bottom: 1.5rem; gap: 2rem;">
                 <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem;">
                     <!-- Language Toggle -->
-                    <button id="langToggle" onclick="toggleLanguage()" style="background: rgba(0, 255, 0, 0.08); border: 1px solid rgba(0, 255, 0, 0.3); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Orbitron', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.3s ease;">
+                    <button id="langToggle" onclick="toggleLanguage()" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Orbitron', monospace; font-size: 0.7rem; cursor: pointer; transition: all 0.3s ease;">
                          EN
                     </button>
                     
                     <!-- UTC Clock -->
-                    <div style="padding: 0.4rem 0.8rem; border: 1px solid rgba(0, 255, 0, 0.25); border-radius: 5px; background: rgba(0, 255, 0, 0.02); text-align: center;">
+                    <div style="padding: 0.4rem 0.8rem; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 5px; background: rgba(255, 255, 255, 0.02); text-align: center;">
                         <div style="font-size: 0.6rem; opacity: 0.6; margin-bottom: 0.1rem;">UTC</div>
                         <div id="utcClock" style="font-family: 'Courier Prime', monospace; font-size: 0.7rem; font-weight: 700;">--:--:--</div>
                     </div>
@@ -1163,19 +1197,19 @@
             <div class="content-card" style="text-align: center;">
                 <div style="display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 2rem; align-items: center;">
                     <div style="text-align: center;">
-                        <div style="width: 120px; height: 120px; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(0, 255, 0, 0.02), rgba(0, 0, 0, 0.6));"></div>
+                        <div style="width: 120px; height: 120px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.6));"></div>
                     </div>
                     
                     <div style="text-align: center;">
-                        <div style="width: 200px; height: 200px; border: 2px solid var(--matrix-green); border-radius: 15px; margin: 0 auto; background: linear-gradient(135deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.8)); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);"></div>
+                        <div style="width: 200px; height: 200px; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; margin: 0 auto; background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.8)); box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);"></div>
                     </div>
                     
                     <div style="text-align: center;">
-                        <div style="width: 120px; height: 120px; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(0, 255, 0, 0.02), rgba(0, 0, 0, 0.6));"></div>
+                        <div style="width: 120px; height: 120px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 12px; margin: 0 auto; background: linear-gradient(45deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.6));"></div>
                     </div>
                 </div>
                 
-                <div style="margin-top: 2rem; padding: 1.5rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                <div style="margin-top: 2rem; padding: 1.5rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; background: rgba(255, 255, 255, 0.02);">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: center; margin-bottom: 1.5rem;">
                         <div>
                             <div style="color: var(--matrix-green); font-weight: 700; font-size: 1.1rem;"> Contact</div>
@@ -1204,7 +1238,7 @@
             
             <div class="content-card">
                 <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem;">
-                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; background: rgba(255, 255, 255, 0.02);">
                         <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
                         <h3>Double Bachelor's Degree</h3>
                         <p>Computer Science (L3) + Mathematics (L2)</p>
@@ -1212,7 +1246,7 @@
                         <div style="margin-top: 1rem; color: var(--matrix-green); font-weight: 700;">2023-2025</div>
                     </div>
                     
-                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                    <div style="text-align: center; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; background: rgba(255, 255, 255, 0.02);">
                         <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
                         <h3>Academic Excellence & Leadership</h3>
                         <p>Bac Mention Bien (2023)<br>Class Representative 3 Years</p>
@@ -1242,7 +1276,7 @@
                             <span class="tech-tag">Telegram API</span>
                             <span class="tech-tag">Payment Processing</span>
                         </div>
-                        <div style="color: var(--matrix-green); font-weight: 700;">Status: ACTIVE</div>
+                        <div style="color: #e0e0e0; font-weight: 700;">Status: ACTIVE</div>
                     </div>
                 </div>
             </div>
@@ -1261,7 +1295,7 @@
                             <span class="tech-tag">Selenium</span>
                             <span class="tech-tag">Automation</span>
                         </div>
-                        <div style="color: var(--matrix-green); font-weight: 700;">Status: OPERATIONAL</div>
+                        <div style="color: #e0e0e0; font-weight: 700;">Status: OPERATIONAL</div>
                     </div>
                 </div>
             </div>
@@ -1314,7 +1348,7 @@
                         
                         <!-- Menu déroulant -->
                         <div style="margin: 1rem 0;">
-                            <select style="background: rgba(0, 0, 0, 0.8); color: var(--matrix-green); border: 1px solid var(--matrix-green); padding: 0.5rem; border-radius: 4px; font-family: 'Courier New', monospace;" onchange="showProject(this.value)">
+                            <select style="background: rgba(0, 0, 0, 0.8); color: #e0e0e0; border: 1px solid rgba(255, 255, 255, 0.15); padding: 0.5rem; border-radius: 4px; font-family: 'Courier New', monospace;" onchange="showProject(this.value)">
                                 <option value="">Select Project Details...</option>
                                 <option value="viral">Viral Content Strategy</option>
                                 <option value="ecommerce">E-Commerce Operations</option>
@@ -1322,20 +1356,20 @@
                         </div>
             
                         <!-- Projet 1: Viral Content -->
-                        <div id="viral-project" style="display: none; margin-top: 1rem; padding: 1rem; border: 1px solid var(--matrix-green); border-radius: 8px; background: rgba(0, 255, 0, 0.05);">
-                            <h4 style="color: var(--matrix-green);">Viral Fitness & Lifestyle Content</h4>
+                        <div id="viral-project" style="display: none; margin-top: 1rem; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; background: rgba(255, 255, 255, 0.05);">
+                            <h4 style="color: #e0e0e0;">Viral Fitness & Lifestyle Content</h4>
                             <p style="color: var(--text-secondary);">Educational fitness and hairstyling content, achieving exceptional organic reach through strategic algorithm optimization and active community engagement.</p>
                             <div class="tech-tags">
                                 <span class="tech-tag">Content Creation</span>
                                 <span class="tech-tag">Algorithm Comprehension</span>
                                 <span class="tech-tag">Community Building</span>
                             </div>
-                            <div style="color: var(--matrix-green); font-weight: 700; margin-top: 0.5rem;">Result: 2M+ TOTAL VIEWS | 215K+ LIKES</div>
+                            <div style="color: #e0e0e0; font-weight: 700; margin-top: 0.5rem;">Result: 2M+ TOTAL VIEWS | 215K+ LIKES</div>
                         </div>
             
                         <!-- Projet 2: E-Commerce -->
-                        <div id="ecommerce-project" style="display: none; margin-top: 1rem; padding: 1rem; border: 1px solid var(--matrix-green); border-radius: 8px; background: rgba(0, 255, 0, 0.05);">
-                            <h4 style="color: var(--matrix-green);">Multi-Platform E-Commerce Venture</h4>
+                        <div id="ecommerce-project" style="display: none; margin-top: 1rem; padding: 1rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; background: rgba(255, 255, 255, 0.05);">
+                            <h4 style="color: #e0e0e0;">Multi-Platform E-Commerce Venture</h4>
                             <p style="color: var(--text-secondary);">Reselling business across Vinted, StockX, and sneaker marketplaces. Discord bot automation for limited drops and brand management.</p>
                             <div class="tech-tags">
                     
@@ -1343,7 +1377,7 @@
                                 <span class="tech-tag">Multi-Platform</span>
                                 <span class="tech-tag">Automation</span>
                             </div>
-                            <div style="color: var(--matrix-green); font-weight: 700; margin-top: 0.5rem;">Result: 4.9/5 RATING | 100+ REVIEWS </div>
+                            <div style="color: #e0e0e0; font-weight: 700; margin-top: 0.5rem;">Result: 4.9/5 RATING | 100+ REVIEWS </div>
                         </div>
             
                         <script>
@@ -1366,7 +1400,7 @@
             <!-- Additional Projects Gallery -->
 
             <div class="content-card">
-                <h3 style="text-align: center; margin-bottom: 2rem; color: var(--matrix-green);"> PROJECT SHOWCASE</h3>
+                <h3 style="text-align: center; margin-bottom: 2rem; color: #e0e0e0;"> PROJECT SHOWCASE</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem;">
                     <div style="text-align: center;">
                         <div style="width: 140px; height: 140px; border: 1px solid var(--border-subtle); border-radius: 10px; margin: 0 auto; background: linear-gradient(135deg, var(--bg-card), rgba(0, 0, 0, 0.6));"></div>
@@ -1398,9 +1432,9 @@
                     <div id="skillsTerminal">
                         <span class="matrix-number">birante@matrix:~$</span> <span id="terminalCommand"></span><span class="terminal-cursor">|</span><br>
                         <div id="terminalOutput" style="margin-top: 0.5rem;">
-                            > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
-                            > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
-                            > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter
+                            > <span style="color: #e0e0e0;">INTERACTIVE TERMINAL READY</span><br>
+                            > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
+                            > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter
                         </div>
                     </div>
                 </div>
@@ -1410,13 +1444,13 @@
                          Click on the terminal and type commands, or use quick buttons:
                     </div>
                     <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <button onclick="executeTerminalCommand('skills')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button onclick="executeTerminalCommand('skills')" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
                              skills
                         </button>
-                        <button onclick="executeTerminalCommand('projects')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button onclick="executeTerminalCommand('projects')" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
                              projects
                         </button>
-                        <button onclick="executeTerminalCommand('status')" style="background: rgba(0, 255, 0, 0.1); border: 1px solid rgba(0, 255, 0, 0.4); color: var(--matrix-green); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button onclick="executeTerminalCommand('status')" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
                              status
                         </button>
                         <button onclick="executeTerminalCommand('clear')" style="background: rgba(255, 0, 64, 0.1); border: 1px solid rgba(255, 0, 64, 0.4); color: var(--neo-red); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
@@ -1484,7 +1518,7 @@
                     </div>
 
                     <div class="skill-card">
-                        <div style="width: 60px; height: 60px; border: 1px solid var(--matrix-green); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(0, 255, 0, 0.1), rgba(0, 0, 0, 0.6));">
+                        <div style="width: 60px; height: 60px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; margin: 0 auto 1rem; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.6));">
                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAAFOElEQVR4nO2Zf0wTZxjHX9T9cEE3t5glc3+4uP2zZcl0yaITxpiGkGAcXunYUMRfQdCY4dTxh0CnmWSoBAjTBJ1LzKYCU4wumjmjm2i4q4AMFZhVgdJSKC0FWrDQX9/lPcKESu+u7QH9g2/yJJdr797P932f53nvcoRMa1qhp886C1+P1RXd2Gg+495oPu2KaSu4FqE5MJ+EupRQzlzRkv/jBtNpV3pvBUZHivmUK1p7+Jd376ueJ6Go6NaDO77qOjngDe4dSV0n7Z9qD2WSUFFES24sYzhmEAP3DqbjWHdES178lIEvfZj/dpyuuCat55xf4KMjrbcCq9uPapY/3P/epIHHaormxuqLzm3uLvUECu4dWyxlnti2wqtRdapXJo4cCFupLdifbPrVIRd4ulesN59yxrQVlaigmiEre2RzbsoXnSf6xABybddxabAJD5wmdLitGPK4+KDH9Bz9jf5H7D6Jxp/7P2nJ2xY0eJT2cES8oeSx0GDbeitwfEANo9sGqep023BsQM1fK3TvhI4TndHNuTF+g8e0HX81rr2Y2ypSoDnWK2hxWRComl3dyLL+ITgGZYjTF3Mfm/LmSDawpqOkVWyZD9tuwOoZRLDq9wyhoP+m4FgRHYV48XHGv5INpFp+E7xhQX8lnHBDLjnhRn5/5TPjxJtOILx1N4jhW5D23ZBsQAieLrlNhpkfbyVyrFf4MTb0lOIN7V6Q9j3D8CMRrAFadMHkvJgeucx4X3cAYbpdY8HlMkC7jZhoXVywN+CA7Rq+7rvAB22dF+0NgiundrRhmfnI+OByGKCzT9ufkGodeuzsu+gz/ehvdxztY67RuXqR3FOKMEOmMHywBugsisGL9fWRiaAmBjwOqKx/YnbHXnFwOQzQXVQobYRmfnSk9Z7Dh/o8vGn8Xjq4HAboo4Av0ZyXAh9pKMQs7Tf+gxtkMCD0qEALVgg83vgT5oz082BCqsaDGPQ4fRrI8JE+Gyw++vlUGLALGPDOf/qiskKbj9m1ySCNm0H0IWDAKDGFVhuO4rW6LSCc4mncVoI82Br8SgRXxF0+Dfxub6Qv61jUsHMsuHfUfAnyaPvUGLgk0EYtrn7Mq00Rhh8V4fWb8JGpeHINiG1kZ7tZhHEJovAzuASct6jhgQfl9nosMuZNjgEpjxLUxNzqdT7hX65ORoWFG3ONAy6UDHCY37lvYg3QKOz7G2LqcvQhW3cGS+7tQXj1WsypXscf5+hKYXJafaeh+wkyrZcxcyIMbOouxeKH2Zh1OxGs7QEmSresTQirTgTRpMljYGvPWUS15mF2zdr/02BhXTo/y3LL7LRi0T/bn6bcnSSQ5h2BGaCvlKvaj2Be3aZxczmqMRtDAhubvxryOBHZkDV+7dSvB9FmDO8hUrWgftt5sW6yvGEvjI5eWWY+ulEl3L3UCSB3U65LNkBqUp8jrGIfYRUDQjd+qy4dVUHUxC1rE5+SgvCUgbJcjn2B+K0q5QLCKUoIx7h8DUB7v0JzCE1P9JLBG5/owGgOioF7CMuUE/bzhf6DP2NkzRLCMX+JpdXie7vxnb4M1/ru8oZsLjsf9JieU+nK8MHdXeK7NatgiVq5LHjwZ4wwKwnL3Jf6yBBAaIg6QUkmVLQ+OCaVcEyXfOCMhbCKzMDyPFDdTJpHOOYHwikGAwZnGQdfY5XKKfwAyDLvDBebwuOngatErZi8LzOi4tYsJSxTJQG8llQpo0hICiSML0JO0TJOnuv52ilXziQhr5pVLxGWySKs4vFwMFn8uWlNi4Sc/gOLOaOTAbf0AgAAAABJRU5ErkJggg==" alt="c-programming" style = "margin-top: 3px;"/>
                         </div>
                         <h3>Core Programming</h3>
@@ -1504,8 +1538,8 @@
             <div class="content-card">
                 <div style="text-align: center; margin-bottom: 2rem;">
                     <div style="font-size: 1.2rem; margin-bottom: 1rem;">
-                        <span style="color: var(--matrix-green); font-weight: 700;">10+</span> Countries | 
-                        <span style="color: var(--matrix-green); font-weight: 700;">4</span> Continents
+                        <span style="color: #e0e0e0; font-weight: 700;">10+</span> Countries | 
+                        <span style="color: #e0e0e0; font-weight: 700;">4</span> Continents
                     </div>
                     <div style="opacity: 0.8;">Cultural adaptability through diverse travel experiences</div>
                 </div>
@@ -1576,7 +1610,7 @@
                     <div class="contact-card">
                         <span class="contact-icon"></span>
                         <h3>Email</h3>
-                        <a href="mailto:soumare.birante05@gmail.com" style="color: var(--matrix-green); text-decoration: none; font-weight: 700;">
+                        <a href="mailto:soumare.birante05@gmail.com" style="color: #e0e0e0; text-decoration: none; font-weight: 700;">
                             soumare.birante05@gmail.com
                         </a>
                         <div style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Primary contact</div>
@@ -1585,14 +1619,14 @@
                     <div class="contact-card">
                         <span class="contact-icon"></span>
                         <h3>Phone</h3>
-                        <a href="tel:+33644756028" style="color: var(--matrix-green); text-decoration: none; font-weight: 700;">
+                        <a href="tel:+33644756028" style="color: #e0e0e0; text-decoration: none; font-weight: 700;">
                             +33 6 44 75 60 28
                         </a>
                         <div style="margin-top: 0.5rem; opacity: 0.7; font-size: 0.9rem;">Direct line</div>
                     </div>
                 </div>
                 
-                <div style="text-align: center; padding: 2rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 10px; background: rgba(0, 255, 0, 0.02);">
+                <div style="text-align: center; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 10px; background: rgba(255, 255, 255, 0.02);">
                     <span style="font-size: 2.5rem; margin-bottom: 1rem; display: block;"></span>
                     <h3>Availability & Mission</h3>
                     <div style="font-weight: 700; margin: 1rem 0;">3-6 Month International Internships</div>
@@ -1600,14 +1634,14 @@
                     <div style="color: var(--neo-red); font-weight: 700;">STATUS: READY FOR ADVENTURE </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px solid var(--matrix-green); border-radius: 15px; background: rgba(0, 255, 0, 0.05);">
-                    <div style="font-size: 1.3rem; margin-bottom: 1rem; font-family: 'Orbitron', monospace; color: var(--matrix-green);">
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem; border: 2px solid rgba(255, 255, 255, 0.2); border-radius: 15px; background: rgba(255, 255, 255, 0.05);">
+                    <div style="font-size: 1.3rem; margin-bottom: 1rem; font-family: 'Orbitron', monospace; color: #e0e0e0;">
                         DOWNLOAD CV
                     </div>
                     <div style="margin-bottom: 1rem; opacity: 0.8;">
                         Traditional format available for corporate systems
                     </div>
-                    <div style="margin-bottom: 1.5rem; padding: 0.8rem; border: 1px solid rgba(0, 255, 0, 0.3); border-radius: 8px; background: rgba(0, 255, 0, 0.02); font-size: 0.9rem;">
+                    <div style="margin-bottom: 1.5rem; padding: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; background: rgba(255, 255, 255, 0.02); font-size: 0.9rem;">
                         <div style="margin-bottom: 0.3rem; font-weight: 700;"> TIP: Switch viewing modes</div>
                         <div><strong>R</strong> = Light Mode | <strong>B</strong> = Dark Mode</div>
                     </div>
@@ -1916,8 +1950,8 @@
         // Simplified Light/Dark Mode Functions
         function showMatrix() {
             // Light Mode (R key) - White background
-            document.documentElement.style.setProperty('--matrix-green', '#006600');
-            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 102, 0, 0.3)');
+            document.documentElement.style.setProperty('--matrix-green', '#9e9e9e');
+            document.documentElement.style.setProperty('--matrix-glow', 'rgba(158, 158, 158, 0.25)');
             document.documentElement.style.setProperty('--neo-red', '#cc0033');
             document.documentElement.style.setProperty('--morpheus-blue', '#003399');
             
@@ -1929,8 +1963,8 @@
 
         function hideMatrix() {
             // Dark Mode (B key) - Original dark
-            document.documentElement.style.setProperty('--matrix-green', '#00ff00');
-            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 255, 0, 0.3)');
+            document.documentElement.style.setProperty('--matrix-green', '#bdbdbd');
+            document.documentElement.style.setProperty('--matrix-glow', 'rgba(189, 189, 189, 0.25)');
             document.documentElement.style.setProperty('--neo-red', '#ff0040');
             document.documentElement.style.setProperty('--morpheus-blue', '#0040ff');
             
@@ -1970,7 +2004,7 @@
         function downloadCV() {
             const button = event.target;
             button.disabled = true;
-            button.style.background = 'rgba(0, 255, 0, 0.3)';
+            button.style.background = 'rgba(255, 255, 255, 0.3)';
             button.innerHTML = ' PREPARING...';
             
             // Create progress overlay
@@ -1994,8 +2028,8 @@
             overlay.innerHTML = `
                 <div style="font-size: 1.2rem; margin-bottom: 1rem;"> EXTRACTING MATRIX DATA</div>
                 <div style="margin-bottom: 1.5rem;">
-                    <div style="width: 200px; height: 6px; background: rgba(0, 255, 0, 0.2); border-radius: 3px; margin: 0 auto;">
-                        <div id="download-progress" style="width: 0%; height: 100%; background: var(--matrix-green); border-radius: 3px; transition: width 0.3s ease;"></div>
+                    <div style="width: 200px; height: 6px; background: rgba(255, 255, 255, 0.2); border-radius: 3px; margin: 0 auto;">
+                        <div id="download-progress" style="width: 0%; height: 100%; background: #e0e0e0; border-radius: 3px; transition: width 0.3s ease;"></div>
                     </div>
                 </div>
                 <div id="download-status" style="font-size: 0.9rem; opacity: 0.8;">Initializing...</div>
@@ -2082,7 +2116,7 @@
             
             const commands = {
                 skills: {
-                    output: `> <span style="color: var(--matrix-green);">TECHNICAL SKILLS MATRIX</span><br>
+                    output: `> <span style="color: #e0e0e0;">TECHNICAL SKILLS MATRIX</span><br>
                     > Python: Intermediate (Telegram Bots, Automation)<br>
                     > Web Tech: Learning (HTML, CSS, JS, Selenium)<br>
                     > Database: Foundation (SQL fundamentals)<br>
@@ -2092,18 +2126,18 @@
                     > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
                 },
                 projects: {
-                    output: `> <span style="color: var(--matrix-green);">PROJECT STATUS</span><br>
-                    > [01] Telegram Bot + Payment API: <span style="color: var(--matrix-green);">OPERATIONAL</span><br>
-                    > [02] Web Automation Scripts: <span style="color: var(--matrix-green);">ACTIVE</span><br>
-                    > [03] 3D Community Projects: <span style="color: var(--matrix-green);">COMPLETED</span><br>
-                    > [04] Content Creation: <span style="color: var(--matrix-green);">VIRAL</span><br>
-                    > Total projects: <span style="color: var(--matrix-green);">4+</span><br>`
+                    output: `> <span style="color: #e0e0e0;">PROJECT STATUS</span><br>
+                    > [01] Telegram Bot + Payment API: <span style="color: #e0e0e0;">OPERATIONAL</span><br>
+                    > [02] Web Automation Scripts: <span style="color: #e0e0e0;">ACTIVE</span><br>
+                    > [03] 3D Community Projects: <span style="color: #e0e0e0;">COMPLETED</span><br>
+                    > [04] Content Creation: <span style="color: #e0e0e0;">VIRAL</span><br>
+                    > Total projects: <span style="color: #e0e0e0;">4+</span><br>`
                 },
                 status: {
-                    output: `> <span style="color: var(--matrix-green);">SYSTEM STATUS</span><br>
+                    output: `> <span style="color: #e0e0e0;">SYSTEM STATUS</span><br>
                     > Name: Birante Soumare<br>
-                    > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
-                    > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
+                    > Status: <span style="color: #e0e0e0;">ONLINE</span><br>
+                    > Mode: <span style="color: #e0e0e0;">LEARNING</span><br>
                     > Location: France → Asia-Pacific<br>
                     > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
                     > Mission: 3-6 month international internship<br>`
@@ -2112,7 +2146,7 @@
                     output: 'Terminal cleared.'
                 },
                 help: {
-                    output: `> <span style="color: var(--matrix-green);">AVAILABLE COMMANDS</span><br>
+                    output: `> <span style="color: #e0e0e0;">AVAILABLE COMMANDS</span><br>
                     > skills - Display technical competencies<br>
                     > projects - Show project status<br>
                     > status - System information<br>
@@ -2147,9 +2181,9 @@
                 if (command) {
                     if (cmd === 'clear') {
                         output.innerHTML = `> Terminal cleared.<br>
-                        > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
-                        > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
-                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter`;
+                        > <span style="color: #e0e0e0;">INTERACTIVE TERMINAL READY</span><br>
+                        > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
+                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`;
                     } else {
                         typeWriter(output, command.output, 20);
                     }
@@ -2170,7 +2204,7 @@
             setTimeout(() => {
                 const commands = {
                     skills: {
-                        output: `> <span style="color: var(--matrix-green);">TECHNICAL SKILLS MATRIX</span><br>
+                        output: `> <span style="color: #e0e0e0;">TECHNICAL SKILLS MATRIX</span><br>
                         > Python: Intermediate (Telegram Bots, Automation)<br>
                         > Web Tech: Learning (HTML, CSS, JS, Selenium)<br>
                         > Database: Foundation (SQL fundamentals)<br>
@@ -2180,15 +2214,15 @@
                         > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
                     },
                     projects: {
-                        output: `> <span style="color: var(--matrix-green);">PROJECT STATUS</span><br>
-                        > [01] Telegram Bot + Payment API: <span style="color: var(--matrix-green);">OPERATIONAL</span><br>
-                        > [02] Web Automation Scripts: <span style="color: var(--matrix-green);">ACTIVE</span><br>
-                        > [03] 3D Community Projects: <span style="color: var(--matrix-green);">COMPLETED</span><br>
-                        > [04] Content Creation: <span style="color: var(--matrix-green);">VIRAL</span><br>
-                        > Total projects: <span style="color: var(--matrix-green);">4+</span><br>`
+                        output: `> <span style="color: #e0e0e0;">PROJECT STATUS</span><br>
+                        > [01] Telegram Bot + Payment API: <span style="color: #e0e0e0;">OPERATIONAL</span><br>
+                        > [02] Web Automation Scripts: <span style="color: #e0e0e0;">ACTIVE</span><br>
+                        > [03] 3D Community Projects: <span style="color: #e0e0e0;">COMPLETED</span><br>
+                        > [04] Content Creation: <span style="color: #e0e0e0;">VIRAL</span><br>
+                        > Total projects: <span style="color: #e0e0e0;">4+</span><br>`
                     },
                     status: {
-                        output: `> <span style="color: var(--matrix-green);">SYSTEM STATUS</span><br>
+                        output: `> <span style="color: #e0e0e0;">SYSTEM STATUS</span><br>
                         > Name: Birante Soumare<br>
                         > Status: <span style="color: var(--matrix-green);">ONLINE</span><br>
                         > Mode: <span style="color: var(--matrix-green);">LEARNING</span><br>
@@ -2198,9 +2232,9 @@
                     },
                     clear: {
                         output: `> Terminal cleared.<br>
-                        > <span style="color: var(--matrix-green);">INTERACTIVE TERMINAL READY</span><br>
-                        > Available commands: <span style="color: var(--matrix-green);">skills</span>, <span style="color: var(--matrix-green);">projects</span>, <span style="color: var(--matrix-green);">status</span>, <span style="color: var(--matrix-green);">help</span><br>
-                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: var(--matrix-green);">skills</span>" and press Enter`
+                        > <span style="color: #e0e0e0;">INTERACTIVE TERMINAL READY</span><br>
+                        > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
+                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`
                     }
                 };
                 
