@@ -1170,7 +1170,7 @@
                 
                 <div style="flex: 1; text-align: center;">
                     <h1 class="glitch" data-text="WELCOME TO THE MATRIX">WELCOME TO THE MATRIX</h1>
-                    <div style="font-size: 1rem; opacity: 0.8; font-family: 'Orbitron', monospace; margin-top: 0.8rem;">
+                    <div id="heroSub" style="font-size: 1rem; opacity: 0.8; font-family: 'Orbitron', monospace; margin-top: 0.8rem;">
                         Computer Science Student | International Seeker
                     </div>
                 </div>
@@ -1778,27 +1778,65 @@
             // Update titles
             document.querySelector('h1').textContent = lang.titles.welcome;
             document.querySelector('h1').setAttribute('data-text', lang.titles.welcome);
+            document.getElementById('heroSub').textContent = lang.profile.title;
             
             // Update profile
             document.querySelector('.profile-title').textContent = lang.profile.title;
             document.querySelector('.profile-status').textContent = lang.profile.status;
-            // Update contact block labels
-            const contactLabels = document.querySelectorAll('#home .content-card [style*="font-weight: 700;"]');
-            if (contactLabels && contactLabels.length >= 3) {
+            // Update contact block labels/values
+            const contactBlock = document.querySelectorAll('#home .content-card > div > div');
+            if (contactBlock && contactBlock.length >= 3) {
                 if (currentLanguage === 'fr') {
-                    contactLabels[0].textContent = ' Contact';
-                    contactLabels[1].textContent = ' Téléphone';
-                    contactLabels[2].textContent = ' Objectif';
+                    contactBlock[0].querySelector('div').textContent = ' Contact';
+                    contactBlock[1].querySelector('div').textContent = ' Téléphone';
+                    contactBlock[2].querySelector('div').textContent = ' Objectif';
+                    // values
+                    contactBlock[2].querySelectorAll('div')[1].textContent = 'Stage en Asie-Pacifique';
                 } else {
-                    contactLabels[0].textContent = ' Contact';
-                    contactLabels[1].textContent = ' Phone';
-                    contactLabels[2].textContent = ' Target';
+                    contactBlock[0].querySelector('div').textContent = ' Contact';
+                    contactBlock[1].querySelector('div').textContent = ' Phone';
+                    contactBlock[2].querySelector('div').textContent = ' Target';
+                    contactBlock[2].querySelectorAll('div')[1].textContent = 'Asia-Pacific Internship';
                 }
             }
             // Update section headers
             const sectionH2 = document.querySelectorAll('section .section-header h2');
             const titleMap = [lang.titles.education, lang.titles.projects, lang.titles.skills, lang.titles.travel, lang.titles.contact];
             sectionH2.forEach((h2, i) => { if (titleMap[i]) h2.textContent = titleMap[i]; });
+
+            // Projects content (headings/status)
+            const projectCards = document.querySelectorAll('#projects .content-card .project-content');
+            if (projectCards.length >= 3) {
+                if (currentLanguage === 'fr') {
+                    projectCards[0].querySelector('h3').textContent = 'Bot Telegram avec API de paiement';
+                    projectCards[0].querySelector('div[style*="font-weight: 700;"]').textContent = 'Statut : ACTIF';
+                    projectCards[1].querySelector('h3').textContent = 'Scripts d’automatisation Web';
+                    projectCards[1].querySelector('div[style*="font-weight: 700;"]').textContent = 'Statut : OPÉRATIONNEL';
+                    projectCards[2].querySelector('h3').textContent = 'Projets de développement communautaire';
+                    projectCards[2].querySelector('div[style*="font-weight: 700;"]').textContent = 'Réussite : APPRENTISSAGE RAPIDE';
+                } else {
+                    projectCards[0].querySelector('h3').textContent = 'Telegram Bot with Payment API';
+                    projectCards[0].querySelector('div[style*="font-weight: 700;"]').textContent = 'Status: ACTIVE';
+                    projectCards[1].querySelector('h3').textContent = 'Web Automation Scripts';
+                    projectCards[1].querySelector('div[style*="font-weight: 700;"]').textContent = 'Status: OPERATIONAL';
+                    projectCards[2].querySelector('h3').textContent = 'Community Development Projects';
+                    projectCards[2].querySelector('div[style*="font-weight: 700;"]').textContent = 'Achievement: RAPID LEARNING';
+                }
+            }
+
+            // Terminal strings (header help)
+            const terminalOutput = document.getElementById('terminalOutput');
+            if (terminalOutput) {
+                if (currentLanguage === 'fr') {
+                    terminalOutput.innerHTML = `> <span style="color: #e0e0e0;">TERMINAL INTERACTIF PRÊT</span><br>
+                    > Commandes disponibles : <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
+                    > <span style="color: var(--accent-primary);">ASTUCE :</span> Tape "<span style="color: #e0e0e0;">skills</span>" puis Entrée`;
+                } else {
+                    terminalOutput.innerHTML = `> <span style="color: #e0e0e0;">INTERACTIVE TERMINAL READY</span><br>
+                    > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
+                    > <span style="color: var(--accent-primary);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`;
+                }
+            }
             
             // Update section titles
             const sections = ['education', 'projects', 'skills', 'travel', 'contact'];
