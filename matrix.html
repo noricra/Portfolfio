@@ -397,7 +397,7 @@
                 backdrop-filter: blur(10px);
                 z-index: 1002;
             }
-            .mobile-menu-toggle { display: inline-flex !important; background: transparent; border: 1px solid var(--border-subtle); color: #e0e0e0; padding: 0.25rem 0.5rem; border-radius: 6px; position: absolute; right: 1rem; }
+            .mobile-menu-toggle { display: inline-flex !important; background: transparent; border: 1px solid var(--border-subtle); color: #e0e0e0; padding: 0.25rem 0.5rem; border-radius: 6px; position: absolute; right: 1rem; z-index: 1100; cursor: pointer; }
             .nav-menu { display: none; position: absolute; top: 56px; left: 0; right: 0; background: rgba(10, 12, 18, 0.98); padding: 0.5rem 1rem; border-bottom: 1px solid var(--border-subtle); transform: translateY(-6px); opacity: 0; transition: transform 0.2s ease, opacity 0.2s ease; }
             .nav-menu.show { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; transform: translateY(0); opacity: 1; }
             .profile-card { display: none !important; }
@@ -1976,7 +1976,17 @@
             sections.forEach(section => observer.observe(section));
             // Mobile menu toggle
             window.toggleMobileMenu = function() {
-                if (navMenu) { navMenu.classList.toggle('show'); }
+                if (!navMenu) return;
+                // force recompute in case inline display overrides
+                if (!navMenu.classList.contains('show')) {
+                    navMenu.style.display = 'flex';
+                    // next frame apply class for animation
+                    requestAnimationFrame(() => navMenu.classList.add('show'));
+                } else {
+                    navMenu.classList.remove('show');
+                    // wait end of transition then hide to avoid click-through
+                    setTimeout(() => { if (!navMenu.classList.contains('show')) navMenu.style.display = 'none'; }, 200);
+                }
             }
         }
 
