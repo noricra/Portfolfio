@@ -1774,6 +1774,7 @@
 
         function updateLanguage() {
             const lang = translations[currentLanguage];
+            try {
             
             // Update language button
             const toggle = document.getElementById('langToggle');
@@ -1863,6 +1864,9 @@
                     h2.textContent = lang.titles[section];
                 }
             });
+            } catch (e) {
+                console.error('updateLanguage error', e);
+            }
         }
 
         // Simple Matrix Rain Effect
