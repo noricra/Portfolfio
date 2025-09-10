@@ -1436,7 +1436,7 @@
                         <button onclick="executeTerminalCommand('status')" style="background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #e0e0e0; padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
                              status
                         </button>
-                        <button onclick="executeTerminalCommand('clear')" style="background: rgba(255, 0, 64, 0.1); border: 1px solid rgba(255, 0, 64, 0.4); color: var(--neo-red); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
+                        <button onclick="executeTerminalCommand('clear')" style="background: rgba(110, 193, 255, 0.12); border: 1px solid var(--accent-primary); color: var(--accent-primary); padding: 0.4rem 0.8rem; border-radius: 5px; font-family: 'Courier Prime', monospace; font-size: 0.8rem; cursor: pointer; transition: all 0.3s ease;">
                              clear
                         </button>
                     </div>
@@ -2078,13 +2078,19 @@
                     currentStep++;
                 } else {
                     clearInterval(progressInterval);
+                    // Smooth transition: small success shimmer before closing
+                    const ok = document.createElement('div');
+                    ok.style.cssText = 'margin-top: 0.5rem; color: var(--accent-primary); font-family: \'Orbitron\', monospace; opacity:0; transition: opacity .3s ease';
+                    ok.textContent = 'CV READY';
+                    overlay.appendChild(ok);
+                    requestAnimationFrame(() => { ok.style.opacity = '1'; });
                     setTimeout(() => {
                         overlay.remove();
                         button.disabled = false;
-                        button.style.background = 'var(--matrix-green)';
+                        button.style.background = 'var(--accent-primary)';
                         button.innerHTML = 'DOWNLOAD MATRIX DATA';
-                        showMessage(" CV READY", "Download would start in real implementation");
-                    }, 1000);
+                        showMessage("CV READY", "Download would start in real implementation");
+                    }, 900);
                 }
             }, 800);
         }
@@ -2133,7 +2139,7 @@
                     > 3D Design: Rapid acquisition (KoziKaza, SolidWorks)<br>
                     > Cryptography: Academic (CryptoHack challenges)<br>
                     > AI Integration: Advanced (AI-assisted development)<br>
-                    > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
+                    > Learning Method: <span style="color: var(--accent-primary);">RAPID ACQUISITION</span><br>`
                 },
                 projects: {
                     output: `> <span style="color: #e0e0e0;">PROJECT STATUS</span><br>
@@ -2149,7 +2155,7 @@
                     > Status: <span style="color: #e0e0e0;">ONLINE</span><br>
                     > Mode: <span style="color: #e0e0e0;">LEARNING</span><br>
                     > Location: France → Asia-Pacific<br>
-                    > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
+                    > Availability: <span style="color: var(--accent-primary);">READY FOR DEPLOYMENT</span><br>
                     > Mission: 3-6 month international internship<br>`
                 },
                 clear: {
@@ -2193,7 +2199,7 @@
                         output.innerHTML = `> Terminal cleared.<br>
                         > <span style="color: #e0e0e0;">INTERACTIVE TERMINAL READY</span><br>
                         > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
-                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`;
+                        > <span style="color: var(--accent-primary);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`;
                     } else {
                         typeWriter(output, command.output, 20);
                     }
@@ -2221,7 +2227,7 @@
                         > 3D Design: Rapid acquisition (KoziKaza, SolidWorks)<br>
                         > Cryptography: Academic (CryptoHack challenges)<br>
                         > Core programming : Academic project (Tic-Tac-Toe, Snake)<br>
-                        > Learning Method: <span style="color: var(--neo-red);">RAPID ACQUISITION</span><br>`
+                        > Learning Method: <span style="color: var(--accent-primary);">RAPID ACQUISITION</span><br>`
                     },
                     projects: {
                         output: `> <span style="color: #e0e0e0;">PROJECT STATUS</span><br>
@@ -2237,14 +2243,14 @@
                         > Status: <span style="color: #e0e0e0;">ONLINE</span><br>
                         > Mode: <span style="color: #e0e0e0;">LEARNING</span><br>
                         > Location: France → Asia-Pacific<br>
-                        > Availability: <span style="color: var(--neo-red);">READY FOR DEPLOYMENT</span><br>
+                        > Availability: <span style="color: var(--accent-primary);">READY FOR DEPLOYMENT</span><br>
                         > Mission: 3-6 month international internship<br>`
                     },
                     clear: {
                         output: `> Terminal cleared.<br>
                         > <span style="color: #e0e0e0;">INTERACTIVE TERMINAL READY</span><br>
                         > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
-                        > <span style="color: var(--neo-red);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`
+                        > <span style="color: var(--accent-primary);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`
                     }
                 };
                 
