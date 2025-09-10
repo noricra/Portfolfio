@@ -366,16 +366,7 @@
             background: rgba(110, 193, 255, 0.10);
             border-color: var(--accent-primary);
         }
-        .nav-menu a.active::after {
-            content: '';
-            position: absolute;
-            left: 8px;
-            right: 8px;
-            bottom: -3px;
-            height: 2px;
-            border-radius: 2px;
-            background: var(--accent-primary);
-        }
+        /* Remove extra blue underline under active link */
 
         /* Mode pills removed */
 
@@ -1121,7 +1112,7 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="logo" style="margin: 0;">BIRANTE.EXE</div>
-        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle navigation" onclick="toggleMobileMenu()" style="display:none;">
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle navigation" aria-disabled="true" style="display:none;">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
