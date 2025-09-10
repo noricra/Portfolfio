@@ -540,7 +540,7 @@
 
      
 
-        .dot-red { background: var(--neo-red); }
+        .dot-red { background: var(--accent-primary); }
         .dot-yellow { background: #ffd166; }
         .dot-green { background: var(--accent-primary); }
 
@@ -1125,11 +1125,11 @@
         </div>
 
         <ul class="nav-menu">
-            <li><a href="#home" class="nav-link active"> HOME</a></li>
-            <li><a href="#about" class="nav-link"> ABOUT</a></li>
-            <li><a href="#projects" class="nav-link"> PROJECTS</a></li>
-            <li><a href="#skills" class="nav-link"> SKILLS</a></li>
-            <li><a href="#travel" class="nav-link"> TRAVEL</a></li>
+            <li><a href="#home" class="nav-link active"> ACCUEIL</a></li>
+            <li><a href="#about" class="nav-link"> À PROPOS</a></li>
+            <li><a href="#projects" class="nav-link"> PROJETS</a></li>
+            <li><a href="#skills" class="nav-link"> COMPÉTENCES</a></li>
+            <li><a href="#travel" class="nav-link"> VOYAGES</a></li>
             <li><a href="#contact" class="nav-link"> CONTACT</a></li>
         </ul>
 
@@ -1782,6 +1782,23 @@
             // Update profile
             document.querySelector('.profile-title').textContent = lang.profile.title;
             document.querySelector('.profile-status').textContent = lang.profile.status;
+            // Update contact block labels
+            const contactLabels = document.querySelectorAll('#home .content-card [style*="font-weight: 700;"]');
+            if (contactLabels && contactLabels.length >= 3) {
+                if (currentLanguage === 'fr') {
+                    contactLabels[0].textContent = ' Contact';
+                    contactLabels[1].textContent = ' Téléphone';
+                    contactLabels[2].textContent = ' Objectif';
+                } else {
+                    contactLabels[0].textContent = ' Contact';
+                    contactLabels[1].textContent = ' Phone';
+                    contactLabels[2].textContent = ' Target';
+                }
+            }
+            // Update section headers
+            const sectionH2 = document.querySelectorAll('section .section-header h2');
+            const titleMap = [lang.titles.education, lang.titles.projects, lang.titles.skills, lang.titles.travel, lang.titles.contact];
+            sectionH2.forEach((h2, i) => { if (titleMap[i]) h2.textContent = titleMap[i]; });
             
             // Update section titles
             const sections = ['education', 'projects', 'skills', 'travel', 'contact'];
