@@ -1625,8 +1625,8 @@
                         Traditional format available for corporate systems
                     </div>
                     <div style="margin-bottom: 1.5rem; padding: 0.8rem; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; background: rgba(255, 255, 255, 0.02); font-size: 0.9rem;">
-                        <div style="margin-bottom: 0.3rem; font-weight: 700;"> TIP: Switch viewing modes</div>
-                        <div><strong>R</strong> = Light Mode | <strong>B</strong> = Dark Mode</div>
+                        <div style="margin-bottom: 0.3rem; font-weight: 700;"> TIP: Use the menu for navigation</div>
+                        <div>Optimized for a premium dark experience</div>
                     </div>
                     <button onclick="downloadCV()" class="matrix-button">
                         DOWNLOAD MATRIX DATA
@@ -1671,6 +1671,8 @@
         </section>
 
     </div>
+    <!-- Back to top -->
+    <button id="backToTop" aria-label="Back to top" style="position: fixed; right: 1rem; bottom: 1rem; width: 40px; height: 40px; border-radius: 999px; background: rgba(110,193,255,0.15); border: 1px solid var(--accent-primary); color: #e0e0e0; display: none; align-items: center; justify-content: center; backdrop-filter: blur(6px); box-shadow: 0 4px 12px rgba(0,0,0,0.3);">↑</button>
 
     <script>
         // Multilingual System
@@ -2246,6 +2248,17 @@
             setTimeout(() => {
                 setupInteractiveTerminal();
             }, 6000); // After loading screen
+            // Back to top behavior
+            const backBtn = document.getElementById('backToTop');
+            if (backBtn) {
+                window.addEventListener('scroll', () => {
+                    const y = window.pageYOffset || document.documentElement.scrollTop;
+                    backBtn.style.display = y > 400 ? 'flex' : 'none';
+                });
+                backBtn.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         });
 
         // Console message with instructions
