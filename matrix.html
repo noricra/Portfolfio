@@ -5,43 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Birante Soumare - Matrix Portfolio</title>
     <link rel="stylesheet" href="matrix-assets.css">
-    <link rel="stylesheet" href="design-improvements.css">
+    <link rel="stylesheet" href="premium-design.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Courier+Prime:wght@400;700&display=swap');
         
         :root {
-            /* Palette Matrix raffinée */
-            --matrix-green: #00cc88;
-            --matrix-green-bright: #00ff99;
-            --matrix-green-dim: #008855;
-            --matrix-dark: #001a0f;
-            --matrix-glow: rgba(0, 204, 136, 0.25);
+            /* Palette Premium Monochrome */
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
             
-            /* Couleurs d'accent équilibrées */
-            --neo-red: #ff4466;
-            --morpheus-blue: #4488ff;
-            --accent-cyan: #00ddcc;
-            --accent-purple: #aa66ff;
-            --accent-orange: #ff9944;
+            /* Hiérarchie des textes premium */
+            --text-primary: var(--primary-white);
+            --text-secondary: var(--gray-300);
+            --text-muted: var(--gray-500);
+            --text-accent: var(--primary-white);
+            --text-inverse: var(--primary-black);
             
-            /* Hiérarchie des textes */
-            --text-primary: #ffffff;
-            --text-secondary: #e0e0e0;
-            --text-muted: #999999;
-            --text-accent: var(--matrix-green-bright);
+            /* Backgrounds premium */
+            --bg-primary: var(--primary-black);
+            --bg-secondary: var(--gray-900);
+            --bg-tertiary: var(--gray-800);
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            --bg-hover: rgba(255, 255, 255, 0.03);
             
-            /* Backgrounds subtils */
-            --bg-primary: #000000;
-            --bg-secondary: rgba(0, 26, 15, 0.6);
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-card-hover: rgba(0, 204, 136, 0.08);
-            --bg-hover: rgba(255, 255, 255, 0.06);
+            /* Borders et effets premium */
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-medium: rgba(255, 255, 255, 0.2);
+            --border-accent: rgba(255, 255, 255, 0.3);
+            --shadow-soft: rgba(0, 0, 0, 0.4);
+            --shadow-medium: rgba(0, 0, 0, 0.6);
+            --shadow-strong: rgba(0, 0, 0, 0.8);
             
-            /* Borders et effets */
-            --border-subtle: rgba(0, 204, 136, 0.15);
-            --border-accent: rgba(0, 204, 136, 0.4);
-            --shadow-soft: rgba(0, 0, 0, 0.3);
-            --shadow-glow: rgba(0, 204, 136, 0.2);
+            /* Mode clair premium */
+            --light-bg-primary: var(--primary-white);
+            --light-bg-secondary: var(--gray-50);
+            --light-bg-card: var(--primary-white);
+            --light-text-primary: var(--primary-black);
+            --light-text-secondary: var(--gray-700);
+            --light-text-muted: var(--gray-500);
+            --light-border: var(--gray-200);
+            --light-shadow: rgba(0, 0, 0, 0.1);
         }
 
         * {
@@ -154,8 +168,8 @@
             50% { opacity: 0.5; }
         }
 
-        /* Matrix Rain Background */
-        .matrix-bg {
+        /* Subtle Premium Background */
+        .premium-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -163,20 +177,10 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.4;
-        }
-
-        .matrix-char {
-            position: absolute;
-            color: var(--matrix-green);
-            font-family: 'Courier Prime', monospace;
-            font-size: 12px;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-100vh); opacity: 1; }
-            100% { transform: translateY(100vh); opacity: 0; }
+            opacity: 0.02;
+            background: 
+                radial-gradient(circle at 25% 25%, var(--text-primary), transparent 50%),
+                radial-gradient(circle at 75% 75%, var(--text-primary), transparent 50%);
         }
 
         /* Loading Screen */
@@ -239,11 +243,9 @@
             top: 0;
             width: 240px;
             height: 100vh;
-            background: 
-                linear-gradient(180deg, var(--bg-secondary), rgba(0, 15, 10, 0.95)),
-                radial-gradient(circle at top left, var(--matrix-glow), transparent 60%);
+            background: var(--bg-secondary);
             backdrop-filter: blur(20px);
-            border-right: 1px solid var(--border-accent);
+            border-right: 1px solid var(--border-subtle);
             z-index: 1000;
             padding: 1.5rem;
             display: flex;
@@ -259,53 +261,63 @@
             right: 0;
             width: 1px;
             height: 100%;
-            background: linear-gradient(180deg, var(--matrix-green), transparent, var(--matrix-green));
-            opacity: 0.5;
+            background: linear-gradient(180deg, var(--border-accent), transparent, var(--border-accent));
+            opacity: 0.3;
         }
 
         .logo {
             font-family: 'Orbitron', monospace;
             font-weight: 700;
             font-size: 1.1rem;
-            color: var(--matrix-green);
+            color: var(--text-primary);
             text-align: center;
             margin-bottom: 1.5rem;
             padding: 0.8rem;
-            border: 1px solid rgba(0, 255, 0, 0.4);
+            border: 1px solid var(--border-subtle);
             border-radius: 8px;
-            background: 
-                linear-gradient(135deg, rgba(0, 255, 0, 0.05), rgba(0, 255, 0, 0.01)),
-                radial-gradient(circle at center, rgba(0, 255, 0, 0.03), transparent);
+            background: var(--bg-card);
             letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            border-color: var(--border-medium);
+            background: var(--bg-card-hover);
         }
 
 
         .profile-card {
-            background: rgba(0, 255, 0, 0.02);
-            border: 1px solid rgba(0, 255, 0, 0.3);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
             border-radius: 12px;
             padding: 1.2rem;
             text-align: center;
             margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            border-color: var(--border-medium);
+            background: var(--bg-card-hover);
         }
 
         .profile-image {
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            border: 2px solid rgba(0, 255, 0, 0.4);
+            border: 2px solid var(--border-medium);
             margin: 0 auto 0.8rem;
-            background: linear-gradient(45deg, rgba(0, 255, 0, 0.03), rgba(0, 0, 0, 0.8));
+            background: var(--bg-tertiary);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .profile-image:hover {
-            border-color: rgba(0, 255, 0, 0.7);
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            border-color: var(--border-accent);
+            box-shadow: 0 0 15px var(--shadow-soft);
         }
 
         .profile-name {
@@ -322,11 +334,12 @@
         }
 
         .profile-status {
-            background: rgba(0, 255, 0, 0.08);
+            background: var(--bg-card);
             padding: 0.4rem;
             border-radius: 4px;
             font-size: 0.7rem;
-            border: 1px solid rgba(0, 255, 0, 0.4);
+            border: 1px solid var(--border-medium);
+            color: var(--text-secondary);
         }
 
         .nav-menu {
@@ -339,7 +352,7 @@
         }
 
         .nav-menu a {
-            color: var(--matrix-green);
+            color: var(--text-secondary);
             text-decoration: none;
             font-family: 'Orbitron', monospace;
             transition: all 0.3s ease;
@@ -353,49 +366,56 @@
         }
 
         .nav-menu a:hover {
-            background: rgba(0, 255, 0, 0.1);
-            border-color: var(--matrix-green);
+            background: var(--bg-hover);
+            border-color: var(--border-medium);
+            color: var(--text-primary);
             transform: translateX(3px);
         }
 
         .nav-menu a.active {
-            background: rgba(0, 255, 0, 0.15);
-            border-color: var(--matrix-green);
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            color: var(--text-primary);
         }
 
-        /* Pills Navigation */
-        .pills-nav {
+        /* Premium Theme Toggle */
+        .theme-toggle {
             position: fixed;
             right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 2rem;
             z-index: 1000;
             display: flex;
-            flex-direction: column;
-            gap: 1rem;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 25px;
+            padding: 0.4rem;
         }
 
-        .pill {
-            width: 50px;
-            height: 25px;
-            border-radius: 12px;
+        .theme-btn {
+            width: 40px;
+            height: 30px;
+            border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
+            border: 1px solid var(--border-medium);
+            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
         }
 
-        .red-pill {
-            background: linear-gradient(45deg, var(--neo-red), #ff6b6b);
-            box-shadow: 0 0 15px rgba(255, 0, 64, 0.4);
+        .theme-btn.active {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border-color: var(--text-primary);
         }
 
-        .blue-pill {
-            background: linear-gradient(45deg, var(--morpheus-blue), #4dabf7);
-            box-shadow: 0 0 15px rgba(0, 64, 255, 0.4);
-        }
-
-        .pill:hover {
-            transform: scale(1.1);
+        .theme-btn:hover {
+            transform: scale(1.05);
+            border-color: var(--border-accent);
         }
 
         /* Main Content */
@@ -426,7 +446,6 @@
             font-weight: 700;
             letter-spacing: 2px;
             color: var(--text-primary);
-            text-shadow: 0 0 20px var(--matrix-glow);
             line-height: 1.1;
         }
 
@@ -437,7 +456,7 @@
             margin-bottom: 1.5rem;
             font-weight: 600;
             letter-spacing: 1px;
-            color: var(--text-accent);
+            color: var(--text-primary);
             position: relative;
         }
 
@@ -448,8 +467,8 @@
             left: 50%;
             transform: translateX(-50%);
             width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--text-accent), transparent);
+            height: 1px;
+            background: var(--border-accent);
         }
 
         h3 {
@@ -813,31 +832,31 @@
         }
 
         /* Premium Button Styling */
-        .matrix-button {
-            background: linear-gradient(135deg, var(--matrix-green), rgba(0, 200, 0, 0.9));
-            color: #000;
-            border: none;
+        .premium-button {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            border: 1px solid var(--border-accent);
             padding: 1rem 2rem;
             border-radius: 8px;
             font-family: 'Orbitron', monospace;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
             overflow: hidden;
-            box-shadow: 
-                0 4px 16px rgba(0, 255, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
         }
 
-        .matrix-button:hover {
-            background: rgba(0, 255, 0, 0.9);
-            box-shadow: 0 4px 16px rgba(0, 255, 0, 0.2);
+        .premium-button:hover {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-color: var(--text-primary);
             transform: translateY(-2px);
+            box-shadow: 0 4px 16px var(--shadow-soft);
         }
 
-        .matrix-button:active {
+        .premium-button:active {
             transform: translateY(0);
         }
 
@@ -934,99 +953,121 @@
             }
         }
 
-        /* Mobile-First Responsive Design */
+        /* Premium Mobile-First Responsive Design */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
                 overflow-x: hidden;
             }
             
+            /* Compact mobile header */
             .sidebar {
                 position: static;
                 width: 100%;
                 height: auto;
                 border-right: none;
-                border-bottom: 1px solid rgba(0, 255, 0, 0.3);
-                padding: 1rem;
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
+                border-bottom: 1px solid var(--border-subtle);
+                padding: 0.8rem;
+                background: var(--bg-secondary);
             }
             
             .logo {
-                font-size: 1.2rem;
-                margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.6rem;
+                padding: 0.5rem;
             }
             
+            /* Horizontal compact profile */
             .profile-card {
-                margin-bottom: 1rem;
-                padding: 1rem;
+                margin-bottom: 0.8rem;
+                padding: 0.6rem;
                 display: flex;
                 align-items: center;
-                gap: 1rem;
+                gap: 0.8rem;
                 text-align: left;
             }
             
             .profile-image {
-                width: 50px;
-                height: 50px;
+                width: 35px;
+                height: 35px;
                 margin: 0;
+                flex-shrink: 0;
             }
             
             .profile-name {
-                font-size: 0.9rem;
-                margin-bottom: 0.2rem;
+                font-size: 0.75rem;
+                margin-bottom: 0.1rem;
             }
             
             .profile-title {
-                font-size: 0.7rem;
-                margin-bottom: 0.3rem;
+                font-size: 0.6rem;
+                margin-bottom: 0.2rem;
             }
             
             .profile-status {
-                font-size: 0.6rem;
-                padding: 0.3rem;
+                font-size: 0.55rem;
+                padding: 0.2rem 0.4rem;
             }
             
+            /* Compact horizontal navigation */
             .nav-menu {
                 flex-direction: row;
-                gap: 0.5rem;
+                gap: 0.3rem;
                 margin-bottom: 0;
                 flex-wrap: wrap;
                 justify-content: center;
             }
             
             .nav-menu a {
-                padding: 0.5rem 0.8rem;
-                font-size: 0.7rem;
+                padding: 0.4rem 0.6rem;
+                font-size: 0.65rem;
                 text-align: center;
                 flex: 1;
-                min-width: 80px;
-                border-radius: 20px;
+                min-width: 70px;
+                border-radius: 15px;
             }
             
             .main-content {
                 margin-left: 0;
                 width: 100%;
-                padding: 1rem;
+                padding: 0.8rem;
             }
             
+            /* Compact sections */
             section {
-                margin-bottom: 2rem;
-            }
-            
-            .content-card {
-                padding: 1.5rem;
                 margin-bottom: 1.5rem;
             }
             
-            /* Home section mobile layout */
+            .content-card {
+                padding: 1rem;
+                margin-bottom: 1rem;
+                border-radius: 12px;
+            }
+            
+            /* Smaller typography hierarchy */
+            h1 {
+                font-size: 1.3rem !important;
+                line-height: 1.2;
+                margin-bottom: 0.8rem;
+                letter-spacing: 1px;
+            }
+            
+            h2 {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+            }
+            
+            h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Compact home section */
             section#home > div:first-child {
                 flex-direction: column;
                 text-align: center;
-                gap: 1rem;
-                align-items: center;
-                margin-bottom: 1rem;
+                gap: 0.6rem;
+                margin-bottom: 0.8rem;
             }
             
             section#home > div:first-child > div:first-child {
@@ -1034,43 +1075,19 @@
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
-                gap: 1rem;
+                gap: 0.6rem;
                 width: 100%;
             }
             
-            section#home > div:first-child > div:first-child > button,
-            section#home > div:first-child > div:first-child > div {
-                flex: 0 0 auto;
-            }
-            
-            h1 {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
-                margin-bottom: 0.5rem;
-                order: 1;
-            }
-            
-            h2 {
-                font-size: 1.2rem;
-            }
-            
-            h3 {
-                font-size: 1rem;
-            }
-            
-            /* Hero image section mobile */
+            /* Smaller hero image */
             section#home .content-card > div:first-child {
                 grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-            
-            section#home .content-card > div:first-child > div:nth-child(2) {
-                order: -1;
+                gap: 0.8rem;
             }
             
             section#home .content-card > div:first-child > div:nth-child(2) > div {
-                width: 150px;
-                height: 150px;
+                width: 120px;
+                height: 120px;
                 margin: 0 auto;
             }
             
@@ -1079,90 +1096,130 @@
                 display: none;
             }
             
-            /* Projects mobile layout */
+            /* Contact info grid - more compact */
+            section#home .content-card > div:last-child > div:first-child {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+                text-align: center;
+            }
+            
+            section#home .content-card > div:last-child > div:first-child > div {
+                padding: 0.6rem;
+                border: 1px solid var(--border-subtle);
+                border-radius: 8px;
+                background: var(--bg-card);
+            }
+            
+            /* Compact projects */
             .project-item {
                 grid-template-columns: 1fr;
                 text-align: center;
-                gap: 1rem;
-            }
-            
-            .project-item:nth-child(even) .project-image,
-            .project-item:nth-child(even) .project-content {
-                order: initial;
-            }
-            
-            .project-image {
-                width: 100px;
-                height: 100px;
-                font-size: 2rem;
-                margin: 0 auto;
-            }
-            
-            /* Grids mobile optimization */
-            .skills-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-            
-            .travel-grid {
-                grid-template-columns: repeat(3, 1fr);
                 gap: 0.8rem;
             }
             
+            .project-image {
+                width: 70px;
+                height: 70px;
+                font-size: 1.5rem;
+                margin: 0 auto;
+            }
+            
+            .project-content h3 {
+                margin-bottom: 0.5rem;
+            }
+            
+            .project-content p {
+                font-size: 0.85rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            /* Smaller skills grid */
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .skill-card {
+                padding: 0.8rem;
+            }
+            
+            .skill-card h3 {
+                font-size: 0.8rem;
+            }
+            
+            .skill-card p {
+                font-size: 0.7rem;
+            }
+            
+            /* Compact travel grid */
+            .travel-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .country-card {
+                padding: 0.6rem;
+                font-size: 0.7rem;
+            }
+            
+            .country-card > div:first-child {
+                font-size: 1.5rem;
+                margin-bottom: 0.3rem;
+            }
+            
+            /* Single column contact */
             .contact-grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 0.8rem;
             }
             
-            /* Mobile navigation pills */
-            .pills-nav {
-                position: fixed;
-                bottom: 1rem;
-                right: 1rem;
-                flex-direction: row;
-                gap: 0.5rem;
-                z-index: 1002;
+            .contact-card {
+                padding: 1rem;
             }
             
-            .pill {
-                width: 35px;
-                height: 18px;
+            /* Compact theme toggle */
+            .theme-toggle {
+                top: 0.5rem;
+                right: 0.8rem;
+                padding: 0.2rem;
             }
             
-            /* Progress bar mobile */
-            #progressBar {
-                left: 0;
-                width: 100%;
+            .theme-btn {
+                width: 30px;
+                height: 24px;
+                font-size: 0.7rem;
             }
             
-            /* Hide desktop-only elements */
+            /* Hide desktop elements */
             #rbIndicator {
                 display: none;
             }
             
             .matrix-bg {
-                opacity: 0.1;
+                display: none;
             }
             
-            /* Terminal mobile optimization */
+            /* Compact terminal */
             .terminal {
-                padding: 1rem;
-                font-size: 0.8rem;
+                padding: 0.8rem;
+                font-size: 0.75rem;
             }
             
             .terminal button {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.6rem;
+                font-size: 0.65rem;
+                padding: 0.25rem 0.5rem;
+                margin: 0.1rem;
             }
             
-            /* Tech tags mobile */
+            /* Smaller tech tags */
             .tech-tags {
                 justify-content: center;
+                gap: 0.4rem;
             }
             
             .tech-tag {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.6rem;
+                font-size: 0.65rem;
+                padding: 0.25rem 0.5rem;
             }
         }
 
@@ -1210,8 +1267,8 @@
 
     
 
-    <!-- Matrix Rain Background -->
-    <div class="matrix-bg" id="matrixBg"></div>
+    <!-- Premium Subtle Background -->
+    <div class="premium-bg"></div>
 
     <!-- Hidden Numbers -->
     <div class="hidden-number" style="top: 15%; left: 85%;">1337</div>
@@ -1246,29 +1303,17 @@
         </div>
     </div>
 
-    <!-- Pills Navigation -->
-    <div class="pills-nav">
-        <div class="pill red-pill" onclick="showMatrix()" title="Light Mode (Press R)"></div>
-        <div class="pill blue-pill" onclick="hideMatrix()" title="Dark Mode (Press B)"></div>
+    <!-- Premium Theme Toggle -->
+    <div class="theme-toggle">
+        <div class="theme-btn" onclick="setLightMode()" title="Light Mode">☀️</div>
+        <div class="theme-btn active" onclick="setDarkMode()" title="Dark Mode">🌙</div>
     </div>
 
-    <!-- Optimized Progress Bar -->
-    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 3px; background: rgba(0, 0, 0, 0.2); z-index: 1001;">
-        <div id="progressFill" style="height: 100%; background: var(--matrix-green); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 8px var(--matrix-glow);"></div>
+    <!-- Premium Progress Bar -->
+    <div id="progressBar" style="position: fixed; top: 0; left: 240px; width: calc(100% - 240px); height: 2px; background: var(--bg-secondary); z-index: 1001;">
+        <div id="progressFill" style="height: 100%; background: var(--text-primary); width: 0%; transition: width 0.3s ease;"></div>
     </div>
 
-    <!-- R/B Indicators - Desktop Only -->
-    <div id="rbIndicator" style="position: fixed; top: 1rem; right: 5rem; z-index: 1001; background: rgba(0, 0, 0, 0.9); padding: 0.6rem 1rem; border-radius: 8px; border: 1px solid rgba(0, 255, 0, 0.4); font-family: 'Orbitron', monospace; font-size: 0.85rem; backdrop-filter: blur(10px);">
-        <div style="margin-bottom: 0.4rem; color: var(--matrix-green); font-weight: 700; text-align: center;">MODES</div>
-        <div style="display: flex; gap: 1.5rem;">
-            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="showMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
-                <strong>R</strong> = ☀️ Light
-            </div>
-            <div style="cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; transition: all 0.3s ease;" onclick="hideMatrix()" onmouseover="this.style.background='rgba(0, 255, 0, 0.1)'" onmouseout="this.style.background=''">
-                <strong>B</strong> = 🌙 Dark
-            </div>
-        </div>
-    </div>
 
     <!-- Main Content -->
     <div class="main-content">
@@ -1749,8 +1794,8 @@
                         <div style="margin-bottom: 0.3rem; font-weight: 700;"> TIP: Switch viewing modes</div>
                         <div><strong>R</strong> = Light Mode | <strong>B</strong> = Dark Mode</div>
                     </div>
-                    <button onclick="downloadCV()" class="matrix-button">
-                        DOWNLOAD MATRIX DATA
+                    <button onclick="downloadCV()" class="premium-button">
+                        DOWNLOAD CV
                     </button>
                 </div>
             </div>
@@ -1912,31 +1957,14 @@
             });
         }
 
-        // Simple Matrix Rain Effect
-        function createMatrixRain() {
-            const container = document.getElementById('matrixBg');
-            const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-            
-            function createChar() {
-                if (container.children.length > 30) return; // Limit for performance
-                
-                const char = document.createElement('div');
-                char.className = 'matrix-char';
-                char.textContent = chars[Math.floor(Math.random() * chars.length)];
-                char.style.left = Math.random() * 100 + '%';
-                char.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                char.style.opacity = Math.random() * 0.6 + 0.2;
-                
-                container.appendChild(char);
-                
-                setTimeout(() => {
-                    if (char.parentNode) {
-                        char.parentNode.removeChild(char);
-                    }
-                }, 7000);
-            }
-            
-            setInterval(createChar, 1000); // Much slower for performance
+        // Premium subtle animations
+        function initPremiumEffects() {
+            // Add subtle entrance animations to cards
+            const cards = document.querySelectorAll('.content-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate-slide-up');
+            });
         }
 
         // Epic Loading Screen with Progressive Messages
@@ -1964,13 +1992,11 @@
                 loadingScreen.style.opacity = '0';
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
-                    createMatrixRain();
+                    initPremiumEffects();
                     setupNavigation();
                     updateLanguage(); // Set initial language
                     startClock();
                     startProgressTracking();
-                    // Minimal effects only
-                    applyBackgroundPatterns();
                 }, 1500);
             }, 5500); // Extended total time
         }
@@ -2051,43 +2077,53 @@
         }
 
 
-        // Enhanced Light/Dark Mode Functions with Balanced Colors
-        function showMatrix() {
-            // Light Mode (R key) - Professional light theme
-            document.documentElement.style.setProperty('--bg-primary', '#f8fffe');
-            document.documentElement.style.setProperty('--text-secondary', '#2d4a3a');
-            document.documentElement.style.setProperty('--text-primary', '#1a2f20');
-            document.documentElement.style.setProperty('--text-accent', '#006644');
-            document.documentElement.style.setProperty('--matrix-green', '#008866');
-            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 136, 102, 0.3)');
-            document.documentElement.style.setProperty('--bg-card', 'rgba(0, 136, 102, 0.05)');
-            document.documentElement.style.setProperty('--bg-card-hover', 'rgba(0, 136, 102, 0.12)');
-            document.documentElement.style.setProperty('--border-subtle', 'rgba(0, 136, 102, 0.2)');
-            document.documentElement.style.setProperty('--border-accent', 'rgba(0, 136, 102, 0.5)');
+        // Premium Light/Dark Mode Functions
+        function setLightMode() {
+            // Premium light theme
+            document.documentElement.style.setProperty('--bg-primary', 'var(--light-bg-primary)');
+            document.documentElement.style.setProperty('--bg-secondary', 'var(--light-bg-secondary)');
+            document.documentElement.style.setProperty('--bg-card', 'var(--light-bg-card)');
+            document.documentElement.style.setProperty('--bg-card-hover', 'rgba(0, 0, 0, 0.05)');
+            document.documentElement.style.setProperty('--text-primary', 'var(--light-text-primary)');
+            document.documentElement.style.setProperty('--text-secondary', 'var(--light-text-secondary)');
+            document.documentElement.style.setProperty('--text-muted', 'var(--light-text-muted)');
+            document.documentElement.style.setProperty('--border-subtle', 'var(--light-border)');
+            document.documentElement.style.setProperty('--border-medium', 'rgba(0, 0, 0, 0.15)');
+            document.documentElement.style.setProperty('--border-accent', 'rgba(0, 0, 0, 0.25)');
+            document.documentElement.style.setProperty('--shadow-soft', 'var(--light-shadow)');
+            
+            // Update theme buttons
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
             document.body.classList.remove('dark-mode');
             document.body.classList.add('light-mode');
             
-            showMessage("☀️ LIGHT MODE", "Professional light theme activated");
+            showMessage("☀️ PREMIUM LIGHT", "Clean professional theme");
         }
 
-        function hideMatrix() {
-            // Dark Mode (B key) - Refined dark theme with balanced colors
-            document.documentElement.style.setProperty('--bg-primary', '#000000');
-            document.documentElement.style.setProperty('--text-secondary', '#e0e0e0');
-            document.documentElement.style.setProperty('--text-primary', '#ffffff');
-            document.documentElement.style.setProperty('--text-accent', '#00ff99');
-            document.documentElement.style.setProperty('--matrix-green', '#00cc88');
-            document.documentElement.style.setProperty('--matrix-glow', 'rgba(0, 204, 136, 0.25)');
-            document.documentElement.style.setProperty('--bg-card', 'rgba(255, 255, 255, 0.03)');
-            document.documentElement.style.setProperty('--bg-card-hover', 'rgba(0, 204, 136, 0.08)');
-            document.documentElement.style.setProperty('--border-subtle', 'rgba(0, 204, 136, 0.15)');
-            document.documentElement.style.setProperty('--border-accent', 'rgba(0, 204, 136, 0.4)');
+        function setDarkMode() {
+            // Premium dark theme - restore original values
+            document.documentElement.style.setProperty('--bg-primary', 'var(--primary-black)');
+            document.documentElement.style.setProperty('--bg-secondary', 'var(--gray-900)');
+            document.documentElement.style.setProperty('--bg-card', 'rgba(255, 255, 255, 0.05)');
+            document.documentElement.style.setProperty('--bg-card-hover', 'rgba(255, 255, 255, 0.08)');
+            document.documentElement.style.setProperty('--text-primary', 'var(--primary-white)');
+            document.documentElement.style.setProperty('--text-secondary', 'var(--gray-300)');
+            document.documentElement.style.setProperty('--text-muted', 'var(--gray-500)');
+            document.documentElement.style.setProperty('--border-subtle', 'rgba(255, 255, 255, 0.1)');
+            document.documentElement.style.setProperty('--border-medium', 'rgba(255, 255, 255, 0.2)');
+            document.documentElement.style.setProperty('--border-accent', 'rgba(255, 255, 255, 0.3)');
+            document.documentElement.style.setProperty('--shadow-soft', 'rgba(0, 0, 0, 0.4)');
+            
+            // Update theme buttons
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
             
             document.body.classList.remove('light-mode');
             document.body.classList.add('dark-mode');
             
-            showMessage("🌙 DARK MODE", "Refined Matrix theme activated");
+            showMessage("🌙 PREMIUM DARK", "Sophisticated dark theme");
         }
 
         function showMessage(title, subtitle) {
@@ -2414,16 +2450,16 @@
         // Console message with instructions
         console.log(`
         ╔══════════════════════════════════════╗
-        ║  Birante Soumare - Matrix Portfolio  ║
+        ║  Birante Soumare - Premium Portfolio ║
         ║                                      ║
-        ║  Professional • Clean • Fast         ║
+        ║  Premium • Minimalist • Professional ║
         ║                                      ║
-        ║  Keyboard Controls:                  ║
-        ║  • Press R = Light Mode              ║
-        ║  • Press B = Dark Mode               ║
+        ║  Theme Controls:                     ║
+        ║  • ☀️ Light Mode (Top Right)        ║
+        ║  • 🌙 Dark Mode (Top Right)         ║
         ║                                      ║
-        ║  🔴 Red Pill: Light Theme            ║
-        ║  🔵 Blue Pill: Dark Theme            ║
+        ║  Monochrome Design System            ║
+        ║  Mobile-First Responsive             ║
         ║  ⬆⬆⬇⬇⬅➡⬅➡BA: Easter Egg       ║
         ║                                      ║
         ║  Contact: soumare.birante05@gmail.com║
