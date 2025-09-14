@@ -34,6 +34,9 @@
             box-sizing: border-box;
         }
 
+        /* Prevent mobile browsers from auto-zooming fonts */
+        html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
         body {
             background: #0a0c12;
             color: #e0e0e0;
@@ -959,7 +962,7 @@
             }
             
             section {
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
             }
             
             .project-item {
@@ -1033,12 +1036,9 @@
                 gap: 1rem !important;
             }
             
-            .skills-grid,
-            .travel-grid,
-            .contact-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1rem !important;
-            }
+            .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 1rem !important; }
+           .travel-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important;  gap: 1rem !important; }
+            .contact-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
 
             /* Force single column on inline grids with inline styles */
             .grid-hero,
@@ -1058,6 +1058,7 @@
 
         /* Extra small devices */
         @media (max-width: 480px) {
+            html { font-size: 14px; }
             .sidebar {
                 padding: 0.75rem !important;
                 gap: 0.5rem !important;
@@ -1074,12 +1075,8 @@
                 padding: 0.3rem 0.5rem;
                 font-size: 0.65rem;
             }
-            .main-content {
-                padding: 0.75rem !important;
-            }
-            .content-card {
-                padding: 1rem;
-            }
+            .main-content { padding: 0.75rem !important; }
+            .content-card { padding: 0.9rem !important; }
             .project-image {
                 width: 100px !important;
                 height: 100px !important;
@@ -1088,6 +1085,8 @@
             h1 { font-size: 1.2rem !important; }
             h2 { font-size: 1rem !important; }
             h3 { font-size: 0.95rem !important; }
+            .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 0.75rem !important; }
+            #progressBar { left: 0 !important; width: 100% !important; }
         }
     </style>
 </head>
@@ -1115,7 +1114,7 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="logo" style="margin: 0;">BIRANTE.EXE</div>
-        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle navigation" aria-disabled="true" style="display:none;">
+        <button id="mobileMenuToggle" class="mobile-menu-toggle" aria-label="Toggle navigation" aria-disabled="true" style="display:none;" onclick="toggleMobileMenu()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
