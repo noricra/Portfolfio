@@ -1812,7 +1812,7 @@
             }
 
             // Terminal strings (header help)
-         /*   const terminalOutput = document.getElementById('terminalOutput');
+            const terminalOutput = document.getElementById('terminalOutput');
             if (terminalOutput) {
                 if (currentLanguage === 'fr') {
                     terminalOutput.innerHTML = `> <span style="color: #e0e0e0;">TERMINAL INTERACTIF PRÊT</span><br>
@@ -1823,7 +1823,7 @@
                     > Available commands: <span style="color: #e0e0e0;">skills</span>, <span style="color: #e0e0e0;">projects</span>, <span style="color: #e0e0e0;">status</span>, <span style="color: #e0e0e0;">help</span><br>
                     > <span style="color: var(--accent-primary);">TRY:</span> Type "<span style="color: #e0e0e0;">skills</span>" and press Enter`;
                 }
-            }*/
+            }
             
             // Update section titles
             const sections = ['education', 'projects', 'skills', 'travel', 'contact'];
@@ -2083,45 +2083,24 @@
                     ok.style.cssText = 'margin-top: 0.5rem; color: var(--accent-primary); font-family: \'Orbitron\', monospace; opacity:0; transition: opacity .3s ease';
                     ok.textContent = 'CV READY';
                     overlay.appendChild(ok);
-                    requestAnimationFrame(() => { ok.style.opacity = '1'; });
+                 requestAnimationFrame(() => { ok.style.opacity = '1'; });
                     setTimeout(() => {
                         overlay.remove();
                         button.disabled = false;
                         button.style.background = 'var(--accent-primary)';
                         button.innerHTML = 'DOWNLOAD MATRIX DATA';
-                        showMessage("CV READY", "Download would start in real implementation");
+                        showMessage("CV READY", "Téléchargement du CV en cours...");
+                        // Déclencher le téléchargement du fichier PDF
+                        const link = document.createElement('a');
+                        link.href = 'CV_Birante.pdf';
+                        link.download = 'CV_Birante.pdf';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
                     }, 900);
                 }
             }, 800);
         }
-
-        // Konami Code Easter Egg
-        let konamiCode = [];
-        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
-
-        document.addEventListener('keydown', (e) => {
-            // Don't trigger shortcuts if user is typing in terminal
-            const activeElement = document.activeElement;
-            const isInTerminal = activeElement && (activeElement.id === 'skillsTerminal' || activeElement.closest('#skillsTerminal'));
-            
-            // Light/Dark shortcuts removed
-            
-            // Konami Code
-            konamiCode.push(e.code);
-            if (konamiCode.length > konamiSequence.length) {
-                konamiCode.shift();
-            }
-
-            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
-                const achievementsSection = document.getElementById('achievements');
-                if (achievementsSection) {
-                    achievementsSection.style.display = 'block';
-                    achievementsSection.scrollIntoView({ behavior: 'smooth' });
-                    showMessage("🥋 I KNOW KUNG FU", "Hidden section unlocked!");
-                }
-                konamiCode = [];
-            }
-        });
 
         // Interactive Terminal System
         function setupInteractiveTerminal() {
