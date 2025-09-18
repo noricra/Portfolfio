@@ -3,55 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sorry Friddah - Animation Grandiose</title>
+    <title>Sorry Friddah - Animation Pixélisée</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at center, #0a0a0a, #1a0a0a, #000);
+            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             font-family: 'Courier New', monospace;
             overflow: hidden;
-            position: relative;
         }
 
-        .main-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .grand-frame {
-            position: absolute;
-            width: 800px;
-            height: 800px;
-            border: 4px solid #ff4757;
-            border-radius: 20px;
-            animation: frame-pulse 3s ease-in-out infinite;
-            box-shadow: 
-                0 0 50px #ff4757,
-                inset 0 0 50px rgba(255, 71, 87, 0.2);
-        }
-
-        .center-content {
-            position: relative;
-            z-index: 10;
+        .container {
             text-align: center;
+            position: relative;
         }
 
         .pixel-heart {
-            width: 300px;
-            height: 300px;
-            margin: 40px auto;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
             position: relative;
-            animation: mega-heartbeat 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 30px #ff4757);
+            animation: heartbeat 1.5s ease-in-out infinite;
         }
 
         .pixel-heart canvas {
@@ -62,365 +38,232 @@
             height: 100%;
         }
 
-        .title-message {
-            font-size: 48px;
-            color: #ff4757;
-            text-shadow: 
-                3px 3px 0px #000,
-                0 0 20px #ff4757,
-                0 0 40px #ff4757,
-                0 0 60px #ff4757;
-            margin: 30px 0;
-            animation: epic-glow 2.5s ease-in-out infinite alternate;
-            letter-spacing: 6px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .sub-message {
+        .message {
             font-size: 24px;
-            color: #ffa502;
-            text-shadow: 2px 2px 0px #000, 0 0 15px #ffa502;
+            color: #ff4757;
+            text-shadow: 2px 2px 0px #000;
             margin: 20px 0;
-            animation: gentle-pulse 3s ease-in-out infinite;
-            letter-spacing: 3px;
+            animation: glow 2s ease-in-out infinite alternate;
+            letter-spacing: 2px;
+            font-weight: bold;
         }
 
-        .geometric-lines {
+        .pixel-lines {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
+            width: 400px;
+            height: 400px;
             pointer-events: none;
         }
 
-        .rotating-ring {
+        .line {
             position: absolute;
-            border: 3px solid #ff4757;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .ring1 {
-            width: 400px;
-            height: 400px;
-            animation: rotate-clockwise 8s linear infinite;
-            border-style: dashed;
-        }
-
-        .ring2 {
-            width: 600px;
-            height: 600px;
-            animation: rotate-counter 12s linear infinite;
-            border-color: #ffa502;
-        }
-
-        .ring3 {
-            width: 500px;
-            height: 500px;
-            animation: rotate-clockwise 15s linear infinite;
-            border-color: #ff6b81;
-            border-width: 2px;
-        }
-
-        .energy-beam {
-            position: absolute;
-            background: linear-gradient(90deg, transparent, #ff4757, transparent);
-            height: 4px;
-            width: 200px;
-            top: 50%;
-            left: 50%;
-            transform-origin: left center;
-        }
-
-        .beam1 {
-            animation: rotate-beam 4s linear infinite;
-            transform: translate(-50%, -50%) rotate(0deg);
-        }
-
-        .beam2 {
-            animation: rotate-beam 4s linear infinite;
-            transform: translate(-50%, -50%) rotate(45deg);
-            animation-delay: -1s;
-        }
-
-        .beam3 {
-            animation: rotate-beam 4s linear infinite;
-            transform: translate(-50%, -50%) rotate(90deg);
-            animation-delay: -2s;
-        }
-
-        .beam4 {
-            animation: rotate-beam 4s linear infinite;
-            transform: translate(-50%, -50%) rotate(135deg);
-            animation-delay: -3s;
-        }
-
-        .floating-pixels {
-            position: absolute;
-            width: 8px;
-            height: 8px;
             background: #ff4757;
-            animation: epic-float 4s ease-in-out infinite;
-            box-shadow: 0 0 10px #ff4757;
+            opacity: 0.6;
         }
 
-        .pixel1 { top: 10%; left: 20%; animation-delay: 0s; }
-        .pixel2 { top: 20%; right: 15%; animation-delay: 0.5s; background: #ffa502; }
-        .pixel3 { top: 80%; left: 10%; animation-delay: 1s; background: #ff6b81; }
-        .pixel4 { top: 70%; right: 20%; animation-delay: 1.5s; }
-        .pixel5 { top: 30%; left: 5%; animation-delay: 2s; background: #ffa502; }
-        .pixel6 { top: 60%; right: 8%; animation-delay: 2.5s; background: #ff6b81; }
-        .pixel7 { top: 40%; left: 15%; animation-delay: 3s; }
-        .pixel8 { top: 50%; right: 12%; animation-delay: 3.5s; background: #ffa502; }
-
-        .particle-explosion {
-            position: absolute;
-            top: 50%;
+        .line1 {
+            width: 2px;
+            height: 100px;
+            top: 0;
             left: 50%;
-            width: 4px;
-            height: 4px;
-            background: #fff;
-            animation: explode 2s ease-out infinite;
-            border-radius: 50%;
+            animation: expand-vertical 2s ease-in-out infinite;
         }
 
-        .explosion1 { animation-delay: 0s; }
-        .explosion2 { animation-delay: 0.3s; }
-        .explosion3 { animation-delay: 0.6s; }
-        .explosion4 { animation-delay: 0.9s; }
-        .explosion5 { animation-delay: 1.2s; }
+        .line2 {
+            width: 100px;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            animation: expand-horizontal 2s ease-in-out infinite 0.5s;
+        }
 
-        @keyframes mega-heartbeat {
+        .line3 {
+            width: 2px;
+            height: 100px;
+            bottom: 0;
+            right: 50%;
+            animation: expand-vertical 2s ease-in-out infinite 1s;
+        }
+
+        .line4 {
+            width: 100px;
+            height: 2px;
+            top: 50%;
+            right: 0;
+            animation: expand-horizontal 2s ease-in-out infinite 1.5s;
+        }
+
+        @keyframes heartbeat {
             0%, 100% {
                 transform: scale(1);
-                filter: drop-shadow(0 0 30px #ff4757) hue-rotate(0deg);
+                filter: hue-rotate(0deg);
             }
             25% {
-                transform: scale(1.15);
-                filter: drop-shadow(0 0 50px #ff4757) hue-rotate(15deg);
+                transform: scale(1.1);
+                filter: hue-rotate(10deg);
             }
             50% {
-                transform: scale(1.3);
-                filter: drop-shadow(0 0 70px #ff4757) hue-rotate(30deg);
+                transform: scale(1.2);
+                filter: hue-rotate(20deg);
             }
             75% {
-                transform: scale(1.15);
-                filter: drop-shadow(0 0 50px #ff4757) hue-rotate(15deg);
+                transform: scale(1.1);
+                filter: hue-rotate(10deg);
             }
         }
 
-        @keyframes epic-glow {
+        @keyframes glow {
             0% {
-                text-shadow: 
-                    3px 3px 0px #000,
-                    0 0 20px #ff4757,
-                    0 0 40px #ff4757,
-                    0 0 60px #ff4757;
+                text-shadow: 2px 2px 0px #000, 0 0 10px #ff4757;
             }
             100% {
-                text-shadow: 
-                    3px 3px 0px #000,
-                    0 0 40px #ff4757,
-                    0 0 80px #ff4757,
-                    0 0 120px #ff4757,
-                    0 0 160px #ff4757;
+                text-shadow: 2px 2px 0px #000, 0 0 20px #ff4757, 0 0 30px #ff4757;
             }
         }
 
-        @keyframes frame-pulse {
+        @keyframes expand-vertical {
             0%, 100% {
-                box-shadow: 
-                    0 0 50px #ff4757,
-                    inset 0 0 50px rgba(255, 71, 87, 0.2);
+                height: 50px;
+                opacity: 0.3;
             }
             50% {
-                box-shadow: 
-                    0 0 100px #ff4757,
-                    0 0 150px #ff4757,
-                    inset 0 0 80px rgba(255, 71, 87, 0.4);
+                height: 150px;
+                opacity: 0.8;
             }
         }
 
-        @keyframes rotate-clockwise {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes rotate-counter {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-
-        @keyframes rotate-beam {
-            0% { transform: translate(-100px, -2px) rotate(0deg); opacity: 0; }
-            25% { opacity: 1; }
-            75% { opacity: 1; }
-            100% { transform: translate(-100px, -2px) rotate(360deg); opacity: 0; }
-        }
-
-        @keyframes epic-float {
+        @keyframes expand-horizontal {
             0%, 100% {
-                transform: translateY(0px) scale(1);
-                opacity: 0.6;
+                width: 50px;
+                opacity: 0.3;
             }
             50% {
-                transform: translateY(-40px) scale(1.5);
-                opacity: 1;
+                width: 150px;
+                opacity: 0.8;
             }
         }
 
-        @keyframes gentle-pulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
+        .pixels {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff4757;
+            animation: float 3s ease-in-out infinite;
         }
 
-        @keyframes explode {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 1;
+        .pixel1 { top: 20%; left: 10%; animation-delay: 0s; }
+        .pixel2 { top: 80%; right: 15%; animation-delay: 0.5s; }
+        .pixel3 { top: 40%; left: 5%; animation-delay: 1s; }
+        .pixel4 { top: 60%; right: 10%; animation-delay: 1.5s; }
+        .pixel5 { top: 30%; right: 20%; animation-delay: 2s; }
+        .pixel6 { top: 70%; left: 15%; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+                opacity: 0.5;
             }
-            100% {
-                transform: translate(-50%, -50%) translate(200px, -200px) scale(2);
-                opacity: 0;
+            50% {
+                transform: translateY(-20px);
+                opacity: 1;
             }
         }
     </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="grand-frame"></div>
-        
-        <div class="geometric-lines">
-            <div class="rotating-ring ring1"></div>
-            <div class="rotating-ring ring2"></div>
-            <div class="rotating-ring ring3"></div>
-            
-            <div class="energy-beam beam1"></div>
-            <div class="energy-beam beam2"></div>
-            <div class="energy-beam beam3"></div>
-            <div class="energy-beam beam4"></div>
+    <div class="container">
+        <div class="pixel-lines">
+            <div class="line line1"></div>
+            <div class="line line2"></div>
+            <div class="line line3"></div>
+            <div class="line line4"></div>
         </div>
         
-        <div class="center-content">
-            <div class="title-message">SORRY</div>
-            <div class="pixel-heart">
-                <canvas id="heartCanvas" width="60" height="60"></canvas>
-            </div>
-            <div class="sub-message">FRIDDAH</div>
+        <div class="pixel-heart">
+            <canvas id="heartCanvas" width="40" height="40"></canvas>
         </div>
         
-        <div class="floating-pixels pixel1"></div>
-        <div class="floating-pixels pixel2"></div>
-        <div class="floating-pixels pixel3"></div>
-        <div class="floating-pixels pixel4"></div>
-        <div class="floating-pixels pixel5"></div>
-        <div class="floating-pixels pixel6"></div>
-        <div class="floating-pixels pixel7"></div>
-        <div class="floating-pixels pixel8"></div>
+        <div class="message">SORRY FRIDDAH</div>
         
-        <div class="particle-explosion explosion1"></div>
-        <div class="particle-explosion explosion2"></div>
-        <div class="particle-explosion explosion3"></div>
-        <div class="particle-explosion explosion4"></div>
-        <div class="particle-explosion explosion5"></div>
+        <div class="pixels pixel1"></div>
+        <div class="pixels pixel2"></div>
+        <div class="pixels pixel3"></div>
+        <div class="pixels pixel4"></div>
+        <div class="pixels pixel5"></div>
+        <div class="pixels pixel6"></div>
     </div>
 
     <script>
         const canvas = document.getElementById('heartCanvas');
         const ctx = canvas.getContext('2d');
         
+        // Désactiver l'antialiasing pour un effet pixélisé
         ctx.imageSmoothingEnabled = false;
         
-        // Pattern du cœur plus détaillé et centré (60x60)
+        // Pattern du cœur en pixels (40x40)
         const heartPattern = [
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000001111100000000000000001111100000000000000000000000",
-            "000000000111111111000000000000111111111000000000000000000000",
-            "000000001111111111100000000001111111111100000000000000000000",
-            "000000011111111111110000000011111111111110000000000000000000",
-            "000000111111111111111000000111111111111111000000000000000000",
-            "000001111111111111111100001111111111111111100000000000000000",
-            "000001111111111111111110011111111111111111100000000000000000",
-            "000011111111111111111111111111111111111111110000000000000000",
-            "000011111111111111111111111111111111111111110000000000000000",
-            "000011111111111111111111111111111111111111110000000000000000",
-            "000011111111111111111111111111111111111111110000000000000000",
-            "000011111111111111111111111111111111111111110000000000000000",
-            "000001111111111111111111111111111111111111100000000000000000",
-            "000001111111111111111111111111111111111111100000000000000000",
-            "000000111111111111111111111111111111111111000000000000000000",
-            "000000011111111111111111111111111111111110000000000000000000",
-            "000000001111111111111111111111111111111100000000000000000000",
-            "000000000111111111111111111111111111111000000000000000000000",
-            "000000000011111111111111111111111111110000000000000000000000",
-            "000000000001111111111111111111111111100000000000000000000000",
-            "000000000000111111111111111111111111000000000000000000000000",
-            "000000000000011111111111111111111110000000000000000000000000",
-            "000000000000001111111111111111111100000000000000000000000000",
-            "000000000000000111111111111111111000000000000000000000000000",
-            "000000000000000011111111111111110000000000000000000000000000",
-            "000000000000000001111111111111100000000000000000000000000000",
-            "000000000000000000111111111111000000000000000000000000000000",
-            "000000000000000000011111111110000000000000000000000000000000",
-            "000000000000000000001111111100000000000000000000000000000000",
-            "000000000000000000000111111000000000000000000000000000000000",
-            "000000000000000000000011110000000000000000000000000000000000",
-            "000000000000000000000001100000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000",
-            "000000000000000000000000000000000000000000000000000000000000"
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000110011000000001100110000000000000",
+            "0000011111111100000111111111000000000000",
+            "0000111111111110001111111111100000000000",
+            "0001111111111111011111111111110000000000",
+            "0001111111111111111111111111110000000000",
+            "0001111111111111111111111111110000000000",
+            "0001111111111111111111111111110000000000",
+            "0000111111111111111111111111100000000000",
+            "0000011111111111111111111111000000000000",
+            "0000001111111111111111111110000000000000",
+            "0000000111111111111111111100000000000000",
+            "0000000011111111111111111000000000000000",
+            "0000000001111111111111110000000000000000",
+            "0000000000111111111111100000000000000000",
+            "0000000000011111111111000000000000000000",
+            "0000000000001111111110000000000000000000",
+            "0000000000000111111100000000000000000000",
+            "0000000000000011111000000000000000000000",
+            "0000000000000001110000000000000000000000",
+            "0000000000000000100000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000",
+            "0000000000000000000000000000000000000000"
         ];
 
         let colorShift = 0;
-        let intensity = 0;
         
         function drawHeart() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
-            intensity = (Math.sin(Date.now() * 0.003) + 1) / 2;
-            
             for (let y = 0; y < heartPattern.length; y++) {
                 for (let x = 0; x < heartPattern[y].length; x++) {
                     if (heartPattern[y][x] === '1') {
-                        const hue = (colorShift + x * 3 + y) % 60;
-                        const saturation = 80 + intensity * 20;
-                        const lightness = 50 + intensity * 30;
-                        ctx.fillStyle = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+                        // Variation de couleur pour l'effet de pulse
+                        const hue = (colorShift + x * 2) % 360;
+                        ctx.fillStyle = `hsl(${hue}, 80%, 55%)`;
                         ctx.fillRect(x, y, 1, 1);
                     }
                 }
             }
             
-            colorShift += 1;
+            colorShift += 2;
             requestAnimationFrame(drawHeart);
         }
         
